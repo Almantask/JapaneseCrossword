@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClient", "Desktop Client\DesktopClient.csproj", "{041811A1-EA0C-4ED1-8BF8-C46EE91E01C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClient", "DesktopClient\DesktopClient.csproj", "{041811A1-EA0C-4ED1-8BF8-C46EE91E01C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageGridGenerator", "ImageGridGenerator\ImageGridGenerator.csproj", "{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}"
 EndProject
