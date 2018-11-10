@@ -16,7 +16,7 @@ namespace JapaneseCrossWord
         public MonochromeGridBuilder(Grid pixelGrid)
         {
             _randomiser = new Random();
-            this._pixelGrid = pixelGrid;
+            _pixelGrid = pixelGrid;
         }
 
 

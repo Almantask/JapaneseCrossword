@@ -22,8 +22,16 @@
                         HorizontalContentAlignment="Center"
                          VerticalContentAlignment="Center"
                          Height="30"
-                         FontSize="20"
-                />
+                         FontSize="20">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock>Count for columns, rows, 1:X ratio for white to black</TextBlock>
+                            <TextBlock>Picking an image will use first 2 numbers as preference</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
                 <Label x:Name = "labelGridSize"  
                          Grid.Column="0"
                        Content="Preferable grid size:"
