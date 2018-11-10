@@ -1,0 +1,64 @@
+﻿<Window x:Class="JapaneseCrossWord.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JapaneseCrossWord"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="550" MinHeight="200" MinWidth="300">
+    <Grid Background="HotPink">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Height="60" Width ="350" VerticalAlignment="Top" HorizontalAlignment="Left" DockPanel.Dock="Top" Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="11*" />
+                    <ColumnDefinition Width="4*" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name = "textBoxGridSize"  
+                       Grid.Column="1"
+                        HorizontalContentAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         Height="30"
+                         FontSize="20"
+                />
+                <Label x:Name = "labelGridSize"  
+                         Grid.Column="0"
+                       Content="Preferable grid size:"
+                       HorizontalContentAlignment="Right"
+                       VerticalContentAlignment="Center"
+                       FontWeight="DemiBold"
+                       FontSize="25"
+                />
+            </Grid>
+
+            <Grid Grid.Row="1" Height="40" VerticalAlignment="Top" DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name = "buttonImageGrid"  
+                        Content = "Pick an image for grid" 
+                        Click = "OnButtonImageGridClick" 
+                        ClickMode ="Press"
+                        Foreground = "Gray"
+                        Grid.Column="0"
+                        FontSize="20"
+                />
+
+                <Button x:Name = "buttonRandomGrid"  
+                        Content = "Randomise grid" 
+                        Click = "OnButtonRnadomGrid" 
+                        ClickMode ="Press"
+                        Foreground = "Gray" 
+                        Grid.Column="1"
+                        FontSize="20"
+                />
+            </Grid>
+        <Grid Grid.Row="2" x:Name="PixelGrid" DockPanel.Dock="Top"/>
+
+    </Grid>
+</Window>

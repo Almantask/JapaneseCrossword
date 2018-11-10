@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ImageGridGenerator
 {
-    public class Class1
+    public class ImageGridBuilder   
     {
+
     }
 }
