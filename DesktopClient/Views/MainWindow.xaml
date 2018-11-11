@@ -5,24 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JapaneseCrossWord"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="550" MinHeight="200" MinWidth="300">
+        Title="MainWindow" Height="550" Width="550" MinHeight="200" MinWidth="300">
     <Grid Background="HotPink">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="1.5*" />
         </Grid.RowDefinitions>
-        <Grid Height="60" Width ="350" VerticalAlignment="Top" HorizontalAlignment="Left" DockPanel.Dock="Top" Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*" />
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="1.5*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Height="60" Width ="350" VerticalAlignment="Top" HorizontalAlignment="Left" DockPanel.Dock="Top" Row="0" Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="11*" />
                     <ColumnDefinition Width="4*" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name = "textBoxGridSize"  
+            <TextBox x:Name = "textBoxGridSize"  
                        Grid.Column="1"
                         HorizontalContentAlignment="Center"
                          VerticalContentAlignment="Center"
                          Height="30"
-                         FontSize="20">
+                         FontSize="18"
+                         Text="9,9">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <StackPanel>
@@ -32,17 +41,17 @@
                     </ToolTip>
                 </TextBox.ToolTip>
             </TextBox>
-                <Label x:Name = "labelGridSize"  
-                         Grid.Column="0"
-                       Content="Preferable grid size:"
-                       HorizontalContentAlignment="Right"
-                       VerticalContentAlignment="Center"
-                       FontWeight="DemiBold"
-                       FontSize="25"
-                />
-            </Grid>
+            <Label x:Name = "labelGridSize"  
+                   Grid.Column="0"
+                   Content="Preferable grid size:"
+                   HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Center"
+                   FontWeight="DemiBold"
+                   FontSize="23"
+            />
+        </Grid>
 
-            <Grid Grid.Row="1" Height="40" VerticalAlignment="Top" DockPanel.Dock="Top">
+        <Grid Grid.Row="1" Grid.Column="1" Height="40" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -54,7 +63,7 @@
                         ClickMode ="Press"
                         Foreground = "Gray"
                         Grid.Column="0"
-                        FontSize="20"
+                        FontSize="18"
                 />
 
                 <Button x:Name = "buttonRandomGrid"  
@@ -63,10 +72,47 @@
                         ClickMode ="Press"
                         Foreground = "Gray" 
                         Grid.Column="1"
-                        FontSize="20"
+                        FontSize="18"
                 />
             </Grid>
-        <Grid Grid.Row="2" x:Name="PixelGrid" DockPanel.Dock="Top"/>
+        <Grid Grid.Row="0" Column="0" x:Name="HintsOnOff">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name = "labelHintOnOff"  
+                   Grid.Column="0"
+                   Content="Hints"
+                   HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Center"
+                   FontSize="10"
+                />
+                <CheckBox x:Name = "checkBoxHintOnOff"  
+                       Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Checked="CheckBoxHintOnOff_OnChecked"
+                          Unchecked="CheckBoxHintOnOff_OnUnchecked"
+                          IsChecked="True"
+                />
+            </Grid>
+            
+        </Grid>
 
+        <Grid Grid.Row="3" Column="1">
+            <Border BorderThickness="3" BorderBrush="Black">
+                <Grid x:Name="PixelGrid" Background="White"/>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2" Column="0" x:Name="TopLeftEmptyCorner" Background="White"/>
+        <Grid Grid.Row="2" Column="2" x:Name="TopRightEmptyCorner" Background="White"/>
+        <Grid Grid.Row="4" Column="0" x:Name="BottomLeftEmptyCorner" Background="White"/>
+        <Grid Grid.Row="4" Column="2" x:Name="BottomRightEmptyCorner" Background="White"/>
+        <Grid Grid.Row="3" Column="0" x:Name="LeftHintGrid" Background="White"/>
+        <Grid Grid.Row="3" Column="2" x:Name="RightHintGrid" Background="White"/>
+        <Grid Grid.Row="2" Column="1" x:Name="TopHintGrid" Background="White"/>
+        <Grid Grid.Row="4" Column="1" x:Name="BottomHintGrid" Background="White"/>
     </Grid>
 </Window>
