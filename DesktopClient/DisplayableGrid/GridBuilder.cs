@@ -1,16 +1,13 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
-namespace JapaneseCrossWord
+namespace JapaneseCrossWord.DisplayableGrid
 {
     // TODO: split into more generic grid builder
     public class GridBuilder
     {
         protected readonly Grid _gridSlot;
-
+        protected object[,] GridData { set; get; }
 
         public GridBuilder(Grid gridSlot)
         {
@@ -21,6 +18,7 @@ namespace JapaneseCrossWord
         public void BuildGrid(int size)
         {
             BuildEmptyCells(size,size);
+            GridData = new object[size,size];
         }
 
         public virtual void BuildGrid(int cols, int rows)
@@ -32,6 +30,7 @@ namespace JapaneseCrossWord
         {
             BuildColumns(cols);
             BuildRows(rows);
+            GridData = new object[cols,rows];
         }
 
         private void BuildColumns(int count)

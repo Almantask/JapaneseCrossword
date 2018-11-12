@@ -3,26 +3,31 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using JapaneseCrossWord.DisplayableGrid;
 
-namespace JapaneseCrossWord
+namespace JapaneseCrossWord.Views
 {
     public partial class MainWindow : Window
     {
         private readonly MonochromeGridBuilder _gridBuilder;
         private int _preferableGridSize = 9;
-        private readonly List<NumberGridBuilder> _numberGridBuilders;
+        private List<NumberGridBuilder> _numberGridBuilders;
         private bool _isFirstLoad = true;
 
         public MainWindow()
         {
             InitializeComponent();
             _gridBuilder = new MonochromeGridBuilder(PixelGrid);
+            BuilHintGrids();
+        }
 
+        private void BuilHintGrids()
+        {
             _numberGridBuilders = new List<NumberGridBuilder>();
-             Grid[] hintGridsSides = { LeftHintGrid, RightHintGrid };
-             Grid[] hintGridsGroundRoof = { TopHintGrid, BottomHintGrid };
+            Grid[] hintGridsSides = { LeftHintGrid, RightHintGrid };
+            Grid[] hintGridsGroundRoof = { TopHintGrid, BottomHintGrid };
 
-            
+
             foreach (var hintGrid in hintGridsSides)
             {
                 var numberGridBuilder = new NumberGridBuilder(hintGrid, true);
@@ -33,7 +38,6 @@ namespace JapaneseCrossWord
                 var numberGridBuilder = new NumberGridBuilder(hintGrid, false);
                 _numberGridBuilders.Add(numberGridBuilder);
             }
-
         }
 
 
@@ -134,9 +138,9 @@ namespace JapaneseCrossWord
                 foreach (var numberGridBuilder in _numberGridBuilders)
                 {
                     if (numberGridBuilder.IsVertical)
-                        numberGridBuilder.FillCells(3, gridSize.Item2);
+                        numberGridBuilder.FillCells();
                     else
-                        numberGridBuilder.FillCells(gridSize.Item1, 3);
+                        numberGridBuilder.FillCells();
                 }
             }
             catch

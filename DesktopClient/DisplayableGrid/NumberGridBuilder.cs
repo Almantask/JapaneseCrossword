@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace JapaneseCrossWord
+namespace JapaneseCrossWord.DisplayableGrid
 {
     // TODO: refactor grid builders
     public class NumberGridBuilder:FilledGridBuilder
@@ -21,16 +17,27 @@ namespace JapaneseCrossWord
             IsVertical = isVertical;
         }
 
-        public override void FillCells(int cols, int rows)
+        public override void GenerateCellData()
         {
-            for (var row = 0; row < rows; row++)
+            for (var col = 0; col < GridData.GetLength(0); col++)
             {
-                for (var col = 0; col < cols; col++)
+                for (var row = 0; row < GridData.GetLength(1); row++)
+                {
+                    GridData[col, row] = _randomiser.Next(0, 10);
+                }
+            }
+        }
+
+        public override void FillCells()
+        {
+            for (var col = 0; col < GridData.GetLength(0); col++)
+            {
+                for (var row = 0; row < GridData.GetLength(1); row++)
                 {
                     var cellView = new Grid();
                     var cellText = new TextBlock
                     {
-                        Text = GetRandomCellContent(),
+                        Text = SetCellContent(GridData[col, row]),
                         Background = Brushes.White,
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center,
@@ -58,11 +65,10 @@ namespace JapaneseCrossWord
             }
         }
 
-        private string GetRandomCellContent()
+        private string SetCellContent(object obj)
         {
-            var num = GetRandomNumber();
-            if (num == 0) return "";
-            return num.ToString();
+            if ((int)obj == 0) return "";
+            return obj.ToString();
         }
 
         private int GetRandomNumber()

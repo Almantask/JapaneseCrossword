@@ -1,32 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace JapaneseCrossWord
+namespace JapaneseCrossWord.DisplayableGrid
 {
     public class MonochromeGridBuilder:FilledGridBuilder
     {
         private readonly Random _randomiser;
-
         public MonochromeGridBuilder(Grid gridSlot):base(gridSlot)
         {
             _randomiser = new Random();
         }
 
-        public override void FillCells(int cols, int rows)
+        public override void GenerateCellData()
         {
-            for (var row = 0; row < rows; row++)
+            for (var col = 0; col < GridData.GetLength(0); col++)
             {
-                for (var col = 0; col < cols; col++)
+                for (var row = 0; row < GridData.GetLength(1); row++)
+                {
+                    GridData[col, row] = _randomiser.Next(0, 2);
+                }
+            }
+        }
+
+        public override void FillCells()
+        {
+            for (var col = 0; col < GridData.GetLength(0); col++)
+            {
+                for (var row = 0; row < GridData.GetLength(1); row++)
                 {
                     var cellView = new Grid
                     {
-                        Background = GetRandomColor(),
+                        Background = GetColor((int)GridData[col, row])
                     };
 
                     Grid.SetColumn(cellView, col);
@@ -59,12 +64,9 @@ namespace JapaneseCrossWord
             }
         }
 
-        private Brush GetRandomColor()
+        private Brush GetColor(int colorIndex)
         {
-            var num = _randomiser.Next(0, 2);
-            if (num > 0)
-                return Brushes.Black;
-            return Brushes.White;
+            return colorIndex == 0 ? Brushes.White : Brushes.Black;
         }
     }
 }
