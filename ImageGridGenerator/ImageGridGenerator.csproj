@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComplexColectionHelpers.cs" />
     <Compile Include="GridSource.cs" />
+    <Compile Include="HintsCalculator.cs" />
     <Compile Include="ImageGridBuilder.cs" />
     <Compile Include="ImageTile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -135,5 +135,11 @@
   <ItemGroup>
     <Folder Include="Entities\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageGridGenerator\ImageGridGenerator.csproj">
+      <Project>{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}</Project>
+      <Name>ImageGridGenerator</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

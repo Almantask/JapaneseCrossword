@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using ImageGridGenerator;
 using JapaneseCrossWord.DisplayableGrid;
 
 namespace JapaneseCrossWord.Views
@@ -27,7 +28,7 @@ namespace JapaneseCrossWord.Views
             Grid[] hintGridsSides = { LeftHintGrid, RightHintGrid };
             Grid[] hintGridsGroundRoof = { TopHintGrid, BottomHintGrid };
 
-
+            var hintsCalculator = new HintsCalculator(_gridBuilder.GridData);
             foreach (var hintGrid in hintGridsSides)
             {
                 var numberGridBuilder = new NumberGridBuilder(hintGrid, true);

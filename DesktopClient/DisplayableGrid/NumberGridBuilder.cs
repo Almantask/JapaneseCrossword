@@ -17,8 +17,16 @@ namespace JapaneseCrossWord.DisplayableGrid
             IsVertical = isVertical;
         }
 
+        public NumberGridBuilder(Grid gridSlot, bool isVertical, int[,] gridData) : base(gridSlot)
+        {
+            _randomiser = new Random();
+            IsVertical = isVertical;
+            GridData = gridData;
+        }
+
         public override void GenerateCellData()
         {
+            if (GridData == null) return;
             for (var col = 0; col < GridData.GetLength(0); col++)
             {
                 for (var row = 0; row < GridData.GetLength(1); row++)
