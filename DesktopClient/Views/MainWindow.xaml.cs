@@ -28,15 +28,19 @@ namespace JapaneseCrossWord.Views
             Grid[] hintGridsSides = { LeftHintGrid, RightHintGrid };
             Grid[] hintGridsGroundRoof = { TopHintGrid, BottomHintGrid };
 
+            // TODO to be modified so that UI gets changed with it.
             var hintsCalculator = new HintsCalculator(_gridBuilder.GridData);
+            var verticalHintsGridData = hintsCalculator.CalculateVerticalHints();
+            var horizontalHintsGridData = hintsCalculator.CalculateHorizontalHints();
+
             foreach (var hintGrid in hintGridsSides)
             {
-                var numberGridBuilder = new NumberGridBuilder(hintGrid, true);
+                var numberGridBuilder = new NumberGridBuilder(hintGrid, true, verticalHintsGridData);
                 _numberGridBuilders.Add(numberGridBuilder);
             }
             foreach (var hintGrid in hintGridsGroundRoof)
             {
-                var numberGridBuilder = new NumberGridBuilder(hintGrid, false);
+                var numberGridBuilder = new NumberGridBuilder(hintGrid, false, horizontalHintsGridData);
                 _numberGridBuilders.Add(numberGridBuilder);
             }
         }

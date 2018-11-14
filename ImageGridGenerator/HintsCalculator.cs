@@ -18,15 +18,21 @@ namespace ImageGridGenerator
             _cellData = cellData;
         }
 
-        int[,] CalculateVerticalHints()
+        public int[,] CalculateVerticalHints()
         {
             var hints = GetConsequitiveVerticalElements();
-            throw new NotImplementedException();
+            return ComplexColectionHelpers.ListArrayToJaggedArray(hints);
         }
 
-        public ArrayList GetConsequitiveVerticalElements()
+        public int[,] CalculateHorizontalHints()
         {
-            var hintsPerRow = new ArrayList(_cellData.GetLength(0));
+            var hints = GetConsequitiveHorizontalElements();
+            return ComplexColectionHelpers.ListArrayToJaggedArray(hints);
+        }
+
+        private List<int>[] GetConsequitiveVerticalElements()
+        {
+            var hintsPerRow = new List<int>[_cellData.GetLength(0)];
             for (var row = 0; row < _cellData.GetLength(1); row++)
             {
                 var rowElements = GetRowElements(row);
@@ -37,9 +43,9 @@ namespace ImageGridGenerator
             return hintsPerRow;
         }
 
-        public ArrayList GetConsequitiveHorizontalElements()
+        private List<int>[] GetConsequitiveHorizontalElements()
         {
-            var hintsPerCol = new ArrayList(_cellData.GetLength(1));
+            var hintsPerCol = new List<int>[_cellData.GetLength(1)];
             for (var col = 0; col < _cellData.GetLength(0); col++)
             {
                 var rowElements = GetColumnElements(col);
