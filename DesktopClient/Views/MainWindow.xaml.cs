@@ -28,19 +28,14 @@ namespace JapaneseCrossWord.Views
             Grid[] hintGridsSides = { LeftHintGrid, RightHintGrid };
             Grid[] hintGridsGroundRoof = { TopHintGrid, BottomHintGrid };
 
-            // TODO to be modified so that UI gets changed with it.
-            var hintsCalculator = new HintsCalculator(_gridBuilder.GridData);
-            var verticalHintsGridData = hintsCalculator.CalculateVerticalHints();
-            var horizontalHintsGridData = hintsCalculator.CalculateHorizontalHints();
-
             foreach (var hintGrid in hintGridsSides)
             {
-                var numberGridBuilder = new NumberGridBuilder(hintGrid, true, verticalHintsGridData);
+                var numberGridBuilder = new NumberGridBuilder(hintGrid, true);
                 _numberGridBuilders.Add(numberGridBuilder);
             }
             foreach (var hintGrid in hintGridsGroundRoof)
             {
-                var numberGridBuilder = new NumberGridBuilder(hintGrid, false, horizontalHintsGridData);
+                var numberGridBuilder = new NumberGridBuilder(hintGrid, false);
                 _numberGridBuilders.Add(numberGridBuilder);
             }
         }
@@ -50,16 +45,20 @@ namespace JapaneseCrossWord.Views
         private void OnButtonRnadomGrid(object sender, RoutedEventArgs e)
         {
             var gridSizeInput = textBoxGridSize.Text;
+            Tuple<int, int> gridSize = null;
             try
             {
-                var gridSize = ParseGridSize(gridSizeInput);
-                BuildMainGrid(gridSize.Item1, gridSize.Item2);
-                BuildHintGrids(gridSize.Item1, gridSize.Item2);
+                gridSize = ParseGridSize(gridSizeInput);
             }
             catch
             {
                 MessageBox.Show($"Failed to read grid size: {gridSizeInput} is not valid");
+                return;
             }
+
+            BuildMainGrid(gridSize.Item1, gridSize.Item2);
+            BuildHintGrids();
+
         }
 
         /// <summary>
@@ -88,14 +87,27 @@ namespace JapaneseCrossWord.Views
             _gridBuilder.BuildGrid(cols, rows);
         }
 
-        private void BuildHintGrids(int cols, int rows)
+        private void BuildHintGrids()
         {
+            var hintsCalculator = new HintsCalculator(_gridBuilder.GridData);
+            var verticalHintsGridData = hintsCalculator.CalculateVerticalHints();
+            var horizontalHintsGridData = hintsCalculator.CalculateHorizontalHints();
             foreach (var hintGridBuilder in _numberGridBuilders)
             {
                 if (hintGridBuilder.IsVertical)
-                    hintGridBuilder.BuildGrid(3, rows);
+                {
+                    hintGridBuilder.GridData = verticalHintsGridData;
+                    var cols = verticalHintsGridData.GetLength(0);
+                    var rows = verticalHintsGridData.GetLength(1);
+                    hintGridBuilder.BuildGrid(cols, rows);
+                }
                 else
-                    hintGridBuilder.BuildGrid(cols, 3);
+                {
+                    hintGridBuilder.GridData = horizontalHintsGridData;
+                    var cols = horizontalHintsGridData.GetLength(0);
+                    var rows = horizontalHintsGridData.GetLength(1);
+                    hintGridBuilder.BuildGrid(cols, rows);
+                }
             }
         }
 
@@ -137,21 +149,25 @@ namespace JapaneseCrossWord.Views
         private void EnableHints()
         {
             var gridSizeInput = textBoxGridSize.Text;
+            Tuple<int,int> gridSize = null;
             try
             {
-                var gridSize = ParseGridSize(gridSizeInput);
-                foreach (var numberGridBuilder in _numberGridBuilders)
-                {
-                    if (numberGridBuilder.IsVertical)
-                        numberGridBuilder.FillCells();
-                    else
-                        numberGridBuilder.FillCells();
-                }
+                gridSize = ParseGridSize(gridSizeInput);
             }
             catch
             {
                 MessageBox.Show($"Failed to read grid size: {gridSizeInput} is not valid");
+                return;
             }
+            
+            foreach (var numberGridBuilder in _numberGridBuilders)
+            {
+                if (numberGridBuilder.IsVertical)
+                    numberGridBuilder.FillCells();
+                else
+                    numberGridBuilder.FillCells();
+            }
+
         }
 
         private void CheckBoxHintOnOff_OnUnchecked(object sender, RoutedEventArgs e)

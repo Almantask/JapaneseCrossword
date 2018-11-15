@@ -17,7 +17,7 @@ namespace ImageGridGenerator
             for (var row = 0; row < listArray.Length; row++)
             {
                 var columns = listArray[row];
-                for (var col = 0; col < maxCount; col++)
+                for (var col = 0; col < columns.Count; col++)
                 {
                     jaggedArray[col, row] = columns[col];
                 }

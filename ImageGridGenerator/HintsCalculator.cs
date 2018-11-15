@@ -11,6 +11,7 @@ namespace ImageGridGenerator
     public class HintsCalculator
     {
         private const int EmptyElementLiteral = 0;
+        private const int FilledElementLiteral = 1;
         private readonly int[,] _cellData;
 
         public HintsCalculator(int[,] cellData)
@@ -18,38 +19,39 @@ namespace ImageGridGenerator
             _cellData = cellData;
         }
 
+        // TODO: rows and columns mixed
         public int[,] CalculateVerticalHints()
         {
-            var hints = GetConsequitiveVerticalElements();
+            var hints = GetConsecuitiveVerticalElements();
             return ComplexColectionHelpers.ListArrayToJaggedArray(hints);
         }
 
         public int[,] CalculateHorizontalHints()
         {
-            var hints = GetConsequitiveHorizontalElements();
+            var hints = GetConsecuitiveHorizontalElements();
             return ComplexColectionHelpers.ListArrayToJaggedArray(hints);
         }
 
-        private List<int>[] GetConsequitiveVerticalElements()
+        private List<int>[] GetConsecuitiveVerticalElements()
         {
             var hintsPerRow = new List<int>[_cellData.GetLength(0)];
             for (var row = 0; row < _cellData.GetLength(1); row++)
             {
                 var rowElements = GetRowElements(row);
-                var counts = GetConsequitiveElementsCounts(rowElements);
+                var counts = GetConsecuitiveElementsCounts(rowElements);
                 hintsPerRow[row] = counts;
             }
 
             return hintsPerRow;
         }
 
-        private List<int>[] GetConsequitiveHorizontalElements()
+        private List<int>[] GetConsecuitiveHorizontalElements()
         {
             var hintsPerCol = new List<int>[_cellData.GetLength(1)];
             for (var col = 0; col < _cellData.GetLength(0); col++)
             {
                 var rowElements = GetColumnElements(col);
-                var counts = GetConsequitiveElementsCounts(rowElements);
+                var counts = GetConsecuitiveElementsCounts(rowElements);
                 hintsPerCol[col] = counts;
             }
 
@@ -61,7 +63,7 @@ namespace ImageGridGenerator
             var columnElements = new int[_cellData.GetLength(1)];
             for (var row = 0; row < _cellData.GetLength(1); row++)
             {
-                columnElements[row] = _cellData[col, row];
+                columnElements[row] = _cellData[row, col];
             }
 
             return columnElements;
@@ -72,30 +74,40 @@ namespace ImageGridGenerator
             var rowElements = new int[_cellData.GetLength(0)];
             for (var col = 0; col < _cellData.GetLength(0); col++)
             {
-                rowElements[col] = _cellData[col, row];
+                rowElements[col] = _cellData[row, col];
             }
 
             return rowElements;
         }
 
-        private List<int> GetConsequitiveElementsCounts(int[] elements)
+        private List<int> GetConsecuitiveElementsCounts(int[] elements)
         {
-            var consequitiveElementsCounts = new List<int>();
-            var count = 1;
-            var index = 0;
-            for (; index < elements.Length - 1; index++)
+            var ConsecuitiveElementsCounts = new List<int>();
+            var count = 0;
+            for (var index = 0; index < elements.Length; index++)
             {
-                if (elements[index] == EmptyElementLiteral) continue;
-                if (elements[index] == elements[index + 1])
-                    count++;
-                else
+                if (elements[index] == FilledElementLiteral)
                 {
-                    consequitiveElementsCounts.Add(count);
-                    count = 1;
+                    if (count == 0)
+                    {
+                        count++;
+                    }
+                    else if (elements[index] == elements[index - 1])
+                    {
+                        count++;
+                    }
+                }
+                else if(count != 0)
+                {
+                    ConsecuitiveElementsCounts.Add(count);
+                    count = 0;
                 }
             }
 
-            return consequitiveElementsCounts;
+            if(count > 0)
+                ConsecuitiveElementsCounts.Add(count);
+
+            return ConsecuitiveElementsCounts;
         }
     }
 }
