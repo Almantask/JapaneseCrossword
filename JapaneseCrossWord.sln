@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClient", "DesktopCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageGridGenerator", "ImageGridGenerator\ImageGridGenerator.csproj", "{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageGridGeneratorTests", "ImageGridGeneratorTests\ImageGridGeneratorTests.csproj", "{58C97159-FAF7-46CB-9517-27EE0443633C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClientTests", "DesktopClientTests\DesktopClientTests.csproj", "{0A69DC96-1944-4581-AAAA-B631960FFD15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58C97159-FAF7-46CB-9517-27EE0443633C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C97159-FAF7-46CB-9517-27EE0443633C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C97159-FAF7-46CB-9517-27EE0443633C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C97159-FAF7-46CB-9517-27EE0443633C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A69DC96-1944-4581-AAAA-B631960FFD15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A69DC96-1944-4581-AAAA-B631960FFD15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A69DC96-1944-4581-AAAA-B631960FFD15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A69DC96-1944-4581-AAAA-B631960FFD15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

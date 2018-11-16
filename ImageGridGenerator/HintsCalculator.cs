@@ -32,7 +32,7 @@ namespace ImageGridGenerator
             return ComplexColectionHelpers.ListArrayToJaggedArray(hints);
         }
 
-        private List<int>[] GetConsecuitiveVerticalElements()
+        public List<int>[] GetConsecuitiveVerticalElements()
         {
             var hintsPerRow = new List<int>[_cellData.GetLength(0)];
             for (var row = 0; row < _cellData.GetLength(1); row++)
@@ -45,7 +45,7 @@ namespace ImageGridGenerator
             return hintsPerRow;
         }
 
-        private List<int>[] GetConsecuitiveHorizontalElements()
+        public List<int>[] GetConsecuitiveHorizontalElements()
         {
             var hintsPerCol = new List<int>[_cellData.GetLength(1)];
             for (var col = 0; col < _cellData.GetLength(0); col++)
