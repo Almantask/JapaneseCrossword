@@ -27,25 +27,25 @@ namespace JapaneseCrossWord.DisplayableGrid
         public override void GenerateCellData()
         {
             if (GridData == null) return;
-            for (var col = 0; col < GridData.GetLength(0); col++)
+            for (var row = 0; row < GridData.GetLength(0); row++)
             {
-                for (var row = 0; row < GridData.GetLength(1); row++)
+                for (var col = 0; col < GridData.GetLength(1); col++)
                 {
-                    GridData[col, row] = _randomiser.Next(0, 10);
+                    GridData[row, col] = _randomiser.Next(0, 10);
                 }
             }
         }
 
         public override void FillCells()
         {
-            for (var col = 0; col < GridData.GetLength(0); col++)
+            for (var row = 0; row < GridData.GetLength(0); row++)
             {
-                for (var row = 0; row < GridData.GetLength(1); row++)
+                for (var col = 0; col < GridData.GetLength(1); col++)
                 {
                     var cellView = new Grid();
                     var cellText = new TextBlock
                     {
-                        Text = SetCellContent(GridData[col, row]),
+                        Text = SetCellContent(GridData[row, col]),
                         Background = Brushes.White,
                         VerticalAlignment = VerticalAlignment.Center,
                         HorizontalAlignment = HorizontalAlignment.Center,

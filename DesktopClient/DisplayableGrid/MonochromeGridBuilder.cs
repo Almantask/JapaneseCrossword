@@ -14,24 +14,24 @@ namespace JapaneseCrossWord.DisplayableGrid
 
         public override void GenerateCellData()
         {
-            for (var col = 0; col < GridData.GetLength(0); col++)
+            for (var row = 0; row < GridData.GetLength(0); row++)
             {
-                for (var row = 0; row < GridData.GetLength(1); row++)
+                for (var col = 0; col < GridData.GetLength(1); col++)
                 {
-                    GridData[col, row] = _randomiser.Next(0, 2);
+                    GridData[row, col] = _randomiser.Next(0, 2);
                 }
             }
         }
 
         public override void FillCells()
         {
-            for (var col = 0; col < GridData.GetLength(0); col++)
+            for (var row = 0; row < GridData.GetLength(0); row++)
             {
-                for (var row = 0; row < GridData.GetLength(1); row++)
+                for (var col = 0; col < GridData.GetLength(1); col++)
                 {
                     var cellView = new Grid
                     {
-                        Background = GetColor((int)GridData[col, row])
+                        Background = GetColor((int)GridData[row, col])
                     };
 
                     Grid.SetColumn(cellView, col);

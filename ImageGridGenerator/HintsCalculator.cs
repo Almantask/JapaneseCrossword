@@ -35,7 +35,7 @@ namespace ImageGridGenerator
         public List<int>[] GetConsecuitiveVerticalElements()
         {
             var hintsPerRow = new List<int>[_cellData.GetLength(0)];
-            for (var row = 0; row < _cellData.GetLength(1); row++)
+            for (var row = 0; row < _cellData.GetLength(0); row++)
             {
                 var rowElements = GetRowElements(row);
                 var counts = GetConsecuitiveElementsCounts(rowElements);
@@ -60,8 +60,8 @@ namespace ImageGridGenerator
 
         private int[] GetColumnElements(int col)
         {
-            var columnElements = new int[_cellData.GetLength(1)];
-            for (var row = 0; row < _cellData.GetLength(1); row++)
+            var columnElements = new int[_cellData.GetLength(0)];
+            for (var row = 0; row < _cellData.GetLength(0); row++)
             {
                 columnElements[row] = _cellData[row, col];
             }
@@ -71,8 +71,8 @@ namespace ImageGridGenerator
 
         private int[] GetRowElements(int row)
         {
-            var rowElements = new int[_cellData.GetLength(0)];
-            for (var col = 0; col < _cellData.GetLength(0); col++)
+            var rowElements = new int[_cellData.GetLength(1)];
+            for (var col = 0; col < _cellData.GetLength(1); col++)
             {
                 rowElements[col] = _cellData[row, col];
             }

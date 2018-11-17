@@ -30,7 +30,7 @@ namespace JapaneseCrossWord.DisplayableGrid
         {
             BuildColumns(cols);
             BuildRows(rows);
-            GridData = new int[cols,rows];
+            GridData = new int[rows, cols];
         }
 
         private void BuildColumns(int count)

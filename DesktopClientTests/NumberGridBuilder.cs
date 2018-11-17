@@ -7,6 +7,13 @@ namespace DesktopClientTests
 {
     public class NumberGridBuilder
     {
+        private int[,] _data;
+
+        NumberGridBuilder()
+        {
+            _data = new int[5,9];
+        }
+
         [Fact]
         public void GenerateCellsDataTest()
         {
@@ -16,7 +23,7 @@ namespace DesktopClientTests
         [Fact]
         public void FillCellsTest()
         {
-
+            
         }
 
         [Fact]
