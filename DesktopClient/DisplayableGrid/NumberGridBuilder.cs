@@ -8,36 +8,22 @@ namespace JapaneseCrossWord.DisplayableGrid
     // TODO: refactor grid builders
     public class NumberGridBuilder:FilledGridBuilder
     {
-        private readonly Random _randomiser;
         public bool IsVertical { get; }
 
         public NumberGridBuilder(Grid gridSlot, bool isVertical):base(gridSlot)
         {
-            _randomiser = new Random();
             IsVertical = isVertical;
         }
 
         public NumberGridBuilder(Grid gridSlot, bool isVertical, int[,] gridData) : base(gridSlot)
         {
-            _randomiser = new Random();
             IsVertical = isVertical;
             GridData = gridData;
         }
 
-        public override void GenerateCellData()
-        {
-            if (GridData == null) return;
-            for (var row = 0; row < GridData.GetLength(0); row++)
-            {
-                for (var col = 0; col < GridData.GetLength(1); col++)
-                {
-                    GridData[row, col] = _randomiser.Next(0, 10);
-                }
-            }
-        }
-
         public override void FillCells()
         {
+            if (GridData == null) return;
             for (var row = 0; row < GridData.GetLength(0); row++)
             {
                 for (var col = 0; col < GridData.GetLength(1); col++)
@@ -77,15 +63,6 @@ namespace JapaneseCrossWord.DisplayableGrid
         {
             if ((int)obj == 0) return "";
             return obj.ToString();
-        }
-
-        private int GetRandomNumber()
-        {
-            var num = _randomiser.Next(0, 2);
-            if (num == 0) return num;
-
-            num = _randomiser.Next(0, 10);
-            return num;
         }
 
         public override void Clear()

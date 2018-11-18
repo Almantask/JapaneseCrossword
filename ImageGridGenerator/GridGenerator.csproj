@@ -7,8 +7,8 @@
     <ProjectGuid>{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageGridGenerator</RootNamespace>
-    <AssemblyName>ImageGridGenerator</AssemblyName>
+    <RootNamespace>GridGenerator</RootNamespace>
+    <AssemblyName>GridGenerator</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComplexColectionHelpers.cs" />
+    <Compile Include="GridDataGenerator.cs" />
     <Compile Include="GridSource.cs" />
     <Compile Include="HintsCalculator.cs" />
     <Compile Include="ImageGridBuilder.cs" />

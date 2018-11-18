@@ -5,11 +5,9 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClient", "DesktopClient\DesktopClient.csproj", "{041811A1-EA0C-4ED1-8BF8-C46EE91E01C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageGridGenerator", "ImageGridGenerator\ImageGridGenerator.csproj", "{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridGenerator", "ImageGridGenerator\GridGenerator.csproj", "{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageGridGeneratorTests", "ImageGridGeneratorTests\ImageGridGeneratorTests.csproj", "{58C97159-FAF7-46CB-9517-27EE0443633C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClientTests", "DesktopClientTests\DesktopClientTests.csproj", "{0A69DC96-1944-4581-AAAA-B631960FFD15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageGridGeneratorTests", "ImageGridGeneratorTests\ImageGridGeneratorTests.csproj", "{58C97159-FAF7-46CB-9517-27EE0443633C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{58C97159-FAF7-46CB-9517-27EE0443633C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58C97159-FAF7-46CB-9517-27EE0443633C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58C97159-FAF7-46CB-9517-27EE0443633C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A69DC96-1944-4581-AAAA-B631960FFD15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A69DC96-1944-4581-AAAA-B631960FFD15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A69DC96-1944-4581-AAAA-B631960FFD15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A69DC96-1944-4581-AAAA-B631960FFD15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

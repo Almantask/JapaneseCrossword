@@ -6,21 +6,8 @@ namespace JapaneseCrossWord.DisplayableGrid
 {
     public class MonochromeGridBuilder:FilledGridBuilder
     {
-        private readonly Random _randomiser;
         public MonochromeGridBuilder(Grid gridSlot):base(gridSlot)
         {
-            _randomiser = new Random();
-        }
-
-        public override void GenerateCellData()
-        {
-            for (var row = 0; row < GridData.GetLength(0); row++)
-            {
-                for (var col = 0; col < GridData.GetLength(1); col++)
-                {
-                    GridData[row, col] = _randomiser.Next(0, 2);
-                }
-            }
         }
 
         public override void FillCells()

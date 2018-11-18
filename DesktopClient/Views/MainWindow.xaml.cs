@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using ImageGridGenerator;
 using JapaneseCrossWord.DisplayableGrid;
+using GridGenerator;
 
 namespace JapaneseCrossWord.Views
 {
@@ -14,6 +15,7 @@ namespace JapaneseCrossWord.Views
         private int _preferableGridSize = 9;
         private List<NumberGridBuilder> _numberGridBuilders;
         private bool _isFirstLoad = true;
+        GridDataGenerator _gridDataGenerator = new GridDataGenerator();
 
         public MainWindow()
         {
@@ -84,28 +86,32 @@ namespace JapaneseCrossWord.Views
 
         private void BuildMainGrid(int cols, int rows)
         {
+            var gridData = _gridDataGenerator.Generate(cols, rows, 0, 1);
+            _gridBuilder.GridData = gridData;
             _gridBuilder.BuildGrid(cols, rows);
         }
 
         private void BuildHintGrids()
         {
             var hintsCalculator = new HintsCalculator(_gridBuilder.GridData);
-            var verticalHintsGridData = hintsCalculator.CalculateVerticalHints();
-            var horizontalHintsGridData = hintsCalculator.CalculateHorizontalHints();
+            //var verticalHintsGridData = hintsCalculator.CalculateVerticalHints();
+            //var horizontalHintsGridData = hintsCalculator.CalculateHorizontalHints();
+            var horizontalHintsGridData = hintsCalculator.CalculateVerticalHints().InvertOrientation();
+            var verticalHintsGridData = hintsCalculator.CalculateHorizontalHints().InvertOrientation();
             foreach (var hintGridBuilder in _numberGridBuilders)
             {
                 if (hintGridBuilder.IsVertical)
                 {
                     hintGridBuilder.GridData = verticalHintsGridData;
-                    var cols = verticalHintsGridData.GetLength(0);
-                    var rows = verticalHintsGridData.GetLength(1);
+                    var rows = verticalHintsGridData.GetLength(0);
+                    var cols = verticalHintsGridData.GetLength(1);
                     hintGridBuilder.BuildGrid(cols, rows);
                 }
                 else
                 {
                     hintGridBuilder.GridData = horizontalHintsGridData;
-                    var cols = horizontalHintsGridData.GetLength(0);
-                    var rows = horizontalHintsGridData.GetLength(1);
+                    var rows = horizontalHintsGridData.GetLength(0);
+                    var cols = horizontalHintsGridData.GetLength(1);
                     hintGridBuilder.BuildGrid(cols, rows);
                 }
             }
@@ -148,18 +154,6 @@ namespace JapaneseCrossWord.Views
 
         private void EnableHints()
         {
-            var gridSizeInput = textBoxGridSize.Text;
-            Tuple<int,int> gridSize = null;
-            try
-            {
-                gridSize = ParseGridSize(gridSizeInput);
-            }
-            catch
-            {
-                MessageBox.Show($"Failed to read grid size: {gridSizeInput} is not valid");
-                return;
-            }
-            
             foreach (var numberGridBuilder in _numberGridBuilders)
             {
                 if (numberGridBuilder.IsVertical)

@@ -23,16 +23,29 @@ namespace ImageGridGenerator
         public int[,] CalculateVerticalHints()
         {
             var hints = GetConsecuitiveVerticalElements();
-            return ComplexColectionHelpers.ListArrayToJaggedArray(hints);
+            return ComplexColectionHelpers.ListArrayToJaggedArrayVertical(hints);
         }
 
         public int[,] CalculateHorizontalHints()
         {
             var hints = GetConsecuitiveHorizontalElements();
-            return ComplexColectionHelpers.ListArrayToJaggedArray(hints);
+            return ComplexColectionHelpers.ListArrayToJaggedArrayHorizontal(hints);
         }
 
         public List<int>[] GetConsecuitiveVerticalElements()
+        {
+            var hintsPerCol = new List<int>[_cellData.GetLength(1)];
+            for (var col = 0; col < _cellData.GetLength(1); col++)
+            {
+                var rowElements = GetColumnElements(col);
+                var counts = GetConsecuitiveElementsCounts(rowElements);
+                hintsPerCol[col] = counts;
+            }
+
+            return hintsPerCol;
+        }
+
+        public List<int>[] GetConsecuitiveHorizontalElements()
         {
             var hintsPerRow = new List<int>[_cellData.GetLength(0)];
             for (var row = 0; row < _cellData.GetLength(0); row++)
@@ -43,19 +56,6 @@ namespace ImageGridGenerator
             }
 
             return hintsPerRow;
-        }
-
-        public List<int>[] GetConsecuitiveHorizontalElements()
-        {
-            var hintsPerCol = new List<int>[_cellData.GetLength(1)];
-            for (var col = 0; col < _cellData.GetLength(0); col++)
-            {
-                var rowElements = GetColumnElements(col);
-                var counts = GetConsecuitiveElementsCounts(rowElements);
-                hintsPerCol[col] = counts;
-            }
-
-            return hintsPerCol;
         }
 
         private int[] GetColumnElements(int col)

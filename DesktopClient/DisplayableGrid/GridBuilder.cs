@@ -7,7 +7,6 @@ namespace JapaneseCrossWord.DisplayableGrid
     public class GridBuilder
     {
         protected readonly Grid _gridSlot;
-        public int[,] GridData { set; get; }
 
         public GridBuilder(Grid gridSlot)
         {
@@ -18,7 +17,6 @@ namespace JapaneseCrossWord.DisplayableGrid
         public void BuildGrid(int size)
         {
             BuildEmptyCells(size,size);
-            GridData = new int[size,size];
         }
 
         public virtual void BuildGrid(int cols, int rows)
@@ -30,7 +28,6 @@ namespace JapaneseCrossWord.DisplayableGrid
         {
             BuildColumns(cols);
             BuildRows(rows);
-            GridData = new int[rows, cols];
         }
 
         private void BuildColumns(int count)
@@ -52,5 +49,6 @@ namespace JapaneseCrossWord.DisplayableGrid
                 _gridSlot.RowDefinitions.Add(row);
             }
         }
+
     }
 }

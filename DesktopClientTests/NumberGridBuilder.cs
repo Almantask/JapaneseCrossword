@@ -5,11 +5,11 @@ using Xunit;
 
 namespace DesktopClientTests
 {
-    public class NumberGridBuilder
+    public class NumberGridBuilderTests
     {
         private int[,] _data;
 
-        NumberGridBuilder()
+        NumberGridBuilderTests()
         {
             _data = new int[5,9];
         }
