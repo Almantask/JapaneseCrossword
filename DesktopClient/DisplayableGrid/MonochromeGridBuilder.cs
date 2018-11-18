@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -54,6 +55,18 @@ namespace JapaneseCrossWord.DisplayableGrid
         private Brush GetColor(int colorIndex)
         {
             return colorIndex == 0 ? Brushes.White : Brushes.Black;
+        }
+
+        protected override RowDefinition BuildRow()
+        {
+            var row = base.BuildRow();
+            return row;
+        }
+
+        protected override ColumnDefinition BuildColumn()
+        {
+            var col = base.BuildColumn();
+            return col;
         }
     }
 }

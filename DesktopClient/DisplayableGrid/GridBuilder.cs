@@ -35,9 +35,14 @@ namespace JapaneseCrossWord.DisplayableGrid
             _gridSlot.ColumnDefinitions.Clear();
             for (var i = 0; i < count; i++)
             {
-                var column = new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) };
+                var column = BuildColumn();
                 _gridSlot.ColumnDefinitions.Add(column);
             }
+        }
+
+        protected virtual ColumnDefinition BuildColumn()
+        {
+            return new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) };
         }
 
         private void BuildRows(int count)
@@ -45,9 +50,14 @@ namespace JapaneseCrossWord.DisplayableGrid
             _gridSlot.RowDefinitions.Clear();
             for (var i = 0; i < count; i++)
             {
-                var row = new RowDefinition { Height = new GridLength(1, GridUnitType.Star) };
+                var row = BuildRow();
                 _gridSlot.RowDefinitions.Add(row);
             }
+        }
+
+        protected virtual RowDefinition BuildRow()
+        {
+            return new RowDefinition { Height = new GridLength(1, GridUnitType.Star) };
         }
 
     }

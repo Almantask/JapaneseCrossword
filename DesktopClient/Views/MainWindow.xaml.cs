@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ImageGridGenerator;
 using JapaneseCrossWord.DisplayableGrid;
@@ -175,6 +178,72 @@ namespace JapaneseCrossWord.Views
             {
                 numberGridBuilder.Clear();
             }
+        }
+
+        private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var cell = GetCellAtGrid();
+            var cellView = GetCellViewAt(cell);
+            InvertColorOf(cellView);
+        }
+
+        private Grid GetCellViewAt(Cell cell)
+        {
+            var cellView = PixelGrid.Children
+                .Cast<UIElement>()
+                .First(el => Grid.GetRow(el) == cell.Row && Grid.GetColumn(el) == cell.Col) as Grid;
+            return cellView;
+        }
+
+        private void InvertColorOf(Grid cellView)
+        {
+            if (cellView.Background == Brushes.Black)
+            {
+                cellView.Background = Brushes.White;
+            }
+            else
+            {
+                cellView.Background = Brushes.Black;
+            }
+        }
+
+
+        private Cell GetCellAtGrid()
+        {
+            var point = Mouse.GetPosition(PixelGrid);
+            var row = GetRowAtGrid(point.Y);
+            var col = GetColAtGrid(point.X);
+            return new Cell(row, col);
+        }
+
+        private int GetRowAtGrid(double mouseY)
+        {
+            var row = 0;
+            var accumulatedHeight = 0.0;
+            foreach (var rowDefinition in PixelGrid.RowDefinitions)
+            {
+                accumulatedHeight += rowDefinition.ActualHeight;
+                if (accumulatedHeight >= mouseY)
+                    break;
+                row++;
+            }
+
+            return row;
+        }
+
+        private int GetColAtGrid(double mouseX)
+        {
+            var col = 0;
+            var accumulatedWidth = 0.0;
+            foreach (var columnDefinition in PixelGrid.ColumnDefinitions)
+            {
+                accumulatedWidth += columnDefinition.ActualWidth;
+                if (accumulatedWidth >= mouseX)
+                    break;
+                col++;
+            }
+
+            return col;
         }
     }
 }

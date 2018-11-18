@@ -73,6 +73,7 @@
     <Compile Include="DisplayableGrid\FilledGridBuilder.cs" />
     <Compile Include="DisplayableGrid\NumberGridBuilder.cs" />
     <Compile Include="DisplayableGrid\MonochromeGridBuilder.cs" />
+    <Compile Include="DisplayableGrid\Cell.cs" />
     <Compile Include="Views\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
     </Compile>
