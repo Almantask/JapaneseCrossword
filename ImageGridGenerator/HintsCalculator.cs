@@ -10,8 +10,8 @@ namespace ImageGridGenerator
 {
     public class HintsCalculator
     {
-        private const int EmptyElementLiteral = 0;
-        private const int FilledElementLiteral = 1;
+        public const int EmptyElementLiteral = 0;
+        public const int FilledElementLiteral = 1;
         private readonly int[,] _cellData;
 
         public HintsCalculator(int[,] cellData)

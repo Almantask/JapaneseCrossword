@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace JapaneseCrossWord.DisplayableGrid
 {
     // TODO: split into more generic grid builder
-    public class GridBuilder
+    public class GridView
     {
         protected readonly Grid _gridSlot;
 
-        public GridBuilder(Grid gridSlot)
+        public GridView(Grid gridSlot)
         {
             _gridSlot = gridSlot;
         }

@@ -14,33 +14,32 @@ namespace JapaneseCrossWord.Views
 {
     public partial class MainWindow : Window
     {
-        private readonly MonochromeGridBuilder _gridBuilder;
+        private readonly MonochromeGridView _pixelGridView;
         private int _preferableGridSize = 9;
-        private List<NumberGridBuilder> _numberGridBuilders;
+        private List<NumberGridView> _numberGridBuilders;
         private bool _isFirstLoad = true;
-        GridDataGenerator _gridDataGenerator = new GridDataGenerator();
 
         public MainWindow()
         {
             InitializeComponent();
-            _gridBuilder = new MonochromeGridBuilder(PixelGrid);
+            _pixelGridView = new MonochromeGridView(PixelGrid);
             BuilHintGrids();
         }
 
         private void BuilHintGrids()
         {
-            _numberGridBuilders = new List<NumberGridBuilder>();
+            _numberGridBuilders = new List<NumberGridView>();
             Grid[] hintGridsSides = { LeftHintGrid, RightHintGrid };
             Grid[] hintGridsGroundRoof = { TopHintGrid, BottomHintGrid };
 
             foreach (var hintGrid in hintGridsSides)
             {
-                var numberGridBuilder = new NumberGridBuilder(hintGrid, true);
+                var numberGridBuilder = new NumberGridView(hintGrid, true);
                 _numberGridBuilders.Add(numberGridBuilder);
             }
             foreach (var hintGrid in hintGridsGroundRoof)
             {
-                var numberGridBuilder = new NumberGridBuilder(hintGrid, false);
+                var numberGridBuilder = new NumberGridView(hintGrid, false);
                 _numberGridBuilders.Add(numberGridBuilder);
             }
         }
@@ -48,6 +47,11 @@ namespace JapaneseCrossWord.Views
 
         // TODO: MVVM
         private void OnButtonRnadomGrid(object sender, RoutedEventArgs e)
+        {
+            BuildCrossword();
+        }
+
+        private void BuildCrossword()
         {
             var gridSizeInput = textBoxGridSize.Text;
             Tuple<int, int> gridSize = null;
@@ -63,7 +67,6 @@ namespace JapaneseCrossWord.Views
 
             BuildMainGrid(gridSize.Item1, gridSize.Item2);
             BuildHintGrids();
-
         }
 
         /// <summary>
@@ -89,33 +92,33 @@ namespace JapaneseCrossWord.Views
 
         private void BuildMainGrid(int cols, int rows)
         {
-            var gridData = _gridDataGenerator.Generate(cols, rows, 0, 1);
-            _gridBuilder.GridData = gridData;
-            _gridBuilder.BuildGrid(cols, rows);
+            _pixelGridView.BuildGrid(cols, rows);
         }
 
         private void BuildHintGrids()
         {
-            var hintsCalculator = new HintsCalculator(_gridBuilder.GridData);
+            var hintsCalculator = new HintsCalculator(_pixelGridView.GridData);
             //var verticalHintsGridData = hintsCalculator.CalculateVerticalHints();
             //var horizontalHintsGridData = hintsCalculator.CalculateHorizontalHints();
             var horizontalHintsGridData = hintsCalculator.CalculateVerticalHints().InvertOrientation();
             var verticalHintsGridData = hintsCalculator.CalculateHorizontalHints().InvertOrientation();
-            foreach (var hintGridBuilder in _numberGridBuilders)
+            foreach (var hintsGridView in _numberGridBuilders)
             {
-                if (hintGridBuilder.IsVertical)
+                // TODO: refactor
+                if (hintsGridView.IsVertical)
                 {
-                    hintGridBuilder.GridData = verticalHintsGridData;
+                    
+                    hintsGridView.GridData = verticalHintsGridData;
                     var rows = verticalHintsGridData.GetLength(0);
                     var cols = verticalHintsGridData.GetLength(1);
-                    hintGridBuilder.BuildGrid(cols, rows);
+                    hintsGridView.BuildGrid(cols, rows);
                 }
                 else
                 {
-                    hintGridBuilder.GridData = horizontalHintsGridData;
+                    hintsGridView.GridData = horizontalHintsGridData;
                     var rows = horizontalHintsGridData.GetLength(0);
                     var cols = horizontalHintsGridData.GetLength(1);
-                    hintGridBuilder.BuildGrid(cols, rows);
+                    hintsGridView.BuildGrid(cols, rows);
                 }
             }
         }
@@ -125,7 +128,7 @@ namespace JapaneseCrossWord.Views
             BitmapImage image = GetImageFromDialog();
             if (image == null) return;
 
-            _gridBuilder.BuildGrid(_preferableGridSize);
+            _pixelGridView.BuildGrid(_preferableGridSize);
         }
 
         private BitmapImage GetImageFromDialog()
@@ -185,10 +188,16 @@ namespace JapaneseCrossWord.Views
             var cell = GetCellAtGrid();
             var cellView = GetCellViewAt(cell);
             InvertColorOf(cellView);
+            InverValueAt(cell);
+            bool isDone = IsGameOver();
+            if (isDone)
+                MessageBox.Show("Congratulations! You completed the crossword!");
         }
+
 
         private Grid GetCellViewAt(Cell cell)
         {
+            if (PixelGrid.Children.Count < 1) return new Grid();
             var cellView = PixelGrid.Children
                 .Cast<UIElement>()
                 .First(el => Grid.GetRow(el) == cell.Row && Grid.GetColumn(el) == cell.Col) as Grid;
@@ -207,6 +216,17 @@ namespace JapaneseCrossWord.Views
             }
         }
 
+        private void InverValueAt(Cell cell)
+        {
+            if (_pixelGridView.Progress[cell.Row, cell.Col] == HintsCalculator.FilledElementLiteral)
+            {
+                _pixelGridView.Progress[cell.Row, cell.Col] = HintsCalculator.EmptyElementLiteral;
+            }
+            else
+            {
+                _pixelGridView.Progress[cell.Row, cell.Col] = HintsCalculator.FilledElementLiteral;
+            }
+        }
 
         private Cell GetCellAtGrid()
         {
@@ -244,6 +264,17 @@ namespace JapaneseCrossWord.Views
             }
 
             return col;
+        }
+
+        private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+                BuildCrossword();
+        }
+
+        private bool IsGameOver()
+        {
+            return _pixelGridView.GameProgress.IsDone();
         }
     }
 }

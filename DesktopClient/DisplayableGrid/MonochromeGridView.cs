@@ -1,18 +1,24 @@
-﻿using System;
-using System.Windows;
+﻿using System.Drawing;
 using System.Windows.Controls;
-using System.Windows.Media;
+using GridGenerator;
+using JapaneseCrossWord.Views;
+using Brush = System.Windows.Media.Brush;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace JapaneseCrossWord.DisplayableGrid
 {
-    public class MonochromeGridBuilder:FilledGridBuilder
+    public class MonochromeGridView:FilledGridView
     {
-        public MonochromeGridBuilder(Grid gridSlot):base(gridSlot)
+        public int[,] Progress => GameProgress._currentGrid;
+        public CrosswordProgress GameProgress;
+
+        public MonochromeGridView(Grid gridSlot):base(gridSlot)
         {
         }
 
         public override void FillCells()
         {
+            _gridSlot.Children.Clear();
             for (var row = 0; row < GridData.GetLength(0); row++)
             {
                 for (var col = 0; col < GridData.GetLength(1); col++)
@@ -67,6 +73,20 @@ namespace JapaneseCrossWord.DisplayableGrid
         {
             var col = base.BuildColumn();
             return col;
+        }
+
+        public void ColorGrid(bool isWhite)
+        {
+            foreach (var child in _gridSlot.Children)
+                ((Grid) child).Background = isWhite ? Brushes.White : Brushes.Black;
+        }
+
+        public override void BuildGrid(int cols, int rows)
+        {
+            GameProgress = new CrosswordProgress(cols, rows);
+            GridData = GameProgress._goalGrid;
+            base.BuildGrid(cols, rows);
+            ColorGrid(true);
         }
     }
 }

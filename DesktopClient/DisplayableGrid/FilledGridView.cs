@@ -2,11 +2,11 @@
 
 namespace JapaneseCrossWord.DisplayableGrid
 {
-    public abstract class FilledGridBuilder:GridBuilder
+    public abstract class FilledGridView:GridView
     {
         public int[,] GridData { set; get; }
 
-        protected FilledGridBuilder(Grid gridSlot) : base(gridSlot)
+        protected FilledGridView(Grid gridSlot) : base(gridSlot)
         {
         }
 

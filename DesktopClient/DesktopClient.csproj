@@ -52,6 +52,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,9 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DisplayableGrid\FilledGridBuilder.cs" />
-    <Compile Include="DisplayableGrid\NumberGridBuilder.cs" />
-    <Compile Include="DisplayableGrid\MonochromeGridBuilder.cs" />
+    <Compile Include="DisplayableGrid\FilledGridView.cs" />
+    <Compile Include="DisplayableGrid\NumberGridView.cs" />
+    <Compile Include="DisplayableGrid\MonochromeGridView.cs" />
     <Compile Include="DisplayableGrid\Cell.cs" />
     <Compile Include="Views\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
@@ -85,7 +86,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DisplayableGrid\GridBuilder.cs" />
+    <Compile Include="DisplayableGrid\GridView.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

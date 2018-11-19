@@ -6,16 +6,16 @@ using System.Windows.Media;
 namespace JapaneseCrossWord.DisplayableGrid
 {
     // TODO: refactor grid builders
-    public class NumberGridBuilder:FilledGridBuilder
+    public class NumberGridView:FilledGridView
     {
         public bool IsVertical { get; }
 
-        public NumberGridBuilder(Grid gridSlot, bool isVertical):base(gridSlot)
+        public NumberGridView(Grid gridSlot, bool isVertical):base(gridSlot)
         {
             IsVertical = isVertical;
         }
 
-        public NumberGridBuilder(Grid gridSlot, bool isVertical, int[,] gridData) : base(gridSlot)
+        public NumberGridView(Grid gridSlot, bool isVertical, int[,] gridData) : base(gridSlot)
         {
             IsVertical = isVertical;
             GridData = gridData;
@@ -24,6 +24,7 @@ namespace JapaneseCrossWord.DisplayableGrid
         public override void FillCells()
         {
             if (GridData == null) return;
+            _gridSlot.Children.Clear();
             for (var row = 0; row < GridData.GetLength(0); row++)
             {
                 for (var col = 0; col < GridData.GetLength(1); col++)
