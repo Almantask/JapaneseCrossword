@@ -11,6 +11,10 @@ namespace GridGenerator
         public int[,] _goalGrid;
         public int[,] _currentGrid;
 
+        public CrosswordProgress()
+        {
+        }
+
         public CrosswordProgress(int[,] goalGrid)
         {
             _goalGrid = goalGrid;
@@ -35,5 +39,7 @@ namespace GridGenerator
             var current = _currentGrid.Cast<int>();
             return goal.SequenceEqual(current);
         }
+
+
     }
 }

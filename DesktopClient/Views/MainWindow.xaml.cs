@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +10,7 @@ using System.Windows.Media.Imaging;
 using ImageGridGenerator;
 using JapaneseCrossWord.DisplayableGrid;
 using GridGenerator;
+using Microsoft.Win32;
 
 namespace JapaneseCrossWord.Views
 {
@@ -275,6 +277,36 @@ namespace JapaneseCrossWord.Views
         private bool IsGameOver()
         {
             return _pixelGridView.GameProgress.IsDone();
+        }
+
+        private void Load_OnClick(object sender, RoutedEventArgs e)
+        {
+
+            var loader = new LocalStateLoader();
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Game save file type | *.jcsj",
+                Title = "Select a save file"
+            };
+            if (openFileDialog.ShowDialog() != true) return;
+            var progres = loader.Load(openFileDialog.FileName);
+            _pixelGridView.GameProgress = progres;
+            _pixelGridView.FillProgressCells();
+            BuildHintGrids();
+        }
+
+        private void Save_OnClick(object sender, RoutedEventArgs e)
+        {
+            var loader = new LocalStateLoader();
+            SaveFileDialog openFileDialog = new SaveFileDialog
+            {
+                Filter = "Game save file type | *.jcsj",
+                Title = "Save game progress to a file"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                loader.Save(_pixelGridView.GameProgress, openFileDialog.FileName);
+            }
         }
     }
 }

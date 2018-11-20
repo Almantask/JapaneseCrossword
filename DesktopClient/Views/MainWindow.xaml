@@ -77,29 +77,45 @@
                         FontSize="18"
                 />
             </Grid>
-        <Grid Grid.Row="0" Column="0" x:Name="HintsOnOff">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label x:Name = "labelHintOnOff"  
+        <Grid Grid.Row ="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label x:Name = "labelHintOnOff"  
                    Grid.Column="0"
                    Content="Hints"
                    HorizontalContentAlignment="Right"
                    VerticalContentAlignment="Center"
                    FontSize="10"
-                />
-                <CheckBox x:Name = "checkBoxHintOnOff"  
-                       Grid.Column="1"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Checked="CheckBoxHintOnOff_OnChecked"
-                          Unchecked="CheckBoxHintOnOff_OnUnchecked"
-                          IsChecked="True"
-                />
+            />
+            <CheckBox x:Name = "checkBoxHintOnOff"  
+                      Grid.Column="1"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Checked="CheckBoxHintOnOff_OnChecked"
+                      Unchecked="CheckBoxHintOnOff_OnUnchecked"
+                      IsChecked="True" Margin="0,15,0,10"
+            />
+        </Grid>
+        <Grid Grid.Row="0" Column="0" x:Name="HintsOnOff">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0">
+                    <Menu DockPanel.Dock="Top">
+                        <MenuItem Header="_File" Width="74">
+                            <MenuItem Header="Load" Click="Load_OnClick"/>
+                            <MenuItem Header="Save" Click="Save_OnClick"/>
+                        </MenuItem>
+                    </Menu>
+                    <StackPanel></StackPanel>
+                </DockPanel>
+               
             </Grid>
-            
+
         </Grid>
 
         <Grid Grid.Row="3" Column="1">

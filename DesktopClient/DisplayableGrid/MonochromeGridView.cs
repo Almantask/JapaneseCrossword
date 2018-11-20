@@ -10,7 +10,17 @@ namespace JapaneseCrossWord.DisplayableGrid
     public class MonochromeGridView:FilledGridView
     {
         public int[,] Progress => GameProgress._currentGrid;
-        public CrosswordProgress GameProgress;
+
+        private CrosswordProgress _gameProgress;
+        public CrosswordProgress GameProgress
+        {
+            set
+            {
+                GridData = value._goalGrid;
+                _gameProgress = value;
+            }
+            get => _gameProgress;
+        }
 
         public MonochromeGridView(Grid gridSlot):base(gridSlot)
         {
@@ -26,6 +36,26 @@ namespace JapaneseCrossWord.DisplayableGrid
                     var cellView = new Grid
                     {
                         Background = GetColor((int)GridData[row, col])
+                    };
+
+                    Grid.SetColumn(cellView, col);
+                    Grid.SetRow(cellView, row);
+                    _gridSlot.Children.Add(cellView);
+                }
+            }
+        }
+
+        public void FillProgressCells()
+        {
+            BuildGrid(GridData.GetLength(1), GridData.GetLength(0));
+            _gridSlot.Children.Clear();
+            for (var row = 0; row < _gameProgress._currentGrid.GetLength(0); row++)
+            {
+                for (var col = 0; col < _gameProgress._currentGrid.GetLength(1); col++)
+                {
+                    var cellView = new Grid
+                    {
+                        Background = GetColor((int)_gameProgress._currentGrid[row, col])
                     };
 
                     Grid.SetColumn(cellView, col);
@@ -84,7 +114,6 @@ namespace JapaneseCrossWord.DisplayableGrid
         public override void BuildGrid(int cols, int rows)
         {
             GameProgress = new CrosswordProgress(cols, rows);
-            GridData = GameProgress._goalGrid;
             base.BuildGrid(cols, rows);
             ColorGrid(true);
         }
