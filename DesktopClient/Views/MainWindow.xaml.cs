@@ -281,7 +281,6 @@ namespace JapaneseCrossWord.Views
 
         private void Load_OnClick(object sender, RoutedEventArgs e)
         {
-
             var loader = new LocalStateLoader();
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -297,6 +296,11 @@ namespace JapaneseCrossWord.Views
 
         private void Save_OnClick(object sender, RoutedEventArgs e)
         {
+            if (_pixelGridView.GameProgress == null)
+            {
+                MessageBox.Show("No grid to be saved");
+                return;
+            }
             var loader = new LocalStateLoader();
             SaveFileDialog openFileDialog = new SaveFileDialog
             {
