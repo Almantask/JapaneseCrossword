@@ -47,7 +47,7 @@ namespace JapaneseCrossWord.DisplayableGrid
 
         public void FillProgressCells()
         {
-            BuildGrid(GridData.GetLength(1), GridData.GetLength(0));
+            BuildGrid(GridData.GetLength(1), GridData.GetLength(0), false);
             _gridSlot.Children.Clear();
             for (var row = 0; row < _gameProgress._currentGrid.GetLength(0); row++)
             {
@@ -111,9 +111,10 @@ namespace JapaneseCrossWord.DisplayableGrid
                 ((Grid) child).Background = isWhite ? Brushes.White : Brushes.Black;
         }
 
-        public override void BuildGrid(int cols, int rows)
+        public override void BuildGrid(int cols, int rows, bool regenerateProgress = true)
         {
-            GameProgress = new CrosswordProgress(cols, rows);
+            if(regenerateProgress)
+                GameProgress = new CrosswordProgress(cols, rows);
             base.BuildGrid(cols, rows);
             ColorGrid(true);
         }

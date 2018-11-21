@@ -279,7 +279,7 @@ namespace JapaneseCrossWord.Views
             return _pixelGridView.GameProgress.IsDone();
         }
 
-        private void Load_OnClick(object sender, RoutedEventArgs e)
+        private void LoadProgress_OnClick(object sender, RoutedEventArgs e)
         {
             var loader = new LocalStateLoader();
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -294,7 +294,7 @@ namespace JapaneseCrossWord.Views
             BuildHintGrids();
         }
 
-        private void Save_OnClick(object sender, RoutedEventArgs e)
+        private void SaveProgress_OnClick(object sender, RoutedEventArgs e)
         {
             if (_pixelGridView.GameProgress == null)
             {
@@ -310,6 +310,26 @@ namespace JapaneseCrossWord.Views
             if (openFileDialog.ShowDialog() == true)
             {
                 loader.Save(_pixelGridView.GameProgress, openFileDialog.FileName);
+            }
+        }
+
+        private void SaveCustom_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (_pixelGridView.GameProgress == null)
+            {
+                MessageBox.Show("No grid to be saved");
+                return;
+            }
+            var loader = new LocalStateLoader();
+            SaveFileDialog openFileDialog = new SaveFileDialog
+            {
+                Filter = "Game save file type | *.jcsj",
+                Title = "Save game progress to a file"
+            };
+            var customProgress = new CrosswordProgress(_pixelGridView.GameProgress._currentGrid);
+            if (openFileDialog.ShowDialog() == true)
+            {
+                loader.Save(customProgress, openFileDialog.FileName);
             }
         }
     }
