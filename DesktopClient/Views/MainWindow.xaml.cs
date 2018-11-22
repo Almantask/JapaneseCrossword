@@ -187,6 +187,7 @@ namespace JapaneseCrossWord.Views
 
         private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (_pixelGridView.GameProgress == null) return;
             var cell = GetCellAtGrid();
             var cellView = GetCellViewAt(cell);
             InvertColorOf(cellView);
