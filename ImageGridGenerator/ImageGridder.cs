@@ -10,7 +10,7 @@ namespace GridGenerator
 {
     public class ImageGridder
     {
-        // TODO: to be continued.
+        // TODO: to be continued
         public int[,] ConvertToGrid(Bitmap image)
         {
             var pixels = ConvertToPixelArray(image);
