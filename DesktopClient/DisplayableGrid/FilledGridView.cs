@@ -10,7 +10,7 @@ namespace JapaneseCrossWord.DisplayableGrid
         {
         }
 
-        public override void BuildGrid(int cols, int rows)
+        public override void BuildGrid(int cols, int rows, bool regenerateProgress = true)
         {
             base.BuildGrid(cols, rows);
             FillCells();

@@ -107,8 +107,9 @@
                 <DockPanel Grid.Row="0">
                     <Menu DockPanel.Dock="Top">
                         <MenuItem Header="_File" Width="74">
-                            <MenuItem Header="Load" Click="Load_OnClick"/>
-                            <MenuItem Header="Save" Click="Save_OnClick"/>
+                            <MenuItem Header="Load" Click="LoadProgress_OnClick"/>
+                            <MenuItem Header="Save Progress" Click="SaveProgress_OnClick"/>
+                            <MenuItem Header="Save custom" Click="SaveCustom_OnClick"/>
                         </MenuItem>
                     </Menu>
                     <StackPanel></StackPanel>
