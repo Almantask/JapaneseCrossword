@@ -10,37 +10,66 @@ namespace GridGenerator
 {
     public class ImageGridder
     {
+        // There are quite many problems here:
+        // fundamentally the pixel is supposed to be changed
+        // into multiple regions of pixels.
+        //
         // TODO: to be continued
-        public int[,] ConvertToGrid(Bitmap image)
+        public ColorRegion[,] ConvertToGrid(Bitmap image)
         {
-            var pixels = ConvertToPixelArray(image);
-            return pixels;
+            var sectors = GetColorSectors(image);
+            var colorRegions = new ColorRegion[5,5];
+            for (var row = 0; row < 5; row++)
+            {
+                for (var col = 0; col < 5; col++)
+                {
+                    colorRegions[row,col] = new ColorRegion(5, 5, sectors[row, col]);
+                }
+            }
+            return colorRegions;
         }
 
-        public int[,] ConvertToPixelArray(Bitmap image)
+        //TODO: what to do with an offset?
+        private int CalculateColorRegionWidth(int totalWidth, int regionWidth)
         {
+            return totalWidth / regionWidth;
+        }
+
+        private int CalculateColorRegionHeight(int totalHeight, int regionHeight)
+        {
+            return totalHeight / regionHeight;
+        }
+
+        private Color[,][,] GetColorSectors(Bitmap image)
+        {
+            var sectors = new Color[5,5][,];
             var pixels = new int[image.Height, image.Width];
             for (var row = 0; row < image.Height; row++)
             {
                 for (var col = 0; col < image.Width; col++)
                 {
-                    // store pixel
+                    var color = image.GetPixel(row, col);
+                   // TODO: continue
                 }
             }
-
-            return pixels;
+            return sectors;
         }
 
-        private class Pixel
+        public class ColorRegion
         {
-            public int Row { set; get; }
-            public int Col { set; get; }
-            public Color Color { set; get; }
-            public Pixel(int row, int col, Color color)
+            public int Height { get; }
+            public int Width { get; }
+            public bool IsBalck { get; }
+            public ColorRegion(int row, int col, Color[,] colors)
             {
-                Row = row;
-                Col = col;
-                Color = color;
+                Height = row;
+                Width = col;
+                IsBalck = IsRegionWhite(colors);
+            }
+
+            private bool IsRegionWhite(Color[,] region)
+            {
+                return true;
             }
         }
     }
