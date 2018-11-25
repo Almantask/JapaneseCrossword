@@ -60,10 +60,10 @@ namespace JapaneseCrossWord.DisplayableGrid
             }
         }
 
-        private string SetCellContent(object obj)
+        private string SetCellContent(int num)
         {
-            if ((int)obj == 0) return "";
-            return obj.ToString();
+            if (num == 0) return "";
+            return num.ToString();
         }
 
         public override void Clear()

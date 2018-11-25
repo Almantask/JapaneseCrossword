@@ -13,8 +13,6 @@ namespace GridGenerator
         // There are quite many problems here:
         // fundamentally the pixel is supposed to be changed
         // into multiple regions of pixels.
-        //
-        // TODO: to be continued
         public ColorRegion[,] ConvertToGrid(Bitmap image)
         {
             var sectors = GetColorSectors(image);
