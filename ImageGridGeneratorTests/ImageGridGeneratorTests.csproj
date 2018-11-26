@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageGridGenerator\GridGenerator.csproj" />
+    <ProjectReference Include="..\ImageGridGenerator\ImageProcessing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Newtonsoft.Json;
 
-namespace GridGenerator
+namespace JapaneseCrossword.State
 {
     public class LocalStateLoader:IStateLoader
     {
-        public CrosswordProgress Load(string path)
+        public GameProgress Load(string path)
         {
             using (var r = new StreamReader(path))
             {
                 var data = r.ReadToEnd();
-                var progress = JsonConvert.DeserializeObject<CrosswordProgress>(data);
+                var progress = JsonConvert.DeserializeObject<GameProgress>(data);
                 return progress;
             }
         }
 
-        public void Save(CrosswordProgress progress, string path)
+        public void Save(GameProgress progress, string path)
         {
             using (var file = File.CreateText(path))
             {

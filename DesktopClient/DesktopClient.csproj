@@ -87,7 +87,6 @@
     <Compile Include="DisplayableGrid\FilledGridView.cs" />
     <Compile Include="DisplayableGrid\NumberGridView.cs" />
     <Compile Include="DisplayableGrid\MonochromeGridView.cs" />
-    <Compile Include="DisplayableGrid\Cell.cs" />
     <Compile Include="Views\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
     </Compile>
@@ -134,7 +133,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -152,9 +153,9 @@
     <Folder Include="Entities\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ImageGridGenerator\GridGenerator.csproj">
+    <ProjectReference Include="..\ImageGridGenerator\ImageProcessing.csproj">
       <Project>{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}</Project>
-      <Name>GridGenerator</Name>
+      <Name>ImageProcessing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
