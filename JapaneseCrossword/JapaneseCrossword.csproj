@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Rules\Cell.cs" />
     <Compile Include="Hints\ConsequitiveElementsFinder.cs" />
     <Compile Include="Rules\IRules.cs" />
     <Compile Include="Rules\StrictRules.cs" />

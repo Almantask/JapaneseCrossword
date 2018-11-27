@@ -5,8 +5,7 @@ using System.Windows.Media;
 
 namespace JapaneseCrossWord.DisplayableGrid
 {
-    // TODO: refactor grid builders
-    public class NumberGridView:FilledGridView
+    public class NumberGridView: GridView
     {
         public bool IsVertical { get; }
 
@@ -15,42 +14,16 @@ namespace JapaneseCrossWord.DisplayableGrid
             IsVertical = isVertical;
         }
 
-        public NumberGridView(Grid gridSlot, bool isVertical, int[,] gridData) : base(gridSlot)
+        public void FillCells(int[,] GridData)
         {
-            IsVertical = isVertical;
-            GridData = gridData;
-        }
-
-        public override void FillCells()
-        {
-            if (GridData == null) return;
             _gridSlot.Children.Clear();
             for (var row = 0; row < GridData.GetLength(0); row++)
             {
                 for (var col = 0; col < GridData.GetLength(1); col++)
                 {
                     var cellView = new Grid();
-                    var cellText = new TextBlock
-                    {
-                        Text = SetCellContent(GridData[row, col]),
-                        Background = Brushes.White,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        FontSize = 10,
-                        TextAlignment = TextAlignment.Center,
-                    };
-
-                    var border = new Border
-                    {
-                        VerticalAlignment = VerticalAlignment.Stretch,
-                        HorizontalAlignment = HorizontalAlignment.Stretch,
-                        Child = cellText,
-                        Background = Brushes.White,
-                        BorderBrush = Brushes.Black,
-                        BorderThickness = new Thickness(2),
-                        
-                    };
-
+                    var content = CreateTextContent(GridData[row, col]);
+                    var border = CreateCellBorder(content);
                     cellView.Children.Add(border);
 
                     Grid.SetColumn(cellView, col);
@@ -60,13 +33,44 @@ namespace JapaneseCrossWord.DisplayableGrid
             }
         }
 
+        private TextBlock CreateTextContent(int number)
+        {
+            var cellText = new TextBlock
+            {
+                Text = SetCellContent(number),
+                Background = Brushes.White,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                FontSize = 10,
+                TextAlignment = TextAlignment.Center,
+            };
+
+            return cellText;
+        }
+
+        private Border CreateCellBorder(TextBlock textContent)
+        {
+            var border = new Border
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Child = textContent,
+                Background = Brushes.White,
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(2),
+
+            };
+
+            return border;
+        }
+
         private string SetCellContent(int num)
         {
             if (num == 0) return "";
             return num.ToString();
         }
 
-        public override void Clear()
+        public void Clear()
         {
             var cols = _gridSlot.ColumnDefinitions.Count;
             var rows = _gridSlot.RowDefinitions.Count;

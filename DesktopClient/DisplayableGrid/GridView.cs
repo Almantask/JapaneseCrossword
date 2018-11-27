@@ -19,7 +19,7 @@ namespace JapaneseCrossWord.DisplayableGrid
             BuildEmptyCells(size,size);
         }
 
-        public virtual void BuildGrid(int cols, int rows, bool regenerateProgress = true)
+        public virtual void BuildGrid(int cols, int rows)
         {
             BuildEmptyCells(cols, rows);
         }

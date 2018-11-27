@@ -84,7 +84,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DisplayableGrid\FilledGridView.cs" />
     <Compile Include="DisplayableGrid\NumberGridView.cs" />
     <Compile Include="DisplayableGrid\MonochromeGridView.cs" />
     <Compile Include="Views\OptionsWindow.xaml.cs">
@@ -156,6 +155,10 @@
     <ProjectReference Include="..\ImageGridGenerator\ImageProcessing.csproj">
       <Project>{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}</Project>
       <Name>ImageProcessing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JapaneseCrossword\JapaneseCrossword.csproj">
+      <Project>{C7A5C1FB-D045-4E64-AAF8-526AA7CBE7A9}</Project>
+      <Name>JapaneseCrossword</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
