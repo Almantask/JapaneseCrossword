@@ -4,7 +4,7 @@ using JapaneseCrossword.State;
 
 namespace JapaneseCrossword.Hints
 {
-    class ConsequitiveElementsFinder:IConsequitiveElementsCountFinder
+    public class ConsequitiveElementsFinder:IConsequitiveElementsCountFinder
     {
         public List<int> Find(MonochromeCell[] elements)
         {

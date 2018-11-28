@@ -8,10 +8,23 @@ namespace JapaneseCrossWord.DisplayableGrid
     public class NumberGridView: GridView
     {
         public bool IsVertical { get; }
+        private int[,] _gridData;
 
         public NumberGridView(Grid gridSlot, bool isVertical):base(gridSlot)
         {
             IsVertical = isVertical;
+        }
+
+        public void BuildGrid(int[,] GridData)
+        {
+            BuildGrid(GridData.GetLength(1), GridData.GetLength(0));
+            FillCells(GridData);
+            _gridData = GridData;
+        }
+
+        public void FillCells()
+        {
+            FillCells(_gridData);
         }
 
         public void FillCells(int[,] GridData)

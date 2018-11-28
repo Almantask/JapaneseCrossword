@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JapaneseCrossword.Hints;
 using Xunit;
 
 namespace ImageGridGeneratorTests

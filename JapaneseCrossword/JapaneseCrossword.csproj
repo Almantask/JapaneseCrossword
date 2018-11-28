@@ -44,7 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crossword.cs" />
     <Compile Include="Hints\ConsequitiveElementsFinder.cs" />
+    <Compile Include="IHintsCalculator.cs" />
+    <Compile Include="IHintsGridBuider.cs" />
+    <Compile Include="IMainGridBuilder.cs" />
     <Compile Include="Rules\IRules.cs" />
     <Compile Include="Rules\StrictRules.cs" />
     <Compile Include="Rules\ValidatoinRules.cs" />

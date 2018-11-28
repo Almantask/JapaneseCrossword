@@ -4,13 +4,13 @@ namespace JapaneseCrossword.State
 {
     public class GameProgress
     {
-        public MonochromeCell[,] Goal { get; }
-        public MonochromeCell[,] Current { get; }
+        public IMonochrome[,] Goal { get; }
+        public IMonochrome[,] Current { get; }
 
-        public GameProgress(MonochromeCell[,] goal)
+        public GameProgress(IMonochrome[,] goal)
         {
             Goal = goal;
-            Current = new MonochromeCell[goal.GetLength(0), goal.GetLength(1)];
+            Current = new IMonochrome[goal.GetLength(0), goal.GetLength(1)];
         }
 
         public void InvertCell(int row, int col)

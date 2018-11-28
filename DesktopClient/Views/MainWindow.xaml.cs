@@ -9,7 +9,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using JapaneseCrossWord.DisplayableGrid;
 using GridGenerator;
+using JapaneseCrossword;
+using JapaneseCrossword.Hints;
+using JapaneseCrossword.Rules;
+using JapaneseCrossword.State;
 using Microsoft.Win32;
+using General;
 
 namespace JapaneseCrossWord.Views
 {
@@ -19,6 +24,7 @@ namespace JapaneseCrossWord.Views
         private int _preferableGridSize = 9;
         private List<NumberGridView> _numberGridBuilders;
         private bool _isFirstLoad = true;
+        private Crossword _crossword;
 
         public MainWindow()
         {
@@ -54,6 +60,20 @@ namespace JapaneseCrossWord.Views
 
         private void BuildCrossword()
         {
+            var gridSize = ParseGridSize();
+            if (gridSize == null) return;
+            var dataGenerator = new GridDataGenerator();
+            var cols = gridSize.Item1;
+            var rows = gridSize.Item2;
+            var gridData = dataGenerator.Generate(cols, rows);
+            // TODO: inject dependencies
+            //_crossword = new Crossword(new StrictRules(), new LocalStateLoader(), gridData);
+            BuildMainGrid(cols, rows);
+            BuildHintGrids(gridData);
+        }
+
+        private Tuple<int , int> ParseGridSize()
+        {
             var gridSizeInput = textBoxGridSize.Text;
             Tuple<int, int> gridSize = null;
             try
@@ -63,11 +83,8 @@ namespace JapaneseCrossWord.Views
             catch
             {
                 MessageBox.Show($"Failed to read grid size: {gridSizeInput} is not valid");
-                return;
             }
-
-            BuildMainGrid(gridSize.Item1, gridSize.Item2);
-            BuildHintGrids();
+            return gridSize;
         }
 
         /// <summary>
@@ -96,31 +113,18 @@ namespace JapaneseCrossWord.Views
             _pixelGridView.BuildGrid(cols, rows);
         }
 
-        private void BuildHintGrids()
+        private void BuildHintGrids(MonochromeCell[,] gridData)
         {
-            var hintsCalculator = new HintsCalculator(_pixelGridView.GridData);
-            //var verticalHintsGridData = hintsCalculator.CalculateVerticalHints();
-            //var horizontalHintsGridData = hintsCalculator.CalculateHorizontalHints();
-            var horizontalHintsGridData = hintsCalculator.CalculateVerticalHints().InvertOrientation();
-            var verticalHintsGridData = hintsCalculator.CalculateHorizontalHints().InvertOrientation();
+            var verticalHintsCalculator = new VerticalHintsCalculator(gridData, new ConsequitiveElementsFinder());
+            var horizontalHintsCalculator = new HorizontalHintsCalculator(gridData, new ConsequitiveElementsFinder());
+
+            var horizontalHintsGridData = verticalHintsCalculator.Calculate().InvertOrientation();
+            var verticalHintsGridData = horizontalHintsCalculator.Calculate().InvertOrientation();
+
             foreach (var hintsGridView in _numberGridBuilders)
             {
-                // TODO: refactor
-                if (hintsGridView.IsVertical)
-                {
-                    
-                    hintsGridView.GridData = verticalHintsGridData;
-                    var rows = verticalHintsGridData.GetLength(0);
-                    var cols = verticalHintsGridData.GetLength(1);
-                    hintsGridView.BuildGrid(cols, rows);
-                }
-                else
-                {
-                    hintsGridView.GridData = horizontalHintsGridData;
-                    var rows = horizontalHintsGridData.GetLength(0);
-                    var cols = horizontalHintsGridData.GetLength(1);
-                    hintsGridView.BuildGrid(cols, rows);
-                }
+                var hintsData = hintsGridView.IsVertical ? verticalHintsGridData : horizontalHintsGridData;
+                hintsGridView.BuildGrid(hintsData);
             }
         }
 
@@ -186,23 +190,23 @@ namespace JapaneseCrossWord.Views
 
         private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (_pixelGridView.GameProgress == null) return;
+            if (_crossword == null) return;
             var cell = GetCellAtGrid();
-            var cellView = GetCellViewAt(cell);
+            var cellView = GetCellViewAt(cell.Item1, cell.Item2);
             InvertColorOf(cellView);
-            InverValueAt(cell);
-            bool isDone = IsGameOver();
+            _crossword.Goal[cell.Item1, cell.Item2].InvertColor();
+            var isDone = _crossword.IsGameOver();
             if (isDone)
                 MessageBox.Show("Congratulations! You completed the crossword!");
         }
 
 
-        private Grid GetCellViewAt(Cell cell)
+        private Grid GetCellViewAt(int row, int col)
         {
             if (PixelGrid.Children.Count < 1) return new Grid();
             var cellView = PixelGrid.Children
                 .Cast<UIElement>()
-                .First(el => Grid.GetRow(el) == cell.Row && Grid.GetColumn(el) == cell.Col) as Grid;
+                .First(el => Grid.GetRow(el) == row && Grid.GetColumn(el) == col) as Grid;
             return cellView;
         }
 
@@ -218,24 +222,12 @@ namespace JapaneseCrossWord.Views
             }
         }
 
-        private void InverValueAt(Cell cell)
-        {
-            if (_pixelGridView.Progress[cell.Row, cell.Col] == HintsCalculator.FilledElementLiteral)
-            {
-                _pixelGridView.Progress[cell.Row, cell.Col] = HintsCalculator.EmptyElementLiteral;
-            }
-            else
-            {
-                _pixelGridView.Progress[cell.Row, cell.Col] = HintsCalculator.FilledElementLiteral;
-            }
-        }
-
-        private Cell GetCellAtGrid()
+        private Tuple<int, int> GetCellAtGrid()
         {
             var point = Mouse.GetPosition(PixelGrid);
             var row = GetRowAtGrid(point.Y);
             var col = GetColAtGrid(point.X);
-            return new Cell(row, col);
+            return new Tuple<int, int>(row, col);
         }
 
         private int GetRowAtGrid(double mouseY)
@@ -274,11 +266,6 @@ namespace JapaneseCrossWord.Views
                 BuildCrossword();
         }
 
-        private bool IsGameOver()
-        {
-            return _pixelGridView.GameProgress.IsDone();
-        }
-
         private void LoadProgress_OnClick(object sender, RoutedEventArgs e)
         {
             var loader = new LocalStateLoader();
@@ -288,15 +275,12 @@ namespace JapaneseCrossWord.Views
                 Title = "Select a save file"
             };
             if (openFileDialog.ShowDialog() != true) return;
-            var progres = loader.Load(openFileDialog.FileName);
-            _pixelGridView.GameProgress = progres;
-            _pixelGridView.FillProgressCells();
-            BuildHintGrids();
+            _crossword.Load(openFileDialog.FileName);
         }
 
         private void SaveProgress_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_pixelGridView.GameProgress == null)
+            if (_crossword == null)
             {
                 MessageBox.Show("No grid to be saved");
                 return;
@@ -309,13 +293,13 @@ namespace JapaneseCrossWord.Views
             };
             if (openFileDialog.ShowDialog() == true)
             {
-                loader.Save(_pixelGridView.GameProgress, openFileDialog.FileName);
+                _crossword.Save(openFileDialog.FileName);
             }
         }
 
         private void SaveCustom_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_pixelGridView.GameProgress == null)
+            if (_crossword == null)
             {
                 MessageBox.Show("No grid to be saved");
                 return;
@@ -326,10 +310,9 @@ namespace JapaneseCrossWord.Views
                 Filter = "Game save file type | *.jcsj",
                 Title = "Save game progress to a file"
             };
-            var customProgress = new CrosswordProgress(_pixelGridView.GameProgress._currentGrid);
             if (openFileDialog.ShowDialog() == true)
             {
-                loader.Save(customProgress, openFileDialog.FileName);
+                _crossword.SaveCustom(openFileDialog.FileName);
             }
         }
     }

@@ -5,13 +5,13 @@ using JapaneseCrossword.State;
 
 namespace JapaneseCrossword.Hints
 {
-    class VerticalHintsCalculator:HintsCalculator
+    public class VerticalHintsCalculator:HintsCalculator
     {
         public VerticalHintsCalculator(MonochromeCell[,] cellData, IConsequitiveElementsCountFinder consequitiveElementsCountFinder) : base(cellData, consequitiveElementsCountFinder)
         {
         }
 
-        public int[,] CalculateVerticalHints()
+        public int[,] Calculate()
         {
             var hints = GetConsecuitiveVerticalElements();
             return ComplexColectionHelpers.ListArrayToJaggedArrayVertical(hints);
