@@ -11,12 +11,28 @@
 
         public MonochromeCell(bool isFilled)
         {
-            IsFilled = false;
+            IsFilled = isFilled;
         }
 
         public void InvertColor()
         {
             IsFilled = !IsFilled;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var mono = obj as MonochromeCell;
+            if (obj != null)
+            {
+                return mono.IsFilled == IsFilled;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return IsFilled? 1:0;
         }
     }
 }

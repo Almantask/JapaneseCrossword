@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace JapaneseCrossWord
+namespace DesktopClient
 {
     /// <summary>
     /// Interaction logic for App.xaml

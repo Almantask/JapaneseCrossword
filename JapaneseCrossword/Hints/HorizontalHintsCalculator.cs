@@ -11,7 +11,7 @@ namespace JapaneseCrossword.Hints
         {
         }
 
-        public int[,] Calculate()
+        public override int[,] Calculate()
         {
             var hints = GetConsecuitiveHorizontalElements();
             return ComplexColectionHelpers.ListArrayToJaggedArrayHorizontal(hints);

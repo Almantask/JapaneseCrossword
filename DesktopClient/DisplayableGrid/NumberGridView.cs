@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using JapaneseCrossword;
 
-namespace JapaneseCrossWord.DisplayableGrid
+namespace DesktopClient.DisplayableGrid
 {
-    public class NumberGridView: GridView
+    public class NumberGridView: GridView, IHintsGridBuider
     {
         public bool IsVertical { get; }
         private int[,] _gridData;
@@ -15,9 +15,9 @@ namespace JapaneseCrossWord.DisplayableGrid
             IsVertical = isVertical;
         }
 
-        public void BuildGrid(int[,] GridData)
+        public void Build(int[,] GridData)
         {
-            BuildGrid(GridData.GetLength(1), GridData.GetLength(0));
+            Build(GridData.GetLength(1), GridData.GetLength(0));
             FillCells(GridData);
             _gridData = GridData;
         }

@@ -1,14 +1,12 @@
-﻿using System.Drawing;
-using System.Windows.Controls;
-using GridGenerator;
+﻿using System.Windows.Controls;
+using JapaneseCrossword;
 using JapaneseCrossword.Rules;
-using JapaneseCrossWord.Views;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 
-namespace JapaneseCrossWord.DisplayableGrid
+namespace DesktopClient.DisplayableGrid
 {
-    public class MonochromeGridView:GridView
+    public class MonochromeGridView:GridView, IMainGridBuilder
     {
         public MonochromeGridView(Grid gridSlot):base(gridSlot)
         {
@@ -31,9 +29,9 @@ namespace JapaneseCrossWord.DisplayableGrid
             return isFilled ? Brushes.Black : Brushes.White;
         }
 
-        public override void BuildGrid(int cols, int rows)
+        public override void Build(int cols, int rows)
         {
-            base.BuildGrid(cols, rows);
+            base.Build(cols, rows);
             FillEmpty();
         }
 
@@ -56,10 +54,10 @@ namespace JapaneseCrossWord.DisplayableGrid
             }
         }
 
-        public void BuildGrid(MonochromeCell[,] GridData)
+        public void Build(IMonochrome[,] GridData)
         {
             _gridSlot.Children.Clear();
-            BuildGrid(GridData.GetLength(1), GridData.GetLength(0));
+            Build(GridData.GetLength(1), GridData.GetLength(0));
             for (var row = 0; row < GridData.GetLength(0); row++)
             {
                 for (var col = 0; col < GridData.GetLength(1); col++)
@@ -75,6 +73,5 @@ namespace JapaneseCrossWord.DisplayableGrid
                 }
             }
         }
-
     }
 }

@@ -13,7 +13,7 @@ namespace JapaneseCrossword
     public class Crossword
     {
         private GameProgress _progress;
-        public IMonochrome[,] Goal => _progress.Goal;
+        public IMonochrome[,] Current => _progress.Current;
         private readonly IRules _rules;
         private readonly IStateLoader _stateLoader;
         private readonly IMainGridBuilder _mainGridBuilder;
@@ -67,6 +67,34 @@ namespace JapaneseCrossword
         {
             var progressCustom = new GameProgress(_progress.Current);
             _stateLoader.Save(progressCustom, path);
+        }
+
+        public void BuildMainGrid(int cols, int rows)
+        {
+            _mainGridBuilder.Build(cols, rows);
+        }
+
+        private void BuildHintGrids(MonochromeCell[,] gridData)
+        {
+            var horizontalHintsGridData = _verticalHintsCalculator.Calculate().InvertOrientation();
+            var verticalHintsGridData = _horizontalHintsCalculator.Calculate().InvertOrientation();
+
+            foreach (var hintsGridView in _hintsGridBuilders)
+            {
+                var hintsData = hintsGridView.IsVertical ? verticalHintsGridData : horizontalHintsGridData;
+                hintsGridView.Build(hintsData);
+            }
+        }
+
+        public void InvertCell(int row, int col)
+        {
+            _progress.InvertCell(row, col);
+        }
+
+        public void Initialise(MonochromeCell[,] gridData)
+        {
+            BuildMainGrid(gridData.GetLength(1), gridData.GetLength(0));
+            BuildHintGrids(gridData);
         }
     }
 }

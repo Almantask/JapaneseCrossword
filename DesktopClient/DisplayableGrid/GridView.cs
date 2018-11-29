@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace JapaneseCrossWord.DisplayableGrid
+namespace DesktopClient.DisplayableGrid
 {
     // TODO: split into more generic grid builder
     public class GridView
@@ -19,7 +19,7 @@ namespace JapaneseCrossWord.DisplayableGrid
             BuildEmptyCells(size,size);
         }
 
-        public virtual void BuildGrid(int cols, int rows)
+        public virtual void Build(int cols, int rows)
         {
             BuildEmptyCells(cols, rows);
         }

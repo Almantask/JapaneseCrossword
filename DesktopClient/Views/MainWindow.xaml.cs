@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using JapaneseCrossWord.DisplayableGrid;
-using GridGenerator;
+using DesktopClient.DisplayableGrid;
 using JapaneseCrossword;
 using JapaneseCrossword.Hints;
 using JapaneseCrossword.Rules;
 using JapaneseCrossword.State;
 using Microsoft.Win32;
-using General;
 
-namespace JapaneseCrossWord.Views
+namespace DesktopClient.Views
 {
     public partial class MainWindow : Window
     {
         private readonly MonochromeGridView _pixelGridView;
         private int _preferableGridSize = 9;
-        private List<NumberGridView> _numberGridBuilders;
-        private bool _isFirstLoad = true;
+        private List<IHintsGridBuider> _numberGridBuilders;
         private Crossword _crossword;
 
         public MainWindow()
@@ -35,7 +31,7 @@ namespace JapaneseCrossWord.Views
 
         private void BuilHintGrids()
         {
-            _numberGridBuilders = new List<NumberGridView>();
+            _numberGridBuilders = new List<IHintsGridBuider>();
             Grid[] hintGridsSides = { LeftHintGrid, RightHintGrid };
             Grid[] hintGridsGroundRoof = { TopHintGrid, BottomHintGrid };
 
@@ -67,9 +63,10 @@ namespace JapaneseCrossWord.Views
             var rows = gridSize.Item2;
             var gridData = dataGenerator.Generate(cols, rows);
             // TODO: inject dependencies
-            //_crossword = new Crossword(new StrictRules(), new LocalStateLoader(), gridData);
-            BuildMainGrid(cols, rows);
-            BuildHintGrids(gridData);
+            var verticalHintsCalculator = new VerticalHintsCalculator(gridData, new ConsequitiveElementsFinder());
+            var horizontalHintsCalculator = new HorizontalHintsCalculator(gridData, new ConsequitiveElementsFinder());
+            _crossword = new Crossword(gridData, new StrictRules(), new LocalStateLoader(), _pixelGridView, _numberGridBuilders, verticalHintsCalculator, horizontalHintsCalculator);
+            _crossword.Initialise(gridData);
         }
 
         private Tuple<int , int> ParseGridSize()
@@ -108,26 +105,6 @@ namespace JapaneseCrossWord.Views
             return new Tuple<int, int>(cols, rows);
         }
 
-        private void BuildMainGrid(int cols, int rows)
-        {
-            _pixelGridView.BuildGrid(cols, rows);
-        }
-
-        private void BuildHintGrids(MonochromeCell[,] gridData)
-        {
-            var verticalHintsCalculator = new VerticalHintsCalculator(gridData, new ConsequitiveElementsFinder());
-            var horizontalHintsCalculator = new HorizontalHintsCalculator(gridData, new ConsequitiveElementsFinder());
-
-            var horizontalHintsGridData = verticalHintsCalculator.Calculate().InvertOrientation();
-            var verticalHintsGridData = horizontalHintsCalculator.Calculate().InvertOrientation();
-
-            foreach (var hintsGridView in _numberGridBuilders)
-            {
-                var hintsData = hintsGridView.IsVertical ? verticalHintsGridData : horizontalHintsGridData;
-                hintsGridView.BuildGrid(hintsData);
-            }
-        }
-
         private void OnButtonImageGridClick(object sender, RoutedEventArgs e)
         {
             BitmapImage image = GetImageFromDialog();
@@ -152,41 +129,12 @@ namespace JapaneseCrossWord.Views
 
         private void CheckBoxHintOnOff_OnChecked(object sender, RoutedEventArgs e)
         {
-            // Becasue hints are enabled by default
-            if (_isFirstLoad)
-            {
-                _isFirstLoad = false;
-            }
-            else
-            {
-                EnableHints();
-            }
-        }
-
-        private void EnableHints()
-        {
-            foreach (var numberGridBuilder in _numberGridBuilders)
-            {
-                if (numberGridBuilder.IsVertical)
-                    numberGridBuilder.FillCells();
-                else
-                    numberGridBuilder.FillCells();
-            }
-
         }
 
         private void CheckBoxHintOnOff_OnUnchecked(object sender, RoutedEventArgs e)
-        {
-            DisableHints();
+        { 
         }
 
-        private void DisableHints()
-        {
-            foreach (var numberGridBuilder in _numberGridBuilders)
-            {
-                numberGridBuilder.Clear();
-            }
-        }
 
         private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -194,7 +142,7 @@ namespace JapaneseCrossWord.Views
             var cell = GetCellAtGrid();
             var cellView = GetCellViewAt(cell.Item1, cell.Item2);
             InvertColorOf(cellView);
-            _crossword.Goal[cell.Item1, cell.Item2].InvertColor();
+            _crossword.InvertCell(cell.Item1, cell.Item2);
             var isDone = _crossword.IsGameOver();
             if (isDone)
                 MessageBox.Show("Congratulations! You completed the crossword!");
