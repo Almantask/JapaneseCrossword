@@ -47,8 +47,6 @@ namespace DesktopClient.Views
             }
         }
 
-
-        // TODO: MVVM
         private void OnButtonRnadomGrid(object sender, RoutedEventArgs e)
         {
             BuildCrossword();
@@ -65,7 +63,8 @@ namespace DesktopClient.Views
             // TODO: inject dependencies
             var verticalHintsCalculator = new VerticalHintsCalculator(gridData, new ConsequitiveElementsFinder());
             var horizontalHintsCalculator = new HorizontalHintsCalculator(gridData, new ConsequitiveElementsFinder());
-            _crossword = new Crossword(gridData, new StrictRules(), new LocalStateLoader(), _pixelGridView, _numberGridBuilders, verticalHintsCalculator, horizontalHintsCalculator);
+            _crossword = new Crossword(gridData, new StrictRules(), new LocalStateLoader(), 
+                _pixelGridView, _numberGridBuilders, verticalHintsCalculator, horizontalHintsCalculator);
             _crossword.Initialise(gridData);
         }
 
