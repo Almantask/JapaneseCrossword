@@ -7,12 +7,15 @@ namespace GridGenerator
         // There are quite many problems here:
         // fundamentally the pixel is supposed to be changed
         // into multiple regions of pixels.
-        public ColorRegion[,] GroupSectorsByColor(Bitmap image)
+        public ColorRegion[,] GroupSectorsByColor(Bitmap image, int sectorWidth, int sectorHeight)
         {
-            int sectorWidth = 5;
-            int sectorHeight = 5;
             var secYCount = image.Width / sectorHeight;
             var secXCount = image.Height / sectorWidth;
+
+            // To be merged with last one
+            var lastSectorWidth = image.Width % sectorWidth;
+            var lastSectorHeight = image.Height % sectorHeight;
+
             var colors = new ColorRegion[secYCount, secXCount];
 
             var sectors = GetColorSectors(image);
@@ -33,7 +36,25 @@ namespace GridGenerator
 
         private Color AverageColor(Color[,] sector)
         {
-            return Color.White;
+            var r = 0;
+            var g = 0;
+            var b = 0;
+            var rows = sector.GetLength(0);
+            var cols = sector.GetLength(1);
+            var total = rows * cols;
+
+            foreach (var color in sector)
+            {
+                r += color.R * color.A;
+                g += color.G * color.A;
+                b = color.B * color.A;
+            }
+
+            r /= total;
+            g /= total;
+            b /= total;
+            var avgColor = Color.FromArgb(255, r, g, b);
+            return avgColor;
         }
 
         //TODO: what to do with an offset?
