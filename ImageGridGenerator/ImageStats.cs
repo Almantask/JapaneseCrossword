@@ -46,20 +46,32 @@ namespace GridGenerator
 
         public Color CalculateAverageColor()
         {
+            return CalculateAverageColor(pixels.Values);
+        }
+
+        public Color CalculateAverageColorArr(Color[,] colors)
+        {
+            return CalculateAverageColor(colors.Cast<Color>());
+        }
+
+        public static Color CalculateAverageColor(IEnumerable<Color> colors)
+        {
             var r = 0;
             var g = 0;
             var b = 0;
             var a = 0;
-            foreach (var color in pixels.Values)
+
+            int count = 0;
+            foreach (var color in colors)
             {
                 r += color.R;
                 g += color.G;
                 b += color.B;
                 a += color.A;
+                count++;
             }
 
-            return Color.FromArgb(a / pixels.Count, 
-                r / pixels.Count, g / pixels.Count, b / pixels.Count);
+            return Color.FromArgb(a / count, r / count, g / count, b / count);
         }
 
         public void Add(Color color)

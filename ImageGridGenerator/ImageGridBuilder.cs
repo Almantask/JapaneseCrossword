@@ -4,11 +4,11 @@ namespace GridGenerator
 {
     public class ImageGridBuilder
     {
-        private int sectorWidth;
-        private int sectorHeight;
-        private Bitmap image;
+        private readonly int sectorWidth;
+        private readonly int sectorHeight;
+        private readonly Bitmap image;
 
-        public ImageStats ColorStats { private set; get; }
+        public ImageStats ColorStats { get; }
 
         public ImageGridBuilder(int sectorWidth, int sectorHeight, Bitmap image)
         {
@@ -29,14 +29,14 @@ namespace GridGenerator
 
             var colors = new ColorRegion[secYCount, secXCount];
 
-            var sectors = GetColorSectors(image);
+            var sectors = GetColorSectors();
             
             for (var row = 0; row < secYCount; row++)
             {
                 for (var col = 0; col < secXCount; col++)
                 {
                     var sector = sectors[row, col];
-                    var color = ColorStats.CalculateAverageColor();
+                    var color = ColorStats.CalculateAverageColorArr(sector);
                     var colorRegion = new ColorRegion(sectorHeight, sectorWidth, color);
                     colors[row, col] = colorRegion;
                 }
@@ -45,7 +45,7 @@ namespace GridGenerator
             return colors;
         }
 
-        private Color[,][,] GetColorSectors(Bitmap image)
+        private Color[,][,] GetColorSectors()
         {
             var sectors = new Color[sectorHeight, sectorWidth][,];
             var secYCount = image.Width / sectorHeight;
@@ -54,8 +54,7 @@ namespace GridGenerator
             {
                 for (var col = 0; col < secXCount; col++)
                 {
-                    var color = image.GetPixel(row, col);
-                    var sector = GetSector(row, col, sectorWidth, sectorHeight, image);
+                    var sector = GetSector(row, col);
                     sectors[row, col] = sector;
                 }
             }
@@ -73,13 +72,13 @@ namespace GridGenerator
             return totalHeight / regionHeight;
         }
 
-        private Color[,] GetSector(int row, int col, int height, int width, Bitmap image)
+        private Color[,] GetSector(int row, int col)
         {
-            var sector = new Color[width, height];
-            var startY = row * height;
-            var startX = col * width;
-            var endY = (row + 1) * height;
-            var endX = (col + 1) * width;
+            var sector = new Color[sectorWidth, sectorHeight];
+            var startY = row * sectorHeight;
+            var startX = col * sectorWidth;
+            var endY = (row + 1) * sectorHeight;
+            var endX = (col + 1) * sectorWidth;
 
             for (var secY = startY; secY < endY; secY++)
             {
@@ -88,6 +87,7 @@ namespace GridGenerator
                     var y = secY - startY;
                     var x = secX - startX;
                     sector[y, x] = image.GetPixel(secY, secX);
+                    ColorStats.Add(sector[y,x]);
                 }
             }
 
