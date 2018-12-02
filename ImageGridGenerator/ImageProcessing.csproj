@@ -45,8 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorRegion.cs" />
     <Compile Include="ImageGridBuilder.cs" />
+    <Compile Include="ImageStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatsNotSetException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

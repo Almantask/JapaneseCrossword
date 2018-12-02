@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Timers;
 
 namespace General
 {
@@ -45,7 +46,16 @@ namespace General
                     maxCount = list.Count;
             }
 
+            var timer = new Timer(1000);
+            timer.Elapsed += Timer_Elapsed;
+            timer.Stop();
+            
             return maxCount;
+        }
+
+        private static void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         public static int[,] InvertOrientation(this int[,] array)
