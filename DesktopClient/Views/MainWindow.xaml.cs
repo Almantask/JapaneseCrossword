@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DesktopClient.DisplayableGrid;
+using GridGenerator;
 using JapaneseCrossword;
 using JapaneseCrossword.Hints;
 using JapaneseCrossword.Rules;
 using JapaneseCrossword.State;
 using Microsoft.Win32;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace DesktopClient.Views
 {
@@ -49,10 +51,10 @@ namespace DesktopClient.Views
 
         private void OnButtonRnadomGrid(object sender, RoutedEventArgs e)
         {
-            BuildCrossword();
+            RandomGame();
         }
 
-        private void BuildCrossword()
+        private void RandomGame()
         {
             var gridSize = ParseGridSize();
             if (gridSize == null) return;
@@ -60,10 +62,14 @@ namespace DesktopClient.Views
             var cols = gridSize.Item1;
             var rows = gridSize.Item2;
             var gridData = dataGenerator.Generate(cols, rows);
-            // TODO: inject dependencies
+            BuildGame(gridData); 
+        }
+
+        private void BuildGame(MonochromeCell[,] gridData)
+        {
             var verticalHintsCalculator = new VerticalHintsCalculator(gridData, new ConsequitiveElementsFinder());
             var horizontalHintsCalculator = new HorizontalHintsCalculator(gridData, new ConsequitiveElementsFinder());
-            _crossword = new Crossword(gridData, new StrictRules(), new LocalStateLoader(), 
+            _crossword = new Crossword(gridData, new StrictRules(), new LocalStateLoader(),
                 _pixelGridView, _numberGridBuilders, verticalHintsCalculator, horizontalHintsCalculator);
             _crossword.Initialise(gridData);
         }
@@ -106,15 +112,19 @@ namespace DesktopClient.Views
 
         private void OnButtonImageGridClick(object sender, RoutedEventArgs e)
         {
-            BitmapImage image = GetImageFromDialog();
+            Bitmap image = GetImageFromDialog();
             if (image == null) return;
-
-            _pixelGridView.BuildGrid(_preferableGridSize);
+            var sizeConfig = ParseGridSize();
+            var imageGridBuilder = new ImageGridBuilder(sizeConfig.Item1, sizeConfig.Item2, image);
+            var colorSectors = imageGridBuilder.GroupSectorsByColor();
+            var regionProcessor = new RegionProcessor(imageGridBuilder.ColorStats);
+            var gridData = regionProcessor.BuildMonochromeCells(colorSectors);
+            BuildGame(gridData);
         }
 
-        private BitmapImage GetImageFromDialog()
+        private Bitmap GetImageFromDialog()
         {
-            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog
+            var fileDialog = new OpenFileDialog
             {
                 DefaultExt = ".png",
                 Filter =
@@ -123,15 +133,17 @@ namespace DesktopClient.Views
             var result = fileDialog.ShowDialog();
             if (result != true) return null;
             var filename = fileDialog.FileName;
-            return new BitmapImage(new Uri(filename, UriKind.Absolute));
+            return new Bitmap(filename);
         }
 
-        private void CheckBoxHintOnOff_OnChecked(object sender, RoutedEventArgs e)
+        private void CheckBoxRevealed_OnChecked(object sender, RoutedEventArgs e)
         {
+            _crossword?.Reveal();
         }
 
-        private void CheckBoxHintOnOff_OnUnchecked(object sender, RoutedEventArgs e)
-        { 
+        private void CheckBoxRevealed_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            _crossword?.BackToProgress();
         }
 
 
@@ -210,7 +222,7 @@ namespace DesktopClient.Views
         private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter)
-                BuildCrossword();
+                RandomGame();
         }
 
         private void LoadProgress_OnClick(object sender, RoutedEventArgs e)

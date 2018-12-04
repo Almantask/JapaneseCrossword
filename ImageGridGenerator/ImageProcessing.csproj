@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorStats.cs" />
+    <Compile Include="RegionProcessor.cs" />
     <Compile Include="ColorRegion.cs" />
     <Compile Include="ImageGridBuilder.cs" />
     <Compile Include="ImageStats.cs" />
@@ -53,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JapaneseCrossword\JapaneseCrossword.csproj">
+      <Project>{C7A5C1FB-D045-4E64-AAF8-526AA7CBE7A9}</Project>
+      <Name>JapaneseCrossword</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,47 +6,27 @@ namespace GridGenerator
 {
     public class ImageStats
     {
-        private SortedList<short, Color> pixels;
-
-        public short MedianValue
-        {
-            get
-            {
-                if (!pixels.Any())
-                    throw new StatsNotSetException("No pixels");
-                return pixels.Keys[pixels.Count / 2];
-            }
-        }
-
-        public Color MedianColor
-        {
-            get
-            {
-                if (!pixels.Any())
-                    throw new StatsNotSetException("No pixels");
-                return pixels.Values[pixels.Count / 2];
-            }
-        }
+        private readonly List<Color> _pixels;
 
         public ImageStats(int pixelsCount)
         {
-            pixels = new SortedList<short, Color>(pixelsCount);
+            _pixels = new List<Color>(pixelsCount);
         }
 
         public int CalculateAverageValue()
         {
             var avg = 0;
-            foreach (var value in pixels.Keys)
+            foreach (var color in _pixels)
             {
-                avg += value;
+                avg += ColorStats.GetValue(color);
             }
 
-            return avg / pixels.Count;
+            return avg / _pixels.Count;
         }
 
         public Color CalculateAverageColor()
         {
-            return CalculateAverageColor(pixels.Values);
+            return CalculateAverageColor(_pixels);
         }
 
         public Color CalculateAverageColorArr(Color[,] colors)
@@ -76,8 +56,7 @@ namespace GridGenerator
 
         public void Add(Color color)
         {
-            var sum = (short)(color.A / 255.0 * (color.G + color.B + color.R));
-            pixels.Add(sum, color);
+            _pixels.Add(color);
         }
 
     }

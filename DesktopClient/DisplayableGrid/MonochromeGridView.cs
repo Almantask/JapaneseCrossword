@@ -35,6 +35,20 @@ namespace DesktopClient.DisplayableGrid
             FillEmpty();
         }
 
+        public void Reveal(IMonochrome[,] gridData)
+        {
+            var index = 0;
+            foreach (var cell in gridData)
+            {
+                var child = _gridSlot.Children[index];
+                if(cell.IsFilled)
+                    ((Grid) child).Background = Brushes.Black;
+                else
+                    ((Grid)child).Background = Brushes.White;
+                index++;
+            }
+        }
+
         private void FillEmpty()
         {
             _gridSlot.Children.Clear();

@@ -96,5 +96,15 @@ namespace JapaneseCrossword
             BuildMainGrid(gridData.GetLength(1), gridData.GetLength(0));
             BuildHintGrids(gridData);
         }
+
+        public void Reveal()
+        {
+            _mainGridBuilder.Reveal(_progress.Goal);
+        }
+
+        public void BackToProgress()
+        {
+            _mainGridBuilder.Reveal(_progress.Current);
+        }
     }
 }

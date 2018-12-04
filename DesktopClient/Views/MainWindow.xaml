@@ -82,20 +82,20 @@
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label x:Name = "labelHintOnOff"  
+            <Label x:Name = "labelRevealed"  
                    Grid.Column="0"
-                   Content="Hints"
+                   Content="Revealed"
                    HorizontalContentAlignment="Right"
                    VerticalContentAlignment="Center"
                    FontSize="10"
             />
-            <CheckBox x:Name = "checkBoxHintOnOff"  
+            <CheckBox x:Name = "checkRevealed"  
                       Grid.Column="1"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Center"
-                      Checked="CheckBoxHintOnOff_OnChecked"
-                      Unchecked="CheckBoxHintOnOff_OnUnchecked"
-                      IsChecked="True" Margin="0,15,0,10"
+                      Checked="CheckBoxRevealed_OnChecked"
+                      Unchecked="CheckBoxRevealed_OnUnchecked"
+                      IsChecked="False" Margin="0,15,0,10"
             />
         </Grid>
         <Grid Grid.Row="0" Column="0" x:Name="HintsOnOff">
