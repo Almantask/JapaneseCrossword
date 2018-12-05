@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorStats.cs" />
+    <Compile Include="GrayscaleConverter.cs" />
     <Compile Include="RegionProcessor.cs" />
     <Compile Include="ColorRegion.cs" />
     <Compile Include="ImageGridBuilder.cs" />

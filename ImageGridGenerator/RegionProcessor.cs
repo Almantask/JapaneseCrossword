@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JapaneseCrossword.Rules;
+﻿using JapaneseCrossword.Rules;
 
 namespace GridGenerator
 {
     public class RegionProcessor
     {
-        private readonly int _averageImageColorValue;
+        private readonly float _averageImageColorValue;
 
         public RegionProcessor(ImageStats stats)
         {

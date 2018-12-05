@@ -1,5 +1,4 @@
 ﻿using JapaneseCrossword.Rules;
-using JapaneseCrossword.State;
 
 namespace JapaneseCrossword.Hints
 {

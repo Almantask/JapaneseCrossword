@@ -1,7 +1,4 @@
-﻿using JapaneseCrossword.Rules;
-using JapaneseCrossword.State;
-
-namespace JapaneseCrossword.Hints
+﻿namespace JapaneseCrossword.Hints
 {
     public class NumberCell
     {

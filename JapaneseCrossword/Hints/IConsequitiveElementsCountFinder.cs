@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using JapaneseCrossword.Rules;
-using JapaneseCrossword.State;
 
 namespace JapaneseCrossword.Hints
 {

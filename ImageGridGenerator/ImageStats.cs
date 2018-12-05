@@ -13,9 +13,9 @@ namespace GridGenerator
             _pixels = new List<Color>(pixelsCount);
         }
 
-        public int CalculateAverageValue()
+        public float CalculateAverageValue()
         {
-            var avg = 0;
+            float avg = 0;
             foreach (var color in _pixels)
             {
                 avg += ColorStats.GetValue(color);
