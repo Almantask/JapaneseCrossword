@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettingsEventHandler : MonoBehaviour {
+public class SolvingSimulation : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
