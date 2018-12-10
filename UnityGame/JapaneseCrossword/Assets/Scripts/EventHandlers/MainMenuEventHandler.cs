@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuEventHandler : MonoBehaviour
 {
+    private Navigator _navigator;
+
+    void Start()
+    {
+        _navigator = FindObjectOfType<Navigator>();
+    }
+
     public void OpenScene(string scene)
     {
-        SceneManager.LoadScene(scene);
+        _navigator.OpenNextScene(scene);
     }
 
     public void ExitGame()

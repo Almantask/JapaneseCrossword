@@ -8,6 +8,11 @@ public abstract class GenericInputCheker:MonoBehaviour
     public bool IsBackKeyPressed { protected set; get; }
     public ScreenStatus ScreenStatus { protected set; get; }
 
+    public virtual void Start()
+    {
+        ScreenStatus = new ScreenStatus();
+    }
+
     void Update()
     {
         InputRoutine();

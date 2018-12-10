@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class DesktopInput : GenericInputCheker
 {
-    public void Start()
+    public override void Start()
     {
+        base.Start();
         IsKnown = true;
     }
     protected override void UpdateBackKeyPress()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("Esc pressed");
             IsBackKeyPressed = true;
+        }
+        else
+        {
+            IsBackKeyPressed = false;
         }
     }
 
