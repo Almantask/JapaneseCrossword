@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum Scenes { Startup, Menu, Main, Options, Credits}
-
 [RequireComponent(typeof(DesktopInput))]
 public class Navigator : MonoBehaviour
 {
@@ -14,13 +12,13 @@ public class Navigator : MonoBehaviour
     private GenericInputCheker _inputChecker;
     private Dictionary<string, Scenes> _scenesMap;
 
-    public void OpenNextScene(string scene)
+    public void OpenScene(string scene)
     {
         var actualScene = _scenesMap[scene];
-        OpennextScene(actualScene);
+        OpenScene(actualScene);
     }
 
-    public void OpennextScene(Scenes scene)
+    public void OpenScene(Scenes scene)
     {
         _previousScene = _currentScene;
         _currentScene = scene;
@@ -30,9 +28,10 @@ public class Navigator : MonoBehaviour
 
 	void Start ()
 	{
-	    _inputChecker = GetComponent<DesktopInput>();
-	    _currentScene = (Scenes)SceneManager.GetActiveScene().buildIndex;
 	    MapScenes();
+	    _inputChecker = GetComponent<DesktopInput>();
+        OpenScene(Scenes.Menu);
+
 	}
 
     private void MapScenes()
@@ -48,7 +47,7 @@ public class Navigator : MonoBehaviour
 	void Update ()
 	{
 	    if (!_inputChecker.IsBackKeyPressed) return;
-	    if (_currentScene == _previousScene) return;
-	    OpennextScene(_previousScene);
+	    if (_currentScene == Scenes.Menu) return;
+	    OpenScene(_previousScene);
 	}
 }

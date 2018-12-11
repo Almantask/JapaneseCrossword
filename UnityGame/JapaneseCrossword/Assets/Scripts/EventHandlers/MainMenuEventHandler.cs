@@ -14,7 +14,7 @@ public class MainMenuEventHandler : MonoBehaviour
 
     public void OpenScene(string scene)
     {
-        _navigator.OpenNextScene(scene);
+        _navigator.OpenScene(scene);
     }
 
     public void ExitGame()
