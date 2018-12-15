@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Assets.Scripts.Helpers.Serializers
+﻿namespace Assets.Scripts.Helpers.Serializers
 {
     public interface ISerializer
     {

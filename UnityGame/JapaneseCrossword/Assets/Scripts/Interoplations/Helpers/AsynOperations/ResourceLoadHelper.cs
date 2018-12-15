@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Helpers.AsyncOperations;
-using Assets.Scripts.Helpers.SingletonDesign;
+﻿using Assets.Scripts.Helpers.SingletonDesign;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +37,6 @@ namespace Assets.Scripts.Helpers.AsyncOperations
             if (load.asset == null)
             {
                 requestorsQueue.Remove(id);
-                LoggerU.LoggerU.LogError("Most likely wrong load name: " + path);
             }
             else
             {
