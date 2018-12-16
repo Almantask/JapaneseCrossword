@@ -18,7 +18,7 @@ namespace GridGenerator
 
             var cells = new MonochromeCell[rows, cols];
 
-            for(var row = 0; row < rows; row++)
+            for (var row = 0; row < rows; row++)
             {
                 for (var col = 0; col < cols; col++)
                 {

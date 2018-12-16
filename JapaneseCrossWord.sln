@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing", "ImageGri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageGridGeneratorTests", "ImageGridGeneratorTests\ImageGridGeneratorTests.csproj", "{58C97159-FAF7-46CB-9517-27EE0443633C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapaneseCrossword", "JapaneseCrossword\JapaneseCrossword.csproj", "{C7A5C1FB-D045-4E64-AAF8-526AA7CBE7A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapaneseCrossword", "JapaneseCrossword\JapaneseCrossword.Core.csproj", "{C7A5C1FB-D045-4E64-AAF8-526AA7CBE7A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "General", "General\General.csproj", "{1C93750E-4C81-41E8-8DD6-19C3D32AD399}"
 EndProject

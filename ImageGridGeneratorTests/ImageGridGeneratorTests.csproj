@@ -18,11 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ImageGridGenerator\ImageProcessing.csproj" />
-    <ProjectReference Include="..\JapaneseCrossword\JapaneseCrossword.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="HintCalculator.feature.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
