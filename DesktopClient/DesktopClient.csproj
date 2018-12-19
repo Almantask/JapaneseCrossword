@@ -148,10 +148,14 @@
       <Project>{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}</Project>
       <Name>ImageProcessing</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JapaneseCrossword\JapaneseCrossword.csproj">
-      <Project>{C7A5C1FB-D045-4E64-AAF8-526AA7CBE7A9}</Project>
-      <Name>JapaneseCrossword</Name>
+    <ProjectReference Include="..\JapaneseCrossword\JapaneseCrossword.Core.csproj">
+      <Project>{c7a5c1fb-d045-4e64-aaf8-526aa7cbe7a9}</Project>
+      <Name>JapaneseCrossword.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

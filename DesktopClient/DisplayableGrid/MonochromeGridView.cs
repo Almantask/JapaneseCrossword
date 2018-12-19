@@ -1,17 +1,18 @@
-﻿using System.Windows.Controls;
-using JapaneseCrossword;
+﻿using JapaneseCrossword;
 using JapaneseCrossword.Rules;
+using System.Windows.Controls;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 
 namespace DesktopClient.DisplayableGrid
 {
-    public class MonochromeGridView:GridView, IMainGridBuilder
+    public class MonochromeGridView : GridView, IMainGridBuilder
     {
-        public MonochromeGridView(Grid gridSlot):base(gridSlot)
+        public MonochromeGridView(Grid gridSlot) : base(gridSlot)
         {
         }
 
+        // Remain, different impl
         public void Clear()
         {
             _gridSlot.Children.Clear();
@@ -21,7 +22,9 @@ namespace DesktopClient.DisplayableGrid
         private void ColorWhite()
         {
             foreach (var child in _gridSlot.Children)
+            {
                 ((Grid)child).Background = Brushes.White;
+            }
         }
 
         private Brush GetColor(bool isFilled)
@@ -35,27 +38,37 @@ namespace DesktopClient.DisplayableGrid
             FillEmpty();
         }
 
+        // Remain, different impl
         public void Reveal(IMonochrome[,] gridData)
         {
             var index = 0;
             foreach (var cell in gridData)
             {
                 var child = _gridSlot.Children[index];
-                if(cell.IsFilled)
-                    ((Grid) child).Background = Brushes.Black;
+                if (cell.IsFilled)
+                {
+                    ((Grid)child).Background = Brushes.Black;
+                }
                 else
+                {
                     ((Grid)child).Background = Brushes.White;
+                }
+
                 index++;
             }
         }
 
+        // Remain, different impl
         private void FillEmpty()
         {
+            //Reamin, different impl
             _gridSlot.Children.Clear();
+            // Different
             for (var row = 0; row < _gridSlot.RowDefinitions.Count; row++)
             {
                 for (var col = 0; col < _gridSlot.ColumnDefinitions.Count; col++)
                 {
+                    // Same, different impl
                     var cellView = new Grid
                     {
                         Background = Brushes.White

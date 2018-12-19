@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using General;
+﻿using General;
+using JapaneseCrossword.Hints;
 using JapaneseCrossword.Rules;
 using JapaneseCrossword.State;
+using System.Collections.Generic;
 
 namespace JapaneseCrossword
 {
@@ -16,15 +17,14 @@ namespace JapaneseCrossword
         private readonly IHintsCalculator _verticalHintsCalculator;
         private readonly IHintsCalculator _horizontalHintsCalculator;
 
-        public Crossword(MonochromeCell[,] gridData, IRules rules, IStateLoader loader, 
-            IMainGridBuilder mainGridBuilder, List<IHintsGridBuider> hintsBuilders,
-            IHintsCalculator verticalHintsCalculator, IHintsCalculator horizontalHintsCalculator)
+        public Crossword(MonochromeCell[,] gridData, IRules rules, IStateLoader loader,
+            IMainGridBuilder mainGridBuilder, List<IHintsGridBuider> hintsBuilders)
         {
             _rules = rules;
             _stateLoader = loader;
             _mainGridBuilder = mainGridBuilder;
-            _verticalHintsCalculator = verticalHintsCalculator;
-            _horizontalHintsCalculator = horizontalHintsCalculator;
+            _verticalHintsCalculator = new VerticalHintsCalculator(gridData, new ConsequitiveElementsFinder());
+            _horizontalHintsCalculator = new HorizontalHintsCalculator(gridData, new ConsequitiveElementsFinder());
             _hintsGridBuilders = hintsBuilders;
             BuildGame(gridData);
         }

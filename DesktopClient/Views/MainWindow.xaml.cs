@@ -1,17 +1,16 @@
-﻿using System;
+﻿using DesktopClient.DisplayableGrid;
+using GridGenerator;
+using JapaneseCrossword;
+using JapaneseCrossword.Rules;
+using JapaneseCrossword.State;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using DesktopClient.DisplayableGrid;
-using GridGenerator;
-using JapaneseCrossword;
-using JapaneseCrossword.Hints;
-using JapaneseCrossword.Rules;
-using JapaneseCrossword.State;
-using Microsoft.Win32;
 using Brushes = System.Windows.Media.Brushes;
 
 namespace DesktopClient.Views
@@ -56,24 +55,26 @@ namespace DesktopClient.Views
         private void RandomGame()
         {
             var gridSize = ParseGridSize();
-            if (gridSize == null) return;
+            if (gridSize == null)
+            {
+                return;
+            }
+
             var dataGenerator = new GridDataGenerator();
             var cols = gridSize.Item1;
             var rows = gridSize.Item2;
             var gridData = dataGenerator.Generate(cols, rows);
-            BuildGame(gridData); 
+            BuildGame(gridData);
         }
 
         private void BuildGame(MonochromeCell[,] gridData)
         {
-            var verticalHintsCalculator = new VerticalHintsCalculator(gridData, new ConsequitiveElementsFinder());
-            var horizontalHintsCalculator = new HorizontalHintsCalculator(gridData, new ConsequitiveElementsFinder());
             _crossword = new Crossword(gridData, new StrictRules(), new LocalStateLoader(),
-                _pixelGridView, _numberGridBuilders, verticalHintsCalculator, horizontalHintsCalculator);
+                _pixelGridView, _numberGridBuilders);
             _crossword.Initialise(gridData);
         }
 
-        private Tuple<int , int> ParseGridSize()
+        private Tuple<int, int> ParseGridSize()
         {
             var gridSizeInput = textBoxGridSize.Text;
             Tuple<int, int> gridSize = null;
@@ -111,8 +112,12 @@ namespace DesktopClient.Views
 
         private void OnButtonImageGridClick(object sender, RoutedEventArgs e)
         {
-            Bitmap image = GetImageFromDialog();
-            if (image == null) return;
+            var image = GetImageFromDialog();
+            if (image == null)
+            {
+                return;
+            }
+
             var sizeConfig = ParseGridSize();
             var imageGridBuilder = new ImageGridBuilder(sizeConfig.Item1, sizeConfig.Item2, image);
             var colorSectors = imageGridBuilder.GroupSectorsByColor();
@@ -130,7 +135,11 @@ namespace DesktopClient.Views
                     "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif"
             };
             var result = fileDialog.ShowDialog();
-            if (result != true) return null;
+            if (result != true)
+            {
+                return null;
+            }
+
             var filename = fileDialog.FileName;
             return new Bitmap(filename);
         }
@@ -148,20 +157,30 @@ namespace DesktopClient.Views
 
         private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (_crossword == null) return;
+            if (_crossword == null)
+            {
+                return;
+            }
+
             var cell = GetCellAtGrid();
             var cellView = GetCellViewAt(cell.Item1, cell.Item2);
             InvertColorOf(cellView);
             _crossword.InvertCell(cell.Item1, cell.Item2);
             var isDone = _crossword.IsGameOver();
             if (isDone)
+            {
                 MessageBox.Show("Congratulations! You completed the crossword!");
+            }
         }
 
 
         private Grid GetCellViewAt(int row, int col)
         {
-            if (PixelGrid.Children.Count < 1) return new Grid();
+            if (PixelGrid.Children.Count < 1)
+            {
+                return new Grid();
+            }
+
             var cellView = PixelGrid.Children
                 .Cast<UIElement>()
                 .First(el => Grid.GetRow(el) == row && Grid.GetColumn(el) == col) as Grid;
@@ -196,7 +215,10 @@ namespace DesktopClient.Views
             {
                 accumulatedHeight += rowDefinition.ActualHeight;
                 if (accumulatedHeight >= mouseY)
+                {
                     break;
+                }
+
                 row++;
             }
 
@@ -211,7 +233,10 @@ namespace DesktopClient.Views
             {
                 accumulatedWidth += columnDefinition.ActualWidth;
                 if (accumulatedWidth >= mouseX)
+                {
                     break;
+                }
+
                 col++;
             }
 
@@ -220,19 +245,25 @@ namespace DesktopClient.Views
 
         private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
+            {
                 RandomGame();
+            }
         }
 
         private void LoadProgress_OnClick(object sender, RoutedEventArgs e)
         {
             var loader = new LocalStateLoader();
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            var openFileDialog = new OpenFileDialog
             {
                 Filter = "Game save file type | *.jcsj",
                 Title = "Select a save file"
             };
-            if (openFileDialog.ShowDialog() != true) return;
+            if (openFileDialog.ShowDialog() != true)
+            {
+                return;
+            }
+
             _crossword.Load(openFileDialog.FileName);
         }
 
@@ -244,7 +275,7 @@ namespace DesktopClient.Views
                 return;
             }
             var loader = new LocalStateLoader();
-            SaveFileDialog openFileDialog = new SaveFileDialog
+            var openFileDialog = new SaveFileDialog
             {
                 Filter = "Game save file type | *.jcsj",
                 Title = "Save game progress to a file"
@@ -263,7 +294,7 @@ namespace DesktopClient.Views
                 return;
             }
             var loader = new LocalStateLoader();
-            SaveFileDialog openFileDialog = new SaveFileDialog
+            var openFileDialog = new SaveFileDialog
             {
                 Filter = "Game save file type | *.jcsj",
                 Title = "Save game progress to a file"
