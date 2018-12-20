@@ -4,5 +4,6 @@
     {
         void Build(int[,] gridData);
         bool IsVertical { get; }
+        void Clear();
     }
 }

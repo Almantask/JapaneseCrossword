@@ -7,5 +7,6 @@ namespace JapaneseCrossword
         void Build(IMonochrome[,] gridData);
         void Build(int cols, int rows);
         void Reveal(IMonochrome[,] gridData);
+        void Clear();
     }
 }

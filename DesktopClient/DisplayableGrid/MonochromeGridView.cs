@@ -12,7 +12,6 @@ namespace DesktopClient.DisplayableGrid
         {
         }
 
-        // Remain, different impl
         public void Clear()
         {
             _gridSlot.Children.Clear();
@@ -38,7 +37,6 @@ namespace DesktopClient.DisplayableGrid
             FillEmpty();
         }
 
-        // Remain, different impl
         public void Reveal(IMonochrome[,] gridData)
         {
             var index = 0;
@@ -58,17 +56,13 @@ namespace DesktopClient.DisplayableGrid
             }
         }
 
-        // Remain, different impl
         private void FillEmpty()
         {
-            //Reamin, different impl
             _gridSlot.Children.Clear();
-            // Different
             for (var row = 0; row < _gridSlot.RowDefinitions.Count; row++)
             {
                 for (var col = 0; col < _gridSlot.ColumnDefinitions.Count; col++)
                 {
-                    // Same, different impl
                     var cellView = new Grid
                     {
                         Background = Brushes.White

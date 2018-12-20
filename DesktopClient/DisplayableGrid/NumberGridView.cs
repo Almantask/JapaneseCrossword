@@ -22,28 +22,23 @@ namespace DesktopClient.DisplayableGrid
             _gridData = GridData;
         }
 
-        public void FillCells()
+        private void FillCells()
         {
             FillCells(_gridData);
         }
 
-        public void FillCells(int[,] GridData)
+        private void FillCells(int[,] GridData)
         {
-            // Clear will remain, different impl
             _gridSlot.Children.Clear();
-            // Iteration will remain
             for (var row = 0; row < GridData.GetLength(0); row++)
             {
-                // Iteration will remain
                 for (var col = 0; col < GridData.GetLength(1); col++)
                 {
-                    // Making a cell will remain, different impl
                     var cellView = new Grid();
                     var content = CreateTextContent(GridData[row, col]);
                     var border = CreateCellBorder(content);
                     cellView.Children.Add(border);
 
-                    // Setting a cell will differ
                     Grid.SetColumn(cellView, col);
                     Grid.SetRow(cellView, row);
                     _gridSlot.Children.Add(cellView);
@@ -51,7 +46,6 @@ namespace DesktopClient.DisplayableGrid
             }
         }
 
-        // Will differ
         private TextBlock CreateTextContent(int number)
         {
             var cellText = new TextBlock
@@ -67,7 +61,6 @@ namespace DesktopClient.DisplayableGrid
             return cellText;
         }
 
-        // will differ
         private Border CreateCellBorder(TextBlock textContent)
         {
             var border = new Border
@@ -84,7 +77,6 @@ namespace DesktopClient.DisplayableGrid
             return border;
         }
 
-        // will differ
         private string SetCellContent(int num)
         {
             if (num == 0)
@@ -95,7 +87,6 @@ namespace DesktopClient.DisplayableGrid
             return num.ToString();
         }
 
-        // Will remain, different implementation
         public void Clear()
         {
             var cols = _gridSlot.ColumnDefinitions.Count;
