@@ -18,7 +18,6 @@ namespace DesktopClient.Views
     public partial class MainWindow : Window
     {
         private readonly MonochromeGridView _pixelGridView;
-        private int _preferableGridSize = 9;
         private List<IHintsGridBuider> _numberGridBuilders;
         private Crossword _crossword;
 
