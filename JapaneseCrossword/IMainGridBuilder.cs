@@ -1,6 +1,6 @@
-﻿using JapaneseCrossword.Rules;
+﻿using JapaneseCrossword.Core.Rules;
 
-namespace JapaneseCrossword
+namespace JapaneseCrossword.Core
 {
     public interface IMainGridBuilder
     {

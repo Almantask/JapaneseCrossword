@@ -1,6 +1,6 @@
-﻿using JapaneseCrossword.Rules;
+﻿using JapaneseCrossword.Core.Rules;
 
-namespace GridGenerator
+namespace ImageProcessing
 {
     public class RegionProcessor
     {

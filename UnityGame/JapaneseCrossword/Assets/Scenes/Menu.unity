@@ -194,7 +194,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 70979231}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 463.5, y: 272.5, z: 0}
+  m_LocalPosition: {x: 413, y: 272.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 771224991}
@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 1810705433}
   - component: {fileID: 1810705432}
   m_Layer: 0
-  m_Name: MenuEventsHandler
+  m_Name: NavigationEventsHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

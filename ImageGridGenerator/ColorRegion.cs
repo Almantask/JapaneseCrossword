@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GridGenerator
+namespace ImageProcessing
 {
     public class ColorRegion
     {

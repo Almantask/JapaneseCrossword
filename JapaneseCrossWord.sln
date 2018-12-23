@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClient", "DesktopClient\DesktopClient.csproj", "{041811A1-EA0C-4ED1-8BF8-C46EE91E01C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapaneseCrossword.DesktopClient", "DesktopClient\JapaneseCrossword.DesktopClient.csproj", "{041811A1-EA0C-4ED1-8BF8-C46EE91E01C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing", "ImageGridGenerator\ImageProcessing.csproj", "{D30D7B1A-DF88-47FB-8B05-69338DBADB5F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageGridGeneratorTests", "ImageGridGeneratorTests\ImageGridGeneratorTests.csproj", "{58C97159-FAF7-46CB-9517-27EE0443633C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapaneseCrossword", "JapaneseCrossword\JapaneseCrossword.Core.csproj", "{C7A5C1FB-D045-4E64-AAF8-526AA7CBE7A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapaneseCrossword.Core", "JapaneseCrossword\JapaneseCrossword.Core.csproj", "{C7A5C1FB-D045-4E64-AAF8-526AA7CBE7A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "General", "General\General.csproj", "{1C93750E-4C81-41E8-8DD6-19C3D32AD399}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JapaneseCrossword.General", "General\JapaneseCrossword.General.csproj", "{1C93750E-4C81-41E8-8DD6-19C3D32AD399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingTests", "ImageProcessingTests\ImageProcessingTests.csproj", "{91B5A0EA-374E-4070-9AB1-6A5CB2FB5516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessingTests", "ImageProcessingTests\ImageProcessingTests.csproj", "{91B5A0EA-374E-4070-9AB1-6A5CB2FB5516}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

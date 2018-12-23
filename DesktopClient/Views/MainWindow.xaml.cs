@@ -1,8 +1,8 @@
-﻿using DesktopClient.DisplayableGrid;
-using GridGenerator;
-using JapaneseCrossword;
-using JapaneseCrossword.Rules;
-using JapaneseCrossword.State;
+﻿using ImageProcessing;
+using JapaneseCrossword.Core;
+using JapaneseCrossword.Core.Rules;
+using JapaneseCrossword.Core.State;
+using JapaneseCrossword.DesktopClient.DisplayableGrid;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Brushes = System.Windows.Media.Brushes;
 
-namespace DesktopClient.Views
+namespace JapaneseCrossword.DesktopClient.Views
 {
     public partial class MainWindow : Window
     {

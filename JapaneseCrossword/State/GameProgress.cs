@@ -1,6 +1,6 @@
-﻿using JapaneseCrossword.Rules;
+﻿using JapaneseCrossword.Core.Rules;
 
-namespace JapaneseCrossword.State
+namespace JapaneseCrossword.Core.State
 {
     public class GameProgress
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using General;
-using JapaneseCrossword.Rules;
+using JapaneseCrossword.Core.Rules;
 
-namespace JapaneseCrossword.Hints
+namespace JapaneseCrossword.Core.Hints
 {
     public class HorizontalHintsCalculator:HintsCalculator
     {

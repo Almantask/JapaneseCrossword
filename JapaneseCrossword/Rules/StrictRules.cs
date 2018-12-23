@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using JapaneseCrossword.State;
+using JapaneseCrossword.Core.State;
 
-namespace JapaneseCrossword.Rules
+namespace JapaneseCrossword.Core.Rules
 {
     public class StrictRules : IRules
     {

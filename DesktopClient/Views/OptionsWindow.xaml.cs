@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace DesktopClient.Views
+namespace JapaneseCrossword.DesktopClient.Views
 {
     /// <summary>
     /// Interaction logic for OptionsWindow.xaml
