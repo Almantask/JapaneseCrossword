@@ -1,10 +1,10 @@
-﻿using JapaneseCrossword;
-using JapaneseCrossword.Rules;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using JapaneseCrossword.Core;
+using JapaneseCrossword.Core.Rules;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 
-namespace DesktopClient.DisplayableGrid
+namespace JapaneseCrossword.DesktopClient.DisplayableGrid
 {
     public class MonochromeGridView : GridView, IMainGridBuilder
     {

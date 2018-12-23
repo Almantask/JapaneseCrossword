@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace DesktopClient.DisplayableGrid
+namespace JapaneseCrossword.DesktopClient.DisplayableGrid
 {
     // TODO: split into more generic grid builder
     public class GridView

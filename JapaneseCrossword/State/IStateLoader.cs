@@ -1,4 +1,4 @@
-﻿namespace JapaneseCrossword.State
+﻿namespace JapaneseCrossword.Core.State
 {
     public interface IStateLoader
     {

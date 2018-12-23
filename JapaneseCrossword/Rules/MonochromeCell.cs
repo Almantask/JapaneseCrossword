@@ -1,4 +1,4 @@
-﻿namespace JapaneseCrossword.Rules
+﻿namespace JapaneseCrossword.Core.Rules
 {
     public class MonochromeCell : IMonochrome
     {

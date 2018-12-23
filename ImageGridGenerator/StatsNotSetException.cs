@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GridGenerator
+namespace ImageProcessing
 {
     public class StatsNotSetException : Exception
     {

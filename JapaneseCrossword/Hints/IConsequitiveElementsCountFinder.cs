@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using JapaneseCrossword.Rules;
+using JapaneseCrossword.Core.Rules;
 
-namespace JapaneseCrossword.Hints
+namespace JapaneseCrossword.Core.Hints
 {
     public interface IConsequitiveElementsCountFinder
     {

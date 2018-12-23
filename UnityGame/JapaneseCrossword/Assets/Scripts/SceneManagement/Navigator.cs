@@ -8,7 +8,7 @@ public class Navigator : MonoBehaviour
 {
     private Scenes _currentScene = Scenes.Startup;
     private Scenes _previousScene = Scenes.Startup;
-    private GenericInputCheker _inputChecker;
+    private InputCheker _inputChecker;
     private Dictionary<string, Scenes> _scenesMap;
 
     public void OpenScene(string scene)
@@ -21,7 +21,7 @@ public class Navigator : MonoBehaviour
     {
         _previousScene = _currentScene;
         _currentScene = scene;
-        SceneManager.LoadScene((int)scene);
+        SceneManager.LoadScene(scene.ToString());
         Debug.Log($"Previous: {_previousScene}, Current: {_currentScene}");
     }
 

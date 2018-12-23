@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
-namespace JapaneseCrossword.State
+namespace JapaneseCrossword.Core.State
 {
     public class LocalStateLoader:IStateLoader
     {

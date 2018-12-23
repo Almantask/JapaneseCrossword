@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DesktopInput : GenericInputCheker
+public class DesktopInput : InputCheker
 {
     public override void Start()
     {
@@ -9,15 +9,7 @@ public class DesktopInput : GenericInputCheker
     }
     protected override void UpdateBackKeyPress()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Debug.Log("Esc pressed");
-            IsBackKeyPressed = true;
-        }
-        else
-        {
-            IsBackKeyPressed = false;
-        }
+        IsBackKeyPressed = Input.GetKeyDown(KeyCode.Escape);
     }
 
     protected override void UpdateScreenStatus()

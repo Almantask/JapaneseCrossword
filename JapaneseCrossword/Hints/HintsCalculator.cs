@@ -1,6 +1,6 @@
-﻿using JapaneseCrossword.Rules;
+﻿using JapaneseCrossword.Core.Rules;
 
-namespace JapaneseCrossword.Hints
+namespace JapaneseCrossword.Core.Hints
 {
     public abstract class HintsCalculator:IHintsCalculator
     {

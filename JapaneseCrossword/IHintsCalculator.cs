@@ -1,4 +1,4 @@
-﻿namespace JapaneseCrossword
+﻿namespace JapaneseCrossword.Core
 {
     public interface IHintsCalculator
     {

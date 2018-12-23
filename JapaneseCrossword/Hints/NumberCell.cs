@@ -1,4 +1,4 @@
-﻿namespace JapaneseCrossword.Hints
+﻿namespace JapaneseCrossword.Core.Hints
 {
     public class NumberCell
     {

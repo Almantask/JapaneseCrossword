@@ -1,10 +1,10 @@
-﻿using General;
-using JapaneseCrossword.Hints;
-using JapaneseCrossword.Rules;
-using JapaneseCrossword.State;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using General;
+using JapaneseCrossword.Core.Hints;
+using JapaneseCrossword.Core.Rules;
+using JapaneseCrossword.Core.State;
 
-namespace JapaneseCrossword
+namespace JapaneseCrossword.Core
 {
     public class Crossword
     {

@@ -1,9 +1,9 @@
-﻿using JapaneseCrossword;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using JapaneseCrossword.Core;
 
-namespace DesktopClient.DisplayableGrid
+namespace JapaneseCrossword.DesktopClient.DisplayableGrid
 {
     public class NumberGridView : GridView, IHintsGridBuider
     {
