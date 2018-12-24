@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Helpers.SingletonDesign;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Utility;
 using UnityEngine;
 
 namespace Assets.Scripts.Helpers.AsyncOperations

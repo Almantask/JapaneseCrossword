@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-namespace Assets.Scripts.Helpers.SingletonDesign
+
+namespace Assets.Scripts.Utility
 {
     /// <summary>
     /// Be aware this will not prevent a non singleton constructor

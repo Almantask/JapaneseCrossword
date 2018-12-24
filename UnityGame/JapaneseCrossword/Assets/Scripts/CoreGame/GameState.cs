@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Utility;
 using JapaneseCrossword.Core;
 using JapaneseCrossword.Core.Rules;
 using JapaneseCrossword.Core.State;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameState : MonoBehaviour
 {
     public MainGridBuilder MainGridBuilder;
+    public Text GridSizeInput;
 
     private Crossword _game;
     private GridDataGenerator _dataGenerator;
@@ -19,8 +22,9 @@ public class GameState : MonoBehaviour
     private void InitialiseCrossword()
     {
         _dataGenerator = new GridDataGenerator();
-        const int cols = 10;
-        const int rows = 10;
+        var gridSize = ParseGridSize();
+        int cols = 10;
+        int rows = 10;
         var cells = _dataGenerator.Generate(cols, rows);
 
         var verticalHintsBuilder = new VerticalHintsBuilder();
@@ -35,4 +39,25 @@ public class GameState : MonoBehaviour
             MainGridBuilder, hintsBuilders);
     }
 
+    /// <summary>
+    /// Parses grid size from input field. Possible formats: x,y or x
+    /// </summary>
+    /// <returns>array of 2 elements: 0- cols, 1- rows</returns>
+    private int[] ParseGridSize()
+    {
+        var gridSize = new int[2];
+        var input = GridSizeInput.text;
+        var inputParts = input.Split(new[] {','});
+
+        if (inputParts.Length == 1)
+        {
+            int sizeX;
+            var isNumber = int.TryParse(inputParts[0], out sizeX);
+            if (!isNumber)
+            {
+                MessageBoxUtil.Show($"{input} is not a number!", MessageType.Error);
+            }
+        }
+        return gridSize;
+    }
 }
