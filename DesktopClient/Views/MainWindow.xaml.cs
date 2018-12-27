@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -75,7 +76,8 @@ namespace JapaneseCrossword.DesktopClient.Views
 
         private Tuple<int, int> ParseGridSize()
         {
-            var gridSizeInput = textBoxGridSize.Text;
+            string gridSizeInput = "";
+            Dispatcher.Invoke(() => gridSizeInput = textBoxGridSize.Text);
             Tuple<int, int> gridSize = null;
             try
             {
@@ -109,7 +111,7 @@ namespace JapaneseCrossword.DesktopClient.Views
             return new Tuple<int, int>(cols, rows);
         }
 
-        private void OnButtonImageGridClick(object sender, RoutedEventArgs e)
+        private async void OnButtonImageGridClick(object sender, RoutedEventArgs e)
         {
             var image = GetImageFromDialog();
             if (image == null)
@@ -119,10 +121,28 @@ namespace JapaneseCrossword.DesktopClient.Views
 
             var sizeConfig = ParseGridSize();
             var imageGridBuilder = new ImageGridBuilder(sizeConfig.Item1, sizeConfig.Item2, image);
-            var colorSectors = imageGridBuilder.GroupSectorsByColor();
-            var regionProcessor = new RegionProcessor(imageGridBuilder.ColorStats);
-            var gridData = regionProcessor.BuildMonochromeCells(colorSectors);
+            
+            // Heavy processing started, no hangs..
+            var processImage = Task.Run(() => imageGridBuilder.GroupSectorsByColor());
+            var colorSectors = await processImage;
+            var gridData = await ConvertColorRegionsIntoGridData(colorSectors, imageGridBuilder);
+            // ..Heavy processing is done.
             BuildGame(gridData);
+        }
+
+        private async Task<MonochromeCell[,]> ConvertColorRegionsIntoGridData(ColorRegion[,] regions, ImageGridBuilder builder)
+        {
+            RegionProcessor regionProcessor = null;
+            var initProcessorTask = Task.Run(() => 
+                regionProcessor = new RegionProcessor(builder.ColorStats));
+            await initProcessorTask;
+
+            MonochromeCell[,] gridData = null;
+            var buildCellsTask = Task.Run(() => 
+                gridData = regionProcessor.BuildMonochromeCells(regions));
+            await buildCellsTask;
+
+            return gridData;
         }
 
         private Bitmap GetImageFromDialog()
