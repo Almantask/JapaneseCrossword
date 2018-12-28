@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="550" MinHeight="200" MinWidth="300"
-        KeyDown="MainWindow_OnKeyDown"
         >
     <Grid Background="HotPink">
         <Grid.RowDefinitions>
@@ -22,17 +22,24 @@
         </Grid.ColumnDefinitions>
 
         <Grid Height="60" Width ="350" VerticalAlignment="Top" HorizontalAlignment="Left" DockPanel.Dock="Top" Row="0" Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="11*" />
-                    <ColumnDefinition Width="4*" />
-                </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="11*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
             <TextBox x:Name = "textBoxGridSize"  
-                       Grid.Column="1"
-                        HorizontalContentAlignment="Center"
+                         Grid.Column="1"
+                         HorizontalContentAlignment="Center"
                          VerticalContentAlignment="Center"
                          Height="30"
                          FontSize="18"
-                         Text="9,9">
+                         Text="{Binding GameModel.GridSize}">
+                <TextBox.InputBindings>
+                    <KeyBinding 
+                        Key="Enter" 
+                        Command="{Binding BuildGameRandomCommand}" 
+                        CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" 
+                        />
+                </TextBox.InputBindings>
                 <TextBox.ToolTip>
                     <ToolTip>
                         <StackPanel>
@@ -53,29 +60,32 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1" Height="40" VerticalAlignment="Top">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                <Button x:Name = "buttonImageGrid"  
+            <Button x:Name = "buttonImageGrid"  
                         Content = "Pick an image for grid" 
-                        Click = "OnButtonImageGridClick" 
-                        ClickMode ="Press"
+                        Command ="{Binding BuildGameFromImageCommand}"
                         Foreground = "Gray"
                         Grid.Column="0"
-                        FontSize="18"
+                        FontSize="18" Grid.RowSpan="3"
                 />
 
-                <Button x:Name = "buttonRandomGrid"  
+            <Button x:Name = "buttonRandomGrid"  
                         Content = "Randomise grid" 
-                        Click = "OnButtonRnadomGrid" 
-                        ClickMode ="Press"
+                        Command ="{Binding BuildGameRandomCommand}"
                         Foreground = "Gray" 
                         Grid.Column="1"
-                        FontSize="18"
+                        FontSize="18" Grid.RowSpan="3"
                 />
-            </Grid>
+        </Grid>
         <Grid Grid.Row ="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
@@ -92,9 +102,9 @@
                       Grid.Column="1"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Center"
-                      Checked="CheckBoxRevealed_OnChecked"
-                      Unchecked="CheckBoxRevealed_OnUnchecked"
-                      IsChecked="False" Margin="0,15,0,10"
+                      Command="{Binding CrosswordRevealCommand}"
+                      CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
+                      IsChecked="{Binding GameModel.IsRevealed}" Margin="0,15,0,10"
             />
         </Grid>
         <Grid Grid.Row="0" Column="0" x:Name="HintsOnOff">
@@ -106,21 +116,27 @@
                 <DockPanel Grid.Row="0">
                     <Menu DockPanel.Dock="Top">
                         <MenuItem Header="_File" Width="74">
-                            <MenuItem Header="Load" Click="LoadProgress_OnClick"/>
-                            <MenuItem Header="Save Progress" Click="SaveProgress_OnClick"/>
-                            <MenuItem Header="Save custom" Click="SaveCustom_OnClick"/>
+                            <MenuItem Header="Load" Command="{Binding LoadGameCommand}"/>
+                            <MenuItem Header="Save Progress" Command="{Binding SaveGameCommand}"/>
+                            <MenuItem Header="Save custom" Command="{Binding SaveScetchCommand}"/>
                         </MenuItem>
                     </Menu>
                     <StackPanel></StackPanel>
                 </DockPanel>
-               
+
             </Grid>
 
         </Grid>
 
         <Grid Grid.Row="3" Column="1">
             <Border BorderThickness="3" BorderBrush="Black">
-                <Grid x:Name="PixelGrid" Background="White" PreviewMouseLeftButtonDown="OnPreviewMouseLeftButtonDown">
+                <!--<Grid x:Name="PixelGrid" Background="White" PreviewMouseLeftButtonDown="">-->
+                <Grid x:Name="PixelGrid" Background="White">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown" >
+                            <i:InvokeCommandAction Command="{Binding InteractWithCellCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </Grid>
             </Border>
         </Grid>
@@ -134,4 +150,5 @@
         <Grid Grid.Row="2" Column="1" x:Name="TopHintGrid" Background="White"/>
         <Grid Grid.Row="4" Column="1" x:Name="BottomHintGrid" Background="White"/>
     </Grid>
+
 </Window>

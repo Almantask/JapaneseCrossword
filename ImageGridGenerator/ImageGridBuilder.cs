@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Threading.Tasks;
 
 namespace ImageProcessing
 {
@@ -25,7 +24,6 @@ namespace ImageProcessing
 
         public ColorRegion[,] GroupSectorsByColor()
         {
-
             // To be merged with last one
             var lastSectorWidth = image.Width % sectorWidth;
             var lastSectorHeight = image.Height % sectorHeight;

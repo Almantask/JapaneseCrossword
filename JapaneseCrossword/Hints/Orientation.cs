@@ -1,6 +1,6 @@
 ﻿namespace JapaneseCrossword.Core.Hints
 {
-    enum Orientation
+    internal enum Orientation
     {
         Vertical,
         Horizontal
