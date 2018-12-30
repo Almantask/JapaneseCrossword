@@ -15,14 +15,14 @@ public class MainGridBuilder:MonoBehaviour, IMainGridBuilder
     [SerializeField]
     private float InitialTilePositionY;
 
-    private float _tileWidth;
-    private float _tileHeight;
     private float _tileScaleX;
     private float _tileScaleY;
+    private float _tileWidth;
+    private float _tileHeight;
 
     public void Build(IMonochrome[,] gridData)
     {
-
+        AdjutTileScale(gridData.GetLength(0), gridData.GetLength(1));
         for (var col = 0; col < gridData.GetLength(0); col++)
         {
             for (var row = 0; row < gridData.GetLength(1); row++)
@@ -38,11 +38,21 @@ public class MainGridBuilder:MonoBehaviour, IMainGridBuilder
         }
     }
 
-    private void AdjutTileScale()
+    private void AdjutTileScale(int cols, int rows)
     {
+        _tileWidth = _gridWidth / cols;
+        _tileHeight = _gridHeight / rows;
+
+        _gameBoardTile.Awake();
         _tileScaleX = _tileWidth / _gameBoardTile.VisualWidth;
         _tileScaleY = _tileHeight / _gameBoardTile.VisualHeight;
         _gameBoardTile.transform.localScale = new Vector3(_tileScaleX, _tileScaleY);
+    }
+
+    private float CalculateTileEdgeSize()
+    {
+
+        return 0;
     }
 
     private void RepositionTile(int col, int row, Transform tile)

@@ -14,7 +14,7 @@ public class GameBoardTile : MonoBehaviour, IMonochrome
     public float VisualWidth { get; private set; }
     public float VisualHeight { get; private set; }
 
-    void Awake ()
+    public void Awake ()
     {
         SetRenderer();
         var bounds = _renderer.bounds;
