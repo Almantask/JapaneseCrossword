@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 
-public class DesktopInput : InputCheker
+namespace Assets.Scripts.InputHandler
 {
-    public override void Start()
+    public class DesktopInput : InputCheker
     {
-        base.Start();
-        IsKnown = true;
-    }
-    protected override void UpdateBackKeyPress()
-    {
-        IsBackKeyPressed = Input.GetKeyDown(KeyCode.Escape);
-    }
+        public override void Start()
+        {
+            base.Start();
+            IsKnown = true;
+        }
+        protected override void UpdateBackKeyPress()
+        {
+            IsBackKeyPressed = Input.GetKeyDown(KeyCode.Escape);
+        }
 
-    protected override void UpdateScreenStatus()
-    {
-        var isDown = Input.GetMouseButtonDown(0);
-        var position = Input.mousePosition;
-        ScreenStatus.Update(position.x, position.y, isDown);
+        protected override void UpdateScreenStatus()
+        {
+            var isDown = Input.GetMouseButtonDown(0);
+            var position = Input.mousePosition;
+            ScreenStatus.Update(position.x, position.y, isDown);
+        }
     }
 }

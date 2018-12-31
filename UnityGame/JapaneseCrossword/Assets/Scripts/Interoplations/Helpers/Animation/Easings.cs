@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Helpers.Animation
+namespace Assets.Scripts.Interoplations.Helpers.Animation
 {
     static public class Easings
     {

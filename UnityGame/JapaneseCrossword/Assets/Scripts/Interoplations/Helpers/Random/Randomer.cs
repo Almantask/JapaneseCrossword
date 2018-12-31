@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Assets.Scripts.Helpers.RandomBasedOperations
+namespace Assets.Scripts.Interoplations.Helpers.Random
 {
     namespace RandomHelper
     {
@@ -20,7 +19,7 @@ namespace Assets.Scripts.Helpers.RandomBasedOperations
             /// <returns> T if item exists, </returns>
             public static T GetRandom<T>(T[] collection, List<int> usedIndexes)
             {
-                int random = Random.Range(0, collection.Length);
+                int random = UnityEngine.Random.Range(0, collection.Length);
                 bool isRandomGood = false;
                 int wrongCount = 0;
                 while (!isRandomGood)
@@ -64,7 +63,7 @@ namespace Assets.Scripts.Helpers.RandomBasedOperations
                 if (cantBeFirstIndex != -1)
                 {
                     T firstElement;
-                    int random = Random.Range(0, collection.Length);
+                    int random = UnityEngine.Random.Range(0, collection.Length);
                     if (cantBeFirstIndex == random)
                     {
                         firstElement = collection[(collection.Length + 1) % collection.Length];
@@ -96,7 +95,7 @@ namespace Assets.Scripts.Helpers.RandomBasedOperations
             /// <returns> T if item exists, </returns>
             public static T GetRandom<T>(T[] collection, int i)
             {
-                int random = Random.Range(0, collection.Length);
+                int random = UnityEngine.Random.Range(0, collection.Length);
                 ICollection col = collection as ICollection;
                 if (i == random)
                 {

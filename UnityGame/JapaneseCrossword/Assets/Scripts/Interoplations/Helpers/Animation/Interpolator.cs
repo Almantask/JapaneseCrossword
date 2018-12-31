@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Helpers.General;
-using System.Collections;
+﻿using System.Collections;
+using Assets.Scripts.Interoplations.Helpers.General;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Helpers.Animation
+namespace Assets.Scripts.Interoplations.Helpers.Animation
 {
     /// <summary>
     /// InterpolateEs between any of the following variables: text.color, material.color, textMesh.color, transform(position, location,scale) or numeric values

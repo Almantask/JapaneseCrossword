@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
 
-public abstract class InputCheker:MonoBehaviour
+namespace Assets.Scripts.InputHandler
 {
-    public bool IsKnown { protected set; get; }
-    public bool IsBackKeyPressed { protected set; get; }
-    public ScreenStatus ScreenStatus { protected set; get; }
-
-    public virtual void Start()
+    public abstract class InputCheker:MonoBehaviour
     {
-        ScreenStatus = new ScreenStatus();
-    }
+        public bool IsKnown { protected set; get; }
+        public bool IsBackKeyPressed { protected set; get; }
+        public ScreenStatus ScreenStatus { protected set; get; }
 
-    void Update()
-    {
-        InputRoutine();
-    }
+        public virtual void Start()
+        {
+            ScreenStatus = new ScreenStatus();
+        }
 
-    protected virtual void InputRoutine()
-    {
-        UpdateBackKeyPress();
-        UpdateScreenStatus();
-    }
+        void Update()
+        {
+            InputRoutine();
+        }
 
-    protected abstract void UpdateBackKeyPress();
-    protected abstract void UpdateScreenStatus();
+        protected virtual void InputRoutine()
+        {
+            UpdateBackKeyPress();
+            UpdateScreenStatus();
+        }
+
+        protected abstract void UpdateBackKeyPress();
+        protected abstract void UpdateScreenStatus();
+    }
 }

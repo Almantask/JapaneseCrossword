@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using Assets.Scripts.Helpers.Conversion;
+﻿using Assets.Scripts.Interoplations.Helpers.Conversion;
+using UnityEngine;
 
-
-namespace Assets.Scripts.Helpers.Extensions.Vector2Extensions
+namespace Assets.Scripts.Interoplations.Helpers.Extensions
 {
     public static class Vector2Extension
     {

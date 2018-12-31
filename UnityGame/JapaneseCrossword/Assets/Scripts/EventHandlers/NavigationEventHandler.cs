@@ -1,21 +1,25 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.SceneManagement;
+using UnityEngine;
 
-public class NavigationEventHandler : MonoBehaviour
+namespace Assets.Scripts.EventHandlers
 {
-    private Navigator _navigator;
-
-    void Start()
+    public class NavigationEventHandler : MonoBehaviour
     {
-        _navigator = FindObjectOfType<Navigator>();
-    }
+        private Navigator _navigator;
 
-    public void OpenScene(string scene)
-    {
-        _navigator.OpenScene(scene);
-    }
+        void Start()
+        {
+            _navigator = FindObjectOfType<Navigator>();
+        }
 
-    public void ExitGame()
-    {
-        Application.Quit();
+        public void OpenScene(string scene)
+        {
+            _navigator.OpenScene(scene);
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
     }
 }

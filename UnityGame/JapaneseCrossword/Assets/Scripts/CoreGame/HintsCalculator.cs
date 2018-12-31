@@ -1,9 +1,12 @@
 ﻿using JapaneseCrossword.Core;
 
-public class HintsCalculator:IHintsCalculator
+namespace Assets.Scripts.CoreGame
 {
-    public int[,] Calculate()
+    public class HintsCalculator:IHintsCalculator
     {
-        throw new System.NotImplementedException();
+        public int[,] Calculate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

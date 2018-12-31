@@ -1,16 +1,19 @@
 ﻿using JapaneseCrossword.Core;
 
-internal class HorizontalHintsBuilder : IHintsGridBuider
+namespace Assets.Scripts.CoreGame
 {
-    public void Build(int[,] gridData)
+    internal class HorizontalHintsBuilder : IHintsGridBuider
     {
-        throw new System.NotImplementedException();
-    }
+        public void Build(int[,] gridData)
+        {
+            throw new System.NotImplementedException();
+        }
 
-    public void Clear()
-    {
-        throw new System.NotImplementedException();
-    }
+        public void Clear()
+        {
+            throw new System.NotImplementedException();
+        }
 
-    public bool IsVertical { get; }
+        public bool IsVertical { get; }
+    }
 }

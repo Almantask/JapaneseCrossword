@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
 
-namespace Assets.Scripts.Helpers.Serializers
+namespace Assets.Scripts.Interoplations.Helpers.Serializers
 {
     class XMLSerializer : ISerializer
     {

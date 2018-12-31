@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Helpers.Serializers
+﻿namespace Assets.Scripts.Interoplations.Helpers.Serializers
 {
     public interface ISerializer
     {

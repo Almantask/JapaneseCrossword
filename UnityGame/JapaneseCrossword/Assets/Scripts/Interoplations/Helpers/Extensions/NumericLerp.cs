@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NumericLerp
+namespace Assets.Scripts.Interoplations.Helpers.Extensions
 {
     public static class NumericLerp
     {

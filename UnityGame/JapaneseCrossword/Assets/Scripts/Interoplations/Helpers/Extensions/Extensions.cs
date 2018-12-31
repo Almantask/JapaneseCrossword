@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NumericalExtensions
+namespace Assets.Scripts.Interoplations.Helpers.Extensions
 {
     public static class NumericalExtensions
     {

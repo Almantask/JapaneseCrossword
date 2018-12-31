@@ -986,10 +986,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a3d06307e911724bb13a85a2030dc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameBoardTile: {fileID: 1195599309}
-  Camera: {fileID: 556403386}
-  TileWidth: 0.7
-  TileHeight: 0.7
+  _gameBoardTile: {fileID: 114306834238993338, guid: 6810e2f75024add42875ae71276aa32e,
+    type: 2}
+  _gridWidth: 7
+  _gridHeight: 7
   InitialTilePositionX: -3
   InitialTilePositionY: -3.25
 --- !u!1 &549866310
@@ -1726,37 +1726,41 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4434967639525194, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
+    - target: {fileID: 4166732096737382, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
       propertyPath: m_LocalPosition.x
       value: -9.51
       objectReference: {fileID: 0}
-    - target: {fileID: 4434967639525194, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
+    - target: {fileID: 4166732096737382, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4434967639525194, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
+    - target: {fileID: 4166732096737382, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4434967639525194, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
+    - target: {fileID: 4166732096737382, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4434967639525194, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
+    - target: {fileID: 4166732096737382, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4434967639525194, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
+    - target: {fileID: 4166732096737382, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4434967639525194, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
+    - target: {fileID: 4166732096737382, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4434967639525194, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
+    - target: {fileID: 4166732096737382, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244346092095056, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6810e2f75024add42875ae71276aa32e, type: 2}
@@ -2849,42 +2853,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1152199624}
---- !u!1 &1195599308 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1758879423313188, guid: 6810e2f75024add42875ae71276aa32e,
-    type: 2}
-  m_PrefabInternal: {fileID: 750830447}
---- !u!114 &1195599309 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114723430848932366, guid: 6810e2f75024add42875ae71276aa32e,
-    type: 2}
-  m_PrefabInternal: {fileID: 750830447}
-  m_Script: {fileID: 11500000, guid: 5705dff5e398612459a7c0d2f5273f9d, type: 3}
---- !u!61 &1195599311
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1195599308}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &1196199755
 GameObject:
   m_ObjectHideFlags: 0

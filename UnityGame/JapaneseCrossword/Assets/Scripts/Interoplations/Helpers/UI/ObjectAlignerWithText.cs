@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Helpers.UI
+namespace Assets.Scripts.Interoplations.Helpers.UI
 {
     public class ObjectAlignerWithText : MonoBehaviour
     {

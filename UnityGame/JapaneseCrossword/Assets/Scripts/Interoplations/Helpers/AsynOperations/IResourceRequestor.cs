@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Helpers.AsyncOperations
+﻿namespace Assets.Scripts.Interoplations.Helpers.AsynOperations
 {
     public interface IResourceRequestor
     {

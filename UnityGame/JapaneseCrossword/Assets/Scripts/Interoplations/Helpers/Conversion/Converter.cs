@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Helpers.Conversion
+namespace Assets.Scripts.Interoplations.Helpers.Conversion
 {
     public static class Converter
     {

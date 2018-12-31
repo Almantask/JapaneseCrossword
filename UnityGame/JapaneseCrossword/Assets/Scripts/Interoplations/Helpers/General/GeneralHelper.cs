@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using UnityEngine;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-namespace Assets.Scripts.Helpers.General
+namespace Assets.Scripts.Interoplations.Helpers.General
 {
     /// <summary>
     /// Converters, UI helpers, 2d functionality not included in 3d, array expanding functions and other helpful functions

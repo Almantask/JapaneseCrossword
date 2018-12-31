@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Utility;
 using UnityEngine;
 
-namespace Assets.Scripts.Helpers.AsyncOperations
+namespace Assets.Scripts.Interoplations.Helpers.AsynOperations
 {
     /// <summary>
     /// Loads and processes resource from Resources folder

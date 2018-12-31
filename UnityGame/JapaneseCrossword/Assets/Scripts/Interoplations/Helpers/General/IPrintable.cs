@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Helpers.General
+﻿namespace Assets.Scripts.Interoplations.Helpers.General
 {
     public interface IPrintable
     {
