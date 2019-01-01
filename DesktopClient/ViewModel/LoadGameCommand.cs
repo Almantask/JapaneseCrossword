@@ -25,3 +25,7 @@ namespace JapaneseCrossword.DesktopClient.ViewModel
         }
     }
 }
+My biggest issue is that there is too much unrelated code in one place.
+My viewModel should know which commands I offer.
+My command should know what it does.
+If I have everything in one place, though encapsulated
