@@ -6,63 +6,54 @@ namespace Assets.Scripts.CoreGame
 {
     public class MainGridBuilder:MonoBehaviour, IMainGridBuilder
     {
-        [SerializeField]
-        private GameBoardTile _gameBoardTile;
-        [SerializeField]
-        private float _gridWidth;
-        [SerializeField]
-        private float _gridHeight;
-        [SerializeField]
-        private float InitialTilePositionX;
-        [SerializeField]
-        private float InitialTilePositionY;
+        public Vector2 TopLeftPivot => new Vector2(_gridSpecs.StartPositionX, _gridSpecs.StartPositionY);
+        public Vector2 TopRightPivot => new Vector2(_gridSpecs.StartPositionX + _gridSpecs.Width, _gridSpecs.StartPositionY);
+        public Vector2 BotLeftPivot => new Vector2(_gridSpecs.StartPositionX, _gridSpecs.StartPositionY + _gridSpecs.Height);
+        public Vector2 BotRightPivot => new Vector2(_gridSpecs.StartPositionX + _gridSpecs.Width, _gridSpecs.StartPositionY + _gridSpecs.Height);
 
-        private float _tileScaleX;
-        private float _tileScaleY;
-        private float _tileWidth;
-        private float _tileHeight;
+        [SerializeField]
+        private GridSpecs _gridSpecs;
+        private TileSpecs _tileSpecs;
 
         public void Build(IMonochrome[,] gridData)
         {
-            AdjutTileScale(gridData.GetLength(0), gridData.GetLength(1));
-            for (var col = 0; col < gridData.GetLength(0); col++)
+            var cols = gridData.GetLength(0);
+            var rows = gridData.GetLength(1);
+
+            InitialiseSpecs(cols, rows);
+
+            for (var col = 0; col < cols; col++)
             {
-                for (var row = 0; row < gridData.GetLength(1); row++)
+                for (var row = 0; row < rows; row++)
                 {
-                    var tileObj = Instantiate(_gameBoardTile, transform).gameObject;
-                    tileObj.name = $"Tile [{col},{row}]";
+                    var tileObj = Instantiate(_gridSpecs.TileObj, transform).gameObject;
+                    tileObj.name = $"TileObj [{col},{row}]";
                     RepositionTile(col, row, tileObj.transform);
 
-                    var tile = tileObj.GetComponent<GameBoardTile>();
-                    if(gridData[col, row].IsFilled)
-                        tile.InvertColor();
+                    var tile = tileObj.GetComponent<ITile>();
+                    tile.SetProperties(gridData[col, row]);
                 }
             }
         }
 
-        private void AdjutTileScale(int cols, int rows)
+        private void InitialiseSpecs(int cols, int rows)
         {
-            _tileWidth = _gridWidth / cols;
-            _tileHeight = _gridHeight / rows;
-
-            _gameBoardTile.Initialise();
-            _tileScaleX = _tileWidth / _gameBoardTile.VisualWidth;
-            _tileScaleY = _tileHeight / _gameBoardTile.VisualHeight;
-            _gameBoardTile.transform.localScale = new Vector3(_tileScaleX, _tileScaleY);
+            _gridSpecs.Initialise();
+            _tileSpecs = new TileSpecs(_gridSpecs, cols, rows);
+            _gridSpecs.CalibrateTile(_tileSpecs);
         }
 
         private float CalculateTileEdgeSize()
         {
-
             return 0;
         }
 
         private void RepositionTile(int col, int row, Transform tile)
         {
-            var offsetX = col * _tileWidth;
-            var offsetY = row * _tileHeight;
+            var offsetX = col * _tileSpecs.Width;
+            var offsetY = row * _tileSpecs.Height;
         
-            var position = new Vector2(InitialTilePositionX + offsetX, InitialTilePositionY + offsetY);
+            var position = new Vector2(_gridSpecs.StartPositionX + offsetX, _gridSpecs.StartPositionY + offsetY);
             tile.position = position;
         }
 

@@ -14,6 +14,6 @@ namespace Assets.Scripts.CoreGame
             throw new System.NotImplementedException();
         }
 
-        public bool IsVertical { get; }
+        public bool IsVertical => false;
     }
 }

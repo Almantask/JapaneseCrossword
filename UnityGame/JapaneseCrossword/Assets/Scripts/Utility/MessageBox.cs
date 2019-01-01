@@ -31,5 +31,6 @@ namespace Assets.Scripts.Utility
         {
             Core.BindComponents();
         }
+
     }
 }

@@ -11,14 +11,27 @@ namespace Assets.Scripts.CoreGame
 {
     public class GameState : MonoBehaviour
     {
-        public MainGridBuilder MainGridBuilder;
-        public Text GridSizeInput;
+        [SerializeField]
+        private MainGridBuilder _mainGridBuilder;
+        [SerializeField]
+        private Text _gridSizeInput;
+        [SerializeField]
+        private VerticalHintsBuilder _hintsBuidlerTop;
+        [SerializeField]
+        private VerticalHintsBuilder _hintsBuidlerBot;
+        [SerializeField]
+        private HorizontalHintsBuilder _hintsBuidlerLeft;
+        [SerializeField]
+        private HorizontalHintsBuilder _hintsBuidlerRight;
 
         private Crossword _game;
         private GridDataGenerator _dataGenerator;
 
         private void Awake()
         {
+
+
+            // Call this on button press
             InitialiseCrossword();
         }
 
@@ -26,8 +39,8 @@ namespace Assets.Scripts.CoreGame
         {
             _dataGenerator = new GridDataGenerator();
             var gridSize = ParseGridSize();
-            int cols = 10;
-            int rows = 10;
+            int cols = gridSize[0];
+            int rows = gridSize[1];
             var cells = _dataGenerator.Generate(cols, rows);
 
             var verticalHintsBuilder = new VerticalHintsBuilder();
@@ -39,7 +52,7 @@ namespace Assets.Scripts.CoreGame
             };
 
             _game = new Crossword(cells, new StrictRules(), new LocalStateLoader(),
-                MainGridBuilder, hintsBuilders);
+                _mainGridBuilder, hintsBuilders);
         }
 
         /// <summary>
@@ -48,9 +61,10 @@ namespace Assets.Scripts.CoreGame
         /// <returns>array of 2 elements: 0- cols, 1- rows</returns>
         private int[] ParseGridSize()
         {
-            var gridSize = new int[2];
-            var input = GridSizeInput.text;
-            var inputParts = input.Split(new[] {','});
+            int[] gridSize = null;
+            //var input = _gridSizeInput.text;
+            var input = "10,10";
+            var inputParts = input.Split(',');
 
             if (inputParts.Length == 1)
             {
@@ -60,7 +74,24 @@ namespace Assets.Scripts.CoreGame
                 {
                     MessageBoxUtil.Show($"{input} is not a number!", MessageType.Error);
                 }
+                else
+                {
+                    gridSize = new int[] { sizeX, sizeX};
+                }
             }
+            else if (inputParts.Length == 2)
+            {
+                int sizeX;
+                int sizeY;
+                var isNumber1 = int.TryParse(inputParts[0], out sizeX);
+                var isNumber2 = int.TryParse(inputParts[0], out sizeY);
+                if (!isNumber1 || !isNumber2)
+                {
+                    MessageBoxUtil.Show($"{input} is not a number!", MessageType.Error);
+                }
+                gridSize = new[] { sizeX, sizeY };
+            }
+
             return gridSize;
         }
     }

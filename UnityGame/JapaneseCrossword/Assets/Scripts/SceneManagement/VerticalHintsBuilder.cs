@@ -1,8 +1,9 @@
-﻿using JapaneseCrossword.Core;
+﻿using Assets.Scripts.CoreGame;
+using JapaneseCrossword.Core;
 
 namespace Assets.Scripts.SceneManagement
 {
-    internal class VerticalHintsBuilder : IHintsGridBuider
+    internal class VerticalHintsBuilder : GridBuilder, IHintsGridBuider
     {
         public void Build(int[,] gridData)
         {
