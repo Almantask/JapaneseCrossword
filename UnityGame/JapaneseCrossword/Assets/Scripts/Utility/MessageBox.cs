@@ -6,26 +6,30 @@ using UnityEngine;
 namespace Assets.Scripts.Utility
 {
     public class MessageBox:MonoBehaviour
-
     {
-    public CoreMessageBox Core;
+        [SerializeField]
+        private CoreMessageBox Core;
 
-    public string Title
-    {
-        set { Core.TitleText.text = value; }
-        get { return Core.TitleText.text; }
-    }
+        public string Title
+        {
+            set { Core.TitleText.text = value; }
+            get { return Core.TitleText.text; }
+        }
 
-    public string Content
-    {
-        set { Core.MessageText.text = value; }
-        get { return Core.MessageText.text; }
-    }
+        public string Content
+        {
+            set { Core.MessageText.text = value; }
+            get { return Core.MessageText.text; }
+        }
 
-    public Sprite Sprite
-    {
-        set { Core.Image.sprite = value; }
-    }
+        public Sprite Sprite
+        {
+            set { Core.Image.sprite = value; }
+        }
 
+        public void BindComponents()
+        {
+            Core.BindComponents();
+        }
     }
 }

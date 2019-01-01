@@ -19,7 +19,7 @@ public class MainGridBuilder:MonoBehaviour, IMainGridBuilder
     //private readonly float tileWidthOffset;
     //private readonly float tileHeightOffset;
 
-    void Awake()
+    void Start()
     {
         _tileScaleX = TileWidth / GameBoardTile.VisualWidth;
         _tileScaleY = TileHeight / GameBoardTile.VisualHeight;

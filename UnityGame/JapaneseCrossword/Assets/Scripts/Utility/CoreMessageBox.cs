@@ -5,11 +5,6 @@ namespace Assets.Scripts.Utility
 {
     public class CoreMessageBox : MonoBehaviour
     {
-        public CoreMessageBox(string message)
-        {
-            MessageText = transform.GetChild(0).GetComponent<Text>();
-            MessageText.text = message;
-        }
 
         public Text MessageText;
         public Text TitleText;
@@ -18,13 +13,24 @@ namespace Assets.Scripts.Utility
         void Start ()
         {
             BindComponents();
-
         }
 
-        private void BindComponents()
+        public void BindComponents()
         {
             var popup = transform.GetChild(0);
             var popupWindow = popup.GetChild(0);
+            
+            const string imageHolderName = "MessageTypeImage";
+            Image = popupWindow.Find(imageHolderName).GetComponent<Image>();
+
+            const string titleHolderName = "Text_WindowTitle";
+            TitleText = popupWindow.Find(titleHolderName).GetComponent<Text>();
+
+            const string textContainerHolderName = "Panel_Content";
+            var textContainerHodler = popupWindow.Find(textContainerHolderName);
+            const string textDescriptionHolderName = "Text_Description";
+            MessageText = textContainerHodler.Find(textDescriptionHolderName).GetComponent<Text>();
+
         }
 
     }
