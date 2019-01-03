@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.CoreGame
 {
-    [RequireComponent(typeof(Text))]
+    [RequireComponent(typeof(TextMesh))]
     public class Hint : MonoBehaviour
     {
         private int _consequitiveColors;
@@ -18,6 +18,6 @@ namespace Assets.Scripts.CoreGame
         }
 
         [SerializeField]
-        private Text _text;
+        private TextMesh _text;
     }
 }

@@ -12,8 +12,8 @@ namespace Assets.Scripts.CoreGame
         public Vector2 BotRightPivot => new Vector2(_gridSpecs.StartPositionX + _gridSpecs.Width, _gridSpecs.StartPositionY + _gridSpecs.Height);
 
         [SerializeField]
-        private GridSpecs _gridSpecs;
-        private TileSpecs _tileSpecs;
+        private GridSpecs<GameTile> _gridSpecs;
+        private TileSpecs<GameTile> _tileSpecs;
 
         public void Build(IMonochrome[,] gridData)
         {
@@ -26,11 +26,11 @@ namespace Assets.Scripts.CoreGame
             {
                 for (var row = 0; row < rows; row++)
                 {
-                    var tileObj = Instantiate(_gridSpecs.TileObj, transform).gameObject;
+                    var tileObj = Instantiate(_gridSpecs.Tile, transform).gameObject;
                     tileObj.name = $"TileObj [{col},{row}]";
                     RepositionTile(col, row, tileObj.transform);
 
-                    var tile = tileObj.GetComponent<ITile>();
+                    var tile = tileObj.GetComponent<IInitialisable>();
                     tile.SetProperties(gridData[col, row]);
                 }
             }
@@ -39,7 +39,7 @@ namespace Assets.Scripts.CoreGame
         private void InitialiseSpecs(int cols, int rows)
         {
             _gridSpecs.Initialise();
-            _tileSpecs = new TileSpecs(_gridSpecs, cols, rows);
+            _tileSpecs = new TileSpecs<GameTile>(_gridSpecs, cols, rows);
             _gridSpecs.CalibrateTile(_tileSpecs);
         }
 

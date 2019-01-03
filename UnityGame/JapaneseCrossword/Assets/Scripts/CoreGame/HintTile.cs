@@ -2,8 +2,11 @@
 
 namespace Assets.Scripts.CoreGame
 {
-    public class HintTile : MonoBehaviour, ITile
+    public class HintTile : MonoBehaviour, IInitialisable, IRenderable
     {
+        public float VisualHeight => _tile.VisualHeight;
+        public float VisualWidth => _tile.VisualWidth;
+
         public int ConsequitiveColors
         {
             set { _hint.ConsequitiveColors = value; }
@@ -28,7 +31,7 @@ namespace Assets.Scripts.CoreGame
             ConsequitiveColors = number;
         }
 
-        Tile ITile.Initialise()
+        object IInitialisable.Initialise()
         {
             throw new System.NotImplementedException();
         }

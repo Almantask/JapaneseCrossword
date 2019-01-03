@@ -5,26 +5,23 @@ using UnityEngine;
 namespace Assets.Scripts.CoreGame
 {
     [Serializable]
-    internal class GridSpecs
+    internal class GridSpecs<T> where T:MonoBehaviour, IInitialisable, IRenderable
     {
-        public GameObject TileObj;
+        public T Tile;
         public float Width;
         public float Height;
         public float StartPositionX;
         public float StartPositionY;
 
-        public Tile Tile { get; private set; }
-
         public void Initialise()
         {
-            var tileComposition = TileObj.GetComponent<ITile>();
-            Tile = tileComposition.Initialise();
+            Tile.Initialise();
         }
 
-        public void CalibrateTile(TileSpecs specs)
+        public void CalibrateTile(TileSpecs<T> specs)
         {
             var scale = new Vector3(specs.ScaleX, specs.ScaleY);
-            TileObj.transform.localScale = scale;
+            Tile.transform.localScale = scale;
         }
     }
 }
