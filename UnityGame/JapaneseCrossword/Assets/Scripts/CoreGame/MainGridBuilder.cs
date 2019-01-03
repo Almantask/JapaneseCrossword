@@ -12,49 +12,13 @@ namespace Assets.Scripts.CoreGame
         public Vector2 BotRightPivot => new Vector2(_gridSpecs.StartPositionX + _gridSpecs.Width, _gridSpecs.StartPositionY + _gridSpecs.Height);
 
         [SerializeField]
-        private GridSpecs<GameTile> _gridSpecs;
-        private TileSpecs<GameTile> _tileSpecs;
+        private GridSpecsGameTile _gridSpecs;
+
+        private readonly GridBuilder<GameTile> _builder = new GridBuilder<GameTile>();
 
         public void Build(IMonochrome[,] gridData)
         {
-            var cols = gridData.GetLength(0);
-            var rows = gridData.GetLength(1);
-
-            InitialiseSpecs(cols, rows);
-
-            for (var col = 0; col < cols; col++)
-            {
-                for (var row = 0; row < rows; row++)
-                {
-                    var tileObj = Instantiate(_gridSpecs.Tile, transform).gameObject;
-                    tileObj.name = $"TileObj [{col},{row}]";
-                    RepositionTile(col, row, tileObj.transform);
-
-                    var tile = tileObj.GetComponent<IInitialisable>();
-                    tile.SetProperties(gridData[col, row]);
-                }
-            }
-        }
-
-        private void InitialiseSpecs(int cols, int rows)
-        {
-            _gridSpecs.Initialise();
-            _tileSpecs = new TileSpecs<GameTile>(_gridSpecs, cols, rows);
-            _gridSpecs.CalibrateTile(_tileSpecs);
-        }
-
-        private float CalculateTileEdgeSize()
-        {
-            return 0;
-        }
-
-        private void RepositionTile(int col, int row, Transform tile)
-        {
-            var offsetX = col * _tileSpecs.Width;
-            var offsetY = row * _tileSpecs.Height;
-        
-            var position = new Vector2(_gridSpecs.StartPositionX + offsetX, _gridSpecs.StartPositionY + offsetY);
-            tile.position = position;
+            _builder.Build(gridData, _gridSpecs, transform);
         }
 
         public void Build(int cols, int rows)

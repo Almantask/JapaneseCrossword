@@ -3,7 +3,7 @@ using JapaneseCrossword.Core;
 
 namespace Assets.Scripts.SceneManagement
 {
-    internal class VerticalHintsBuilder : GridBuilder, IHintsGridBuider
+    internal class VerticalHintsBuilder : GridBuilder<HintTile>, IHintsGridBuider
     {
         public void Build(int[,] gridData)
         {

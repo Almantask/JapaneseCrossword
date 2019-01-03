@@ -16,14 +16,13 @@ namespace Assets.Scripts.CoreGame
 
         public float VisualHeight => _tile.VisualHeight;
         public float VisualWidth => _tile.VisualWidth;
+        public bool IsFilled { get; private set; }
 
         public void InvertColor()
         {
             IsFilled = !IsFilled;
             _tile.Color = IsFilled ? Color.black : Color.white;
         }
-
-        public bool IsFilled { get; private set; }
 
         void OnMouseDown()
         {
