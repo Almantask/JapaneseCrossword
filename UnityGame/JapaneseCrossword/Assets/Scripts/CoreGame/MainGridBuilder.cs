@@ -14,7 +14,7 @@ namespace Assets.Scripts.CoreGame
         [SerializeField]
         private GridSpecsGameTile _gridSpecs;
 
-        private readonly GridBuilder<GameTile> _builder = new GridBuilder<GameTile>();
+        private readonly GridBuilder<GameTile, IMonochrome> _builder = new GridBuilder<GameTile, IMonochrome>();
 
         public void Build(IMonochrome[,] gridData)
         {

@@ -1,22 +1,24 @@
-﻿using IHintsGridBuider = JapaneseCrossword.Core.IHintsGridBuider;
+﻿using General;
+using JapaneseCrossword.Core.Rules;
+using UnityEngine;
+using IHintsGridBuider = JapaneseCrossword.Core.IHintsGridBuider;
 
 namespace Assets.Scripts.CoreGame
 {
-    public class VerticalHintsBuilder : IHintsGridBuider {
+    public class HintsViewBuilder : MonoBehaviour, IHintsGridBuider
+    {
+        [SerializeField]
+        private bool _isVertical;
+        [SerializeField]
+        private GridSpecsGameTile _gridSpecs;
+        private readonly GridBuilder<GameTile, int> _builder = new GridBuilder<GameTile, int>();
 
-        // Use this for initialization
-        void Start () {
-		
-        }
-	
-        // Update is called once per frame
-        void Update () {
-		
-        }
+        public bool IsVertical => true;
 
         public void Build(int[,] gridData)
         {
-            throw new System.NotImplementedException();
+            var alignedHints = IsVertical ? gridData.InvertOrientation() : gridData;
+            _builder.Build(alignedHints, _gridSpecs, transform);
         }
 
         public void Clear()
@@ -24,6 +26,5 @@ namespace Assets.Scripts.CoreGame
             throw new System.NotImplementedException();
         }
 
-        public bool IsVertical => true;
     }
 }

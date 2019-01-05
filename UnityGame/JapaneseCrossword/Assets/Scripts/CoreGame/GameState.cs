@@ -16,13 +16,13 @@ namespace Assets.Scripts.CoreGame
         [SerializeField]
         private Text _gridSizeInput;
         [SerializeField]
-        private VerticalHintsBuilder _hintsBuidlerTop;
+        private HintsViewBuilder _hintsViewBuidlerTop;
         [SerializeField]
-        private VerticalHintsBuilder _hintsBuidlerBot;
+        private HintsViewBuilder _hintsViewBuidlerBot;
         [SerializeField]
-        private HorizontalHintsBuilder _hintsBuidlerLeft;
+        private HintsViewBuilder _hintsBuidlerLeft;
         [SerializeField]
-        private HorizontalHintsBuilder _hintsBuidlerRight;
+        private HintsViewBuilder _hintsBuidlerRight;
 
         private Crossword _game;
         private GridDataGenerator _dataGenerator;
@@ -43,13 +43,15 @@ namespace Assets.Scripts.CoreGame
             int rows = gridSize[1];
             var cells = _dataGenerator.Generate(cols, rows);
 
-            var verticalHintsBuilder = new VerticalHintsBuilder();
-            var horizontalhintsBuilder = new HorizontalHintsBuilder();
             var hintsBuilders = new List<IHintsGridBuider>
             {
-                verticalHintsBuilder,
-                horizontalhintsBuilder
+                _hintsViewBuidlerTop,
+                _hintsViewBuidlerBot,
+                _hintsBuidlerLeft,
+                _hintsBuidlerRight
             };
+
+
 
             _game = new Crossword(cells, new StrictRules(), new LocalStateLoader(),
                 _mainGridBuilder, hintsBuilders);

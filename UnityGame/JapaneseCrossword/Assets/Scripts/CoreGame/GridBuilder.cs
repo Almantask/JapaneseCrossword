@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Assets.Scripts.CoreGame
 {
-    internal class GridBuilder<T> where T: MonoBehaviour, IInitialisable, IRenderable
+    internal class GridBuilder<T, G> where T: MonoBehaviour, IInitialisable, IRenderable
     {
         private GridSpecs<T> _gridSpecs;
         protected TileSpecs<T> TileSpecs;
 
-        public void Build(IMonochrome[,] gridData, GridSpecs<T> gridSpecs, Transform parent)
+        public void Build(G[,] gridData, GridSpecs<T> gridSpecs, Transform parent)
         {
             var cols = gridData.GetLength(0);
             var rows = gridData.GetLength(1);
