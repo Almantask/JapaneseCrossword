@@ -33,7 +33,8 @@ namespace Assets.Scripts.CoreGame
 
         object IInitialisable.Initialise()
         {
-            throw new System.NotImplementedException();
+            _tile.Initialise();
+            return _tile;
         }
     }
 }

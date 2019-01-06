@@ -10,8 +10,8 @@ namespace Assets.Scripts.CoreGame
         [SerializeField]
         private bool _isVertical;
         [SerializeField]
-        private GridSpecsGameTile _gridSpecs;
-        private readonly GridBuilder<GameTile, int> _builder = new GridBuilder<GameTile, int>();
+        private GridSpecsHintTile _gridSpecs;
+        private readonly GridBuilder<HintTile, int> _builder = new GridBuilder<HintTile, int>();
 
         public bool IsVertical => true;
 
