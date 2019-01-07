@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.CoreGame
 {
-    internal interface IRenderable
+    public interface IRenderable
     {
         float VisualHeight { get; }
         float VisualWidth { get; }

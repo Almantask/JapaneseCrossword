@@ -16,9 +16,9 @@ namespace Assets.Scripts.CoreGame
         [SerializeField]
         private Text _gridSizeInput;
         [SerializeField]
-        private HintsViewBuilder _hintsViewBuidlerTop;
+        private HintsViewBuilder _hintsBuilderTop;
         [SerializeField]
-        private HintsViewBuilder _hintsViewBuidlerBot;
+        private HintsViewBuilder _hintsBuidlerBot;
         [SerializeField]
         private HintsViewBuilder _hintsBuidlerLeft;
         [SerializeField]
@@ -45,13 +45,16 @@ namespace Assets.Scripts.CoreGame
 
             var hintsBuilders = new List<IHintsGridBuider>
             {
-                _hintsViewBuidlerTop,
-                _hintsViewBuidlerBot,
+                _hintsBuilderTop,
+                _hintsBuidlerBot,
                 _hintsBuidlerLeft,
                 _hintsBuidlerRight
             };
 
-
+            _hintsBuidlerLeft.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Left);
+            _hintsBuidlerRight.SetPivot(_mainGridBuilder.PivotPoints.TopRight, Edge.Right);
+            _hintsBuilderTop.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Top);
+            _hintsBuidlerBot.SetPivot(_mainGridBuilder.PivotPoints.BotLeft, Edge.Bot);
 
             _game = new Crossword(cells, new StrictRules(), new LocalStateLoader(),
                 _mainGridBuilder, hintsBuilders);
