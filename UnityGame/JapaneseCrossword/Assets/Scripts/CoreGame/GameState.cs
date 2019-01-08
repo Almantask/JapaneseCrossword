@@ -18,11 +18,7 @@ namespace Assets.Scripts.CoreGame
         [SerializeField]
         private HintsViewBuilder _hintsBuilderTop;
         [SerializeField]
-        private HintsViewBuilder _hintsBuidlerBot;
-        [SerializeField]
         private HintsViewBuilder _hintsBuidlerLeft;
-        [SerializeField]
-        private HintsViewBuilder _hintsBuidlerRight;
 
         private Crossword _game;
         private GridDataGenerator _dataGenerator;
@@ -46,15 +42,11 @@ namespace Assets.Scripts.CoreGame
             var hintsBuilders = new List<IHintsGridBuider>
             {
                 _hintsBuilderTop,
-                _hintsBuidlerBot,
-                _hintsBuidlerLeft,
-                _hintsBuidlerRight
+                _hintsBuidlerLeft
             };
 
             _hintsBuidlerLeft.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Left);
-            _hintsBuidlerRight.SetPivot(_mainGridBuilder.PivotPoints.TopRight, Edge.Right);
             _hintsBuilderTop.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Top);
-            _hintsBuidlerBot.SetPivot(_mainGridBuilder.PivotPoints.BotLeft, Edge.Bot);
 
             _game = new Crossword(cells, new StrictRules(), new LocalStateLoader(),
                 _mainGridBuilder, hintsBuilders);

@@ -842,7 +842,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 933887394}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &223485897
 Prefab:
@@ -1578,37 +1578,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 584267641}
---- !u!1 &605649441
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1601766317352026, guid: 0ba5572b1ecd862408a7c419efbd91cf,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 605649442}
-  - component: {fileID: 2023688801}
-  m_Layer: 0
-  m_Name: HintsBot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &605649442
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4642096679928842, guid: 0ba5572b1ecd862408a7c419efbd91cf,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 605649441}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 933887394}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &707149957
 GameObject:
   m_ObjectHideFlags: 0
@@ -2216,9 +2185,7 @@ MonoBehaviour:
   _mainGridBuilder: {fileID: 493677129}
   _gridSizeInput: {fileID: 1096359637}
   _hintsBuilderTop: {fileID: 1158953091}
-  _hintsBuidlerBot: {fileID: 2023688801}
   _hintsBuidlerLeft: {fileID: 801356129}
-  _hintsBuidlerRight: {fileID: 1490501979}
 --- !u!4 &775353628
 Transform:
   m_ObjectHideFlags: 0
@@ -2246,8 +2213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridSpecs:
     Tile: {fileID: 114114901063872534, guid: ba098c8d26c16a341b49d42eb8096ed2, type: 2}
-    Width: 2
-    Height: 7
+    Width: 4
+    Height: 4
     StartPositionX: 0
     StartPositionY: 0
   _isVertical: 0
@@ -2742,8 +2709,6 @@ Transform:
   m_Children:
   - {fileID: 2001276375}
   - {fileID: 493677128}
-  - {fileID: 1993789137}
-  - {fileID: 605649442}
   - {fileID: 216509309}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -3205,8 +3170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridSpecs:
     Tile: {fileID: 114114901063872534, guid: ba098c8d26c16a341b49d42eb8096ed2, type: 2}
-    Width: 7
-    Height: 2
+    Width: 4
+    Height: 4
     StartPositionX: 0
     StartPositionY: 0
   _isVertical: 1
@@ -3686,25 +3651,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1478122587}
---- !u!114 &1490501979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114806498072475252, guid: 0ba5572b1ecd862408a7c419efbd91cf,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1993789136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9c0298bebf76d419b56137491af37f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gridSpecs:
-    Tile: {fileID: 114114901063872534, guid: ba098c8d26c16a341b49d42eb8096ed2, type: 2}
-    Width: 2
-    Height: 7
-    StartPositionX: 0
-    StartPositionY: 0
-  _isVertical: 0
 --- !u!1001 &1500834612
 Prefab:
   m_ObjectHideFlags: 0
@@ -4712,37 +4658,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1903433870}
---- !u!1 &1993789136
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1330422790733762, guid: 0ba5572b1ecd862408a7c419efbd91cf,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1993789137}
-  - component: {fileID: 1490501979}
-  m_Layer: 0
-  m_Name: HintsRight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1993789137
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4394500229626148, guid: 0ba5572b1ecd862408a7c419efbd91cf,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1993789136}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 933887394}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2001276374
 GameObject:
   m_ObjectHideFlags: 0
@@ -4774,25 +4689,6 @@ Transform:
   m_Father: {fileID: 933887394}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2023688801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114540253304359716, guid: 0ba5572b1ecd862408a7c419efbd91cf,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 605649441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba9c0298bebf76d419b56137491af37f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gridSpecs:
-    Tile: {fileID: 114114901063872534, guid: ba098c8d26c16a341b49d42eb8096ed2, type: 2}
-    Width: 7
-    Height: 2
-    StartPositionX: 0
-    StartPositionY: 0
-  _isVertical: 1
 --- !u!1 &2090596561
 GameObject:
   m_ObjectHideFlags: 0
