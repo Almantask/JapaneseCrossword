@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.CoreGame
 {
-    public class HintTile : MonoBehaviour, IInitialisable, IRenderable
+    public class HintTile : MonoBehaviour, IInitialisable, IRenderable, IScalable
     {
         public float VisualHeight => _tile.VisualHeight;
         public float VisualWidth => _tile.VisualWidth;
@@ -35,6 +35,11 @@ namespace Assets.Scripts.CoreGame
         {
             _tile.Initialise();
             return _tile;
+        }
+
+        public void Scale(Vector2 scale)
+        {
+            
         }
     }
 }

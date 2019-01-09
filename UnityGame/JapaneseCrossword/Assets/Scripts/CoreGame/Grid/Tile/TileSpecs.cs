@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.CoreGame
 {
-    public class TileSpecs<T> where T:MonoBehaviour, IRenderable, IInitialisable
+    public class TileSpecs<T> where T:MonoBehaviour, IRenderable, IInitialisable, IScalable
     {
         public float ScaleX;
         public float ScaleY;

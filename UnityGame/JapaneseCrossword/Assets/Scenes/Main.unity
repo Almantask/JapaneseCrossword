@@ -2213,7 +2213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridSpecs:
     Tile: {fileID: 114114901063872534, guid: ba098c8d26c16a341b49d42eb8096ed2, type: 2}
-    Width: 4
+    Width: 2
     Height: 4
     StartPositionX: 0
     StartPositionY: 0
@@ -3171,7 +3171,7 @@ MonoBehaviour:
   _gridSpecs:
     Tile: {fileID: 114114901063872534, guid: ba098c8d26c16a341b49d42eb8096ed2, type: 2}
     Width: 4
-    Height: 4
+    Height: 2
     StartPositionX: 0
     StartPositionY: 0
   _isVertical: 1

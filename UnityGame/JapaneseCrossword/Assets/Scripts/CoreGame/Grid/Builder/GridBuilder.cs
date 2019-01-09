@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.CoreGame
 {
-    internal class GridBuilder<T, G> where T: MonoBehaviour, IInitialisable, IRenderable
+    internal class GridBuilder<T, G> where T: MonoBehaviour, IInitialisable, IRenderable, IScalable
     {
         private GridSpecs<T> _gridSpecs;
         protected TileSpecs<T> TileSpecs;

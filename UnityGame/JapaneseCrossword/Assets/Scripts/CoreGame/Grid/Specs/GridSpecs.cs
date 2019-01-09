@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Assets.Scripts.CoreGame
 {
     [Serializable]
-    public class GridSpecs<T> where T:MonoBehaviour, IInitialisable, IRenderable
+    public class GridSpecs<T> where T:MonoBehaviour, IInitialisable, IRenderable, IScalable
     {
         public T Tile;
         public float Width;
@@ -22,7 +22,7 @@ namespace Assets.Scripts.CoreGame
         public void CalibrateTile(TileSpecs<T> specs)
         {
             var scale = new Vector3(specs.ScaleX, specs.ScaleY);
-            Tile.transform.localScale = scale;
+            Tile.Scale(scale);
         }
 
         public void SetPivotPoint(Vector2 pivotPoint, Edge edgeAnchor)
@@ -62,5 +62,10 @@ namespace Assets.Scripts.CoreGame
             StartPositionX = startPosition.x;
             StartPositionY = startPosition.y;
         }
+    }
+
+    public interface IScalable
+    {
+        void Scale(Vector2 scale);
     }
 }

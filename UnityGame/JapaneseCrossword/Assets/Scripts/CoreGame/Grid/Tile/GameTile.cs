@@ -9,7 +9,7 @@ namespace Assets.Scripts.CoreGame
     /// </summary>
     [RequireComponent(typeof(BoxCollider2D))]
     [Serializable]
-    public class GameTile : MonoBehaviour, IMonochrome, IInitialisable, IRenderable
+    public class GameTile : MonoBehaviour, IMonochrome, IInitialisable, IRenderable, IScalable
     {
         [SerializeField]
         private Tile _tile;
@@ -41,6 +41,11 @@ namespace Assets.Scripts.CoreGame
             IMonochrome monochrome = (IMonochrome) param;
             _tile.Color = monochrome.IsFilled ? Color.black : Color.white;
             IsFilled = true;
+        }
+
+        public void Scale(Vector2 scale)
+        {
+            
         }
     }
 }
