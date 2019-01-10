@@ -25,8 +25,6 @@ namespace Assets.Scripts.CoreGame
 
         private void Awake()
         {
-
-
             // Call this on button press
             InitialiseCrossword();
         }

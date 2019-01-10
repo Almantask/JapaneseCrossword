@@ -7,6 +7,7 @@ namespace Assets.Scripts.CoreGame
     public class Hint : MonoBehaviour
     {
         private int _consequitiveColors;
+
         public int ConsequitiveColors
         {
             set
@@ -15,6 +16,12 @@ namespace Assets.Scripts.CoreGame
                 _consequitiveColors = value;
             }
             get { return _consequitiveColors; }
+        }
+
+        public int FontSize
+        {
+            set { _text.fontSize = value; }
+            get { return _text.fontSize; }
         }
 
         [SerializeField]

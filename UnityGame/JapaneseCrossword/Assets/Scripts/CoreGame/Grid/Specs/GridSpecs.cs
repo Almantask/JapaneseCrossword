@@ -46,7 +46,7 @@ namespace Assets.Scripts.CoreGame
                     offset = new Vector2(0, 0);
                     break;
                 case Edge.Top:
-                    offset = new Vector2(0, Height);
+                    offset = new Vector2(0, Height*2);
                     break;
                 default:
                     offset = new Vector2(0, 0);

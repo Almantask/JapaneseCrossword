@@ -7,6 +7,7 @@ namespace Assets.Scripts.CoreGame
 {
     public class HintsViewBuilder : MonoBehaviour, IHintsGridBuider
     {
+
         [SerializeField]
         private GridSpecsHintTile _gridSpecs;
 
@@ -24,8 +25,8 @@ namespace Assets.Scripts.CoreGame
 
         public void Build(int[,] gridData)
         {
-            var alignedHints = IsVertical ? gridData.InvertOrientation() : gridData;
-            _builder.Build(alignedHints, _gridSpecs, transform);
+            //var alignedHints = IsVertical ? gridData.InvertOrientation() : gridData;
+            _builder.Build(gridData, _gridSpecs, transform);
         }
 
         public void Clear()

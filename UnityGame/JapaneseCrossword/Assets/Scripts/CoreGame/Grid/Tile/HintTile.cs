@@ -4,8 +4,12 @@ namespace Assets.Scripts.CoreGame
 {
     public class HintTile : MonoBehaviour, IInitialisable, IRenderable, IScalable
     {
+        private bool _initialised;
+
         public float VisualHeight => _tile.VisualHeight;
         public float VisualWidth => _tile.VisualWidth;
+
+        private int _intialHintFontSize;
 
         public int ConsequitiveColors
         {
@@ -33,13 +37,24 @@ namespace Assets.Scripts.CoreGame
 
         object IInitialisable.Initialise()
         {
-            _tile.Initialise();
+            if (!_initialised)
+            {
+                _tile.Initialise();
+                _intialHintFontSize = _hint.FontSize;
+                _initialised = true;
+            }
+
             return _tile;
         }
 
         public void Scale(Vector2 scale)
         {
-            
+            _tile.transform.localScale = scale;
+
+            var fontSizeRatio = scale.x < scale.y ? scale.x : scale.y;
+            _hint.FontSize = (int)(_intialHintFontSize * fontSizeRatio);
         }
+
+
     }
 }

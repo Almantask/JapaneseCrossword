@@ -45,7 +45,7 @@ namespace Assets.Scripts.CoreGame
 
         public void Scale(Vector2 scale)
         {
-            
+            _tile.transform.localScale = scale;
         }
     }
 }
