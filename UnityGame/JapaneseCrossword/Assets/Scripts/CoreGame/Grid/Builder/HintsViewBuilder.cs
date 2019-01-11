@@ -21,7 +21,7 @@ namespace Assets.Scripts.CoreGame
             _gridSpecs.SetPivotPoint(pivot, edge);
         }
 
-        public bool IsVertical => true;
+        public bool IsVertical => _isVertical;
 
         public void Build(int[,] gridData)
         {

@@ -19,7 +19,7 @@ namespace Assets.Scripts.CoreGame
             {
                 for (var row = 0; row < rows; row++)
                 {
-                    var tileObj = Object.Instantiate(gridSpecs.Tile, parent).gameObject;
+                    var tileObj = Object.Instantiate(gridSpecs.TileInstance, parent).gameObject;
                     tileObj.name = $"TileObj [{col},{row}]";
                     RepositionTile(col, row, tileObj.transform);
 

@@ -2,13 +2,15 @@
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Assets.Scripts.CoreGame
 {
     [Serializable]
     public class GridSpecs<T> where T:MonoBehaviour, IInitialisable, IRenderable, IScalable
     {
-        public T Tile;
+        public T TilePrefab;
+        public T TileInstance { private set; get; }
         public float Width;
         public float Height;
         public float StartPositionX;
@@ -16,13 +18,14 @@ namespace Assets.Scripts.CoreGame
 
         public void Initialise()
         {
-            Tile.Initialise();
+            TileInstance = Object.Instantiate(TilePrefab);
+            TileInstance.Initialise();
         }
 
         public void CalibrateTile(TileSpecs<T> specs)
         {
             var scale = new Vector3(specs.ScaleX, specs.ScaleY);
-            Tile.Scale(scale);
+            TileInstance.Scale(scale);
         }
 
         public void SetPivotPoint(Vector2 pivotPoint, Edge edgeAnchor)

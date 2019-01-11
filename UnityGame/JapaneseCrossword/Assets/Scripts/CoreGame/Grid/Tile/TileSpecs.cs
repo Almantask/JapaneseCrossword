@@ -14,8 +14,8 @@ namespace Assets.Scripts.CoreGame
             Width = gridSpecs.Width / cols;
             Height = gridSpecs.Height / rows;
 
-            ScaleX = Width / gridSpecs.Tile.VisualWidth;
-            ScaleY = Height / gridSpecs.Tile.VisualHeight;
+            ScaleX = Width / gridSpecs.TilePrefab.VisualWidth;
+            ScaleY = Height / gridSpecs.TilePrefab.VisualHeight;
         }
     }
 }

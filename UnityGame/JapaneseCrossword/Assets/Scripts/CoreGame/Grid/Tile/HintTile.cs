@@ -22,20 +22,13 @@ namespace Assets.Scripts.CoreGame
         [SerializeField]
         private Hint _hint;
 
-        // TODO: reconsider...
-        public Tile Initialise()
-        {
-            _tile.Initialise();
-            return _tile;
-        }
-
         public void SetProperties(object param, bool isLoad = false)
         {
             int number = (int) param;
             ConsequitiveColors = number;
         }
 
-        object IInitialisable.Initialise()
+        public object Initialise()
         {
             if (!_initialised)
             {
