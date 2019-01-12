@@ -27,6 +27,8 @@ namespace Assets.Scripts.CoreGame
                     tile.SetProperties(gridData[col, row]);
                 }
             }
+
+            Object.Destroy(gridSpecs.TileInstance.gameObject);
         }
 
         private void LoadSpecs(GridSpecs<T> gridSpecs, int cols, int rows)

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripts.SceneManagement;
 using Assets.Scripts.Utility;
 using JapaneseCrossword.Core;
 using JapaneseCrossword.Core.Rules;
 using JapaneseCrossword.Core.State;
 using UnityEngine;
 using UnityEngine.UI;
+#pragma warning disable 649
 
 namespace Assets.Scripts.CoreGame
 {
@@ -43,8 +43,8 @@ namespace Assets.Scripts.CoreGame
                 _hintsBuidlerLeft
             };
 
-            _hintsBuidlerLeft.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Left);
-            _hintsBuilderTop.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Top);
+            _hintsBuidlerLeft.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Left, cols, rows);
+            _hintsBuilderTop.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Top, cols, rows);
 
             _game = new Crossword(cells, new StrictRules(), new LocalStateLoader(),
                 _mainGridBuilder, hintsBuilders);

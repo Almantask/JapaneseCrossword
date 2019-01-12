@@ -28,28 +28,29 @@ namespace Assets.Scripts.CoreGame
             TileInstance.Scale(scale);
         }
 
-        public void SetPivotPoint(Vector2 pivotPoint, Edge edgeAnchor)
+        public void SetPivotPoint(Vector2 pivotPoint, Edge edgeAnchor, int cols, int rows)
         {
-            var offset = GetOffset(edgeAnchor);
+            var offset = GetOffset(edgeAnchor, cols, rows);
             SetPivotPoint(pivotPoint, offset);
         }
 
-        private Vector2 GetOffset(Edge edge)
+        private Vector2 GetOffset(Edge edge, int cols, int rows)
         {
             Vector2 offset;
+
             switch (edge)
             {
                 case Edge.Bot:
                     offset = new Vector2(0, 0);
                     break;
                 case Edge.Left:
-                    offset = new Vector2(-Width, 0);
+                    offset = new Vector2(-Width, 0) + new Vector2(Width / cols / 4, 0);
                     break;
                 case Edge.Right:
                     offset = new Vector2(0, 0);
                     break;
                 case Edge.Top:
-                    offset = new Vector2(0, Height*2);
+                    offset = new Vector2(0, Height * 2) + new Vector2(0, Height / rows /4);
                     break;
                 default:
                     offset = new Vector2(0, 0);

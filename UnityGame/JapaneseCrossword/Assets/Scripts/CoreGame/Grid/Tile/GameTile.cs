@@ -46,6 +46,8 @@ namespace Assets.Scripts.CoreGame
         public void Scale(Vector2 scale)
         {
             _tile.transform.localScale = scale;
+            var collider = GetComponent<BoxCollider2D>();
+            collider.size = scale;
         }
     }
 }

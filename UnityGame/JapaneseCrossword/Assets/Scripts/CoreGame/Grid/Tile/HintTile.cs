@@ -30,13 +30,8 @@ namespace Assets.Scripts.CoreGame
 
         public object Initialise()
         {
-            if (!_initialised)
-            {
-                _tile.Initialise();
-                _intialHintFontSize = _hint.FontSize;
-                _initialised = true;
-            }
-
+            _tile.Initialise();
+            _intialHintFontSize = _hint.FontSize;
             return _tile;
         }
 

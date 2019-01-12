@@ -4,19 +4,21 @@ namespace Assets.Scripts.CoreGame
 {
     public class Tile:MonoBehaviour
     {
-        public float VisualWidth { get; private set; }
-        public float VisualHeight { get; private set; }
+        public float VisualWidth => _bounds.size.x;//{ get; private set; }
+        public float VisualHeight => _bounds.size.y; //{ get; private set; }
 
         public Color Color
         {
-            set { _renderer.color = value; }
-            get { return _renderer.color; } 
+            set { _rendererColor.color = value; }
+            get { return _rendererColor.color; } 
         }
 
-        private SpriteRenderer _renderer;
+        private SpriteRenderer _rendererColor;
+        private SpriteRenderer _rendererFrame;
         private bool _isInitialised;
+        private Bounds _bounds;
 
-        private void Awake()
+        void Awake()
         {
             Initialise();
         }
@@ -25,9 +27,9 @@ namespace Assets.Scripts.CoreGame
         {
             if (_isInitialised) return;
             SetRenderer();
-            var bounds = _renderer.bounds;
-            VisualWidth = bounds.size.x;
-            VisualHeight = bounds.size.y;
+            _bounds = _rendererFrame.bounds;
+            //VisualWidth = bounds.size.x;
+            //VisualHeight = bounds.size.y;
             _isInitialised = true;
         }
 
@@ -35,7 +37,9 @@ namespace Assets.Scripts.CoreGame
         {
             var borderHolder = transform.GetChild(0);
             var baseHolder = borderHolder.GetChild(0);
-            _renderer = baseHolder.GetComponent<SpriteRenderer>();
+
+            _rendererColor = baseHolder.GetComponent<SpriteRenderer>();
+            _rendererFrame = borderHolder.GetComponent<SpriteRenderer>();
         }
     }
 }

@@ -16,16 +16,15 @@ namespace Assets.Scripts.CoreGame
 
         private readonly GridBuilder<HintTile, int> _builder = new GridBuilder<HintTile, int>();
 
-        public void SetPivot(Vector2 pivot, Edge edge)
+        public void SetPivot(Vector2 pivot, Edge edge, int cols, int rows)
         {
-            _gridSpecs.SetPivotPoint(pivot, edge);
+            _gridSpecs.SetPivotPoint(pivot, edge, cols, rows);
         }
 
         public bool IsVertical => _isVertical;
 
         public void Build(int[,] gridData)
         {
-            //var alignedHints = IsVertical ? gridData.InvertOrientation() : gridData;
             _builder.Build(gridData, _gridSpecs, transform);
         }
 
