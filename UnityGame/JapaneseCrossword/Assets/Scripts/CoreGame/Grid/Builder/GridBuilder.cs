@@ -1,5 +1,6 @@
 ﻿using JapaneseCrossword.Core.Rules;
 using UnityEngine;
+using UnityEngine.Assertions.Comparers;
 
 namespace Assets.Scripts.CoreGame
 {
@@ -7,6 +8,9 @@ namespace Assets.Scripts.CoreGame
     {
         private GridSpecs<T> _gridSpecs;
         protected TileSpecs<T> TileSpecs;
+
+        public float TileWidth => TileSpecs.Width;
+        public float TileHeight => TileSpecs.Height;
 
         public void Build(G[,] gridData, GridSpecs<T> gridSpecs, Transform parent)
         {
@@ -31,8 +35,9 @@ namespace Assets.Scripts.CoreGame
             Object.Destroy(gridSpecs.TileInstance.gameObject);
         }
 
-        private void LoadSpecs(GridSpecs<T> gridSpecs, int cols, int rows)
+        public void LoadSpecs(GridSpecs<T> gridSpecs, int cols, int rows)
         {
+            gridSpecs.Dimensions = new Vector2(cols, rows);
             gridSpecs.Initialise();
             TileSpecs = new TileSpecs<T>(gridSpecs, cols, rows);
             gridSpecs.CalibrateTile(TileSpecs);

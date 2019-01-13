@@ -9,17 +9,13 @@ namespace Assets.Scripts.CoreGame
 {
     public class PivotPoints
     {
-        public Vector2 TopLeft { get; }
-        public Vector2 TopRight { get; }
-        public Vector2 BotLeft { get; }
-        public Vector2 BotRight { get; }
+        public Vector2 Top { get; }
+        public Vector2 Left { get; }
 
-        public PivotPoints(Vector2 topLeft, Vector2 topRight, Vector2 botLeft, Vector2 botRight)
+        public PivotPoints(Vector2 top, Vector2 left)
         {
-            TopLeft = topLeft;
-            TopRight = topRight;
-            BotLeft = botLeft;
-            BotRight = botRight;
+            Top = top;
+            Left = left;
         }
     }
 }

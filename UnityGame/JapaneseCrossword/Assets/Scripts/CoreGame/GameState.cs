@@ -43,8 +43,13 @@ namespace Assets.Scripts.CoreGame
                 _hintsBuidlerLeft
             };
 
-            _hintsBuidlerLeft.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Left, cols, rows);
-            _hintsBuilderTop.SetPivot(_mainGridBuilder.PivotPoints.TopLeft, Edge.Top, cols, rows);
+            var pivots = _mainGridBuilder.CreatePivotPoints(new Vector2(cols, rows));
+
+            _hintsBuidlerLeft.SetPivot(pivots.Left);
+            _hintsBuilderTop.SetPivot(pivots.Top);
+
+            _hintsBuidlerLeft.Height = _mainGridBuilder.Height;
+            _hintsBuilderTop.Width = _mainGridBuilder.Width;
 
             _game = new Crossword(cells, new StrictRules(), new LocalStateLoader(),
                 _mainGridBuilder, hintsBuilders);
@@ -58,7 +63,7 @@ namespace Assets.Scripts.CoreGame
         {
             int[] gridSize = null;
             //var input = _gridSizeInput.text;
-            var input = "10,10";
+            var input = "2,2";
             var inputParts = input.Split(',');
 
             if (inputParts.Length == 1)

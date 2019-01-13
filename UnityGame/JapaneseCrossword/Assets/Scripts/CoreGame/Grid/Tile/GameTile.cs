@@ -40,7 +40,7 @@ namespace Assets.Scripts.CoreGame
             if (!isLoad) return;
             IMonochrome monochrome = (IMonochrome) param;
             _tile.Color = monochrome.IsFilled ? Color.black : Color.white;
-            IsFilled = true;
+            IsFilled = false;
         }
 
         public void Scale(Vector2 scale)
