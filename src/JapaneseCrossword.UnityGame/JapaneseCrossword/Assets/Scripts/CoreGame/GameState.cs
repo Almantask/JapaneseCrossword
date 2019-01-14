@@ -23,13 +23,7 @@ namespace Assets.Scripts.CoreGame
         private Crossword _game;
         private GridDataGenerator _dataGenerator;
 
-        private void Awake()
-        {
-            // Call this on button press
-            InitialiseCrossword();
-        }
-
-        private void InitialiseCrossword()
+        public void InitialiseCrossword()
         {
             _dataGenerator = new GridDataGenerator();
             var gridSize = ParseGridSize();
@@ -62,8 +56,7 @@ namespace Assets.Scripts.CoreGame
         private int[] ParseGridSize()
         {
             int[] gridSize = null;
-            //var input = _gridSizeInput.text;
-            var input = "2,2";
+            var input = _gridSizeInput.text;
             var inputParts = input.Split(',');
 
             if (inputParts.Length == 1)

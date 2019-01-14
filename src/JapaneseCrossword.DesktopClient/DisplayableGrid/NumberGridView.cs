@@ -54,7 +54,7 @@ namespace JapaneseCrossword.DesktopClient.DisplayableGrid
                 Background = Brushes.White,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                FontSize = 10,
+                FontSize = 20,
                 TextAlignment = TextAlignment.Center,
             };
 
