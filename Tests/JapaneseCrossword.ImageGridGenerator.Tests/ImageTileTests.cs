@@ -1,7 +1,6 @@
-using System;
 using Xunit;
 
-namespace ImageGridGeneratorTests
+namespace JapaneseCrossword.ImageGridGenerator.Tests
 {
     public class ImageTileTests
     {

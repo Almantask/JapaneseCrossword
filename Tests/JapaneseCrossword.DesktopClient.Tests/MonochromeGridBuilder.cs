@@ -1,8 +1,6 @@
-using System;
-using JapaneseCrossWord.DisplayableGrid;
 using Xunit;
 
-namespace DesktopClientTests
+namespace JapaneseCrossword.DesktopClient.Tests
 {
     public class MonochromeGridBuilderTests
     {

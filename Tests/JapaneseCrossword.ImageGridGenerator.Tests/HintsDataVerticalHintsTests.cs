@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
-namespace ImageGridGeneratorTests
+namespace JapaneseCrossword.ImageGridGenerator.Tests
 {
     internal class HintsCalculatorVerticalHintsTestData : IEnumerable<object[]>
     {
