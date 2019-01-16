@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Microsoft.Win32;
 
-namespace JapaneseCrossword.DesktopClient.ViewModel
+namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
 {
     internal class LoadGameCommand:BaseCommand, ICommand
     {

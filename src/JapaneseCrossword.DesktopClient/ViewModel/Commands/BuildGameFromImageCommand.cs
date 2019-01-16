@@ -5,7 +5,7 @@ using ImageProcessing;
 using JapaneseCrossword.Core.Rules;
 using Microsoft.Win32;
 
-namespace JapaneseCrossword.DesktopClient.ViewModel
+namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
 {
     internal class BuildGameFromImageCommand:BaseCommand, ICommand
     {

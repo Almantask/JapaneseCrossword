@@ -34,5 +34,10 @@
         {
             return IsFilled? 1:0;
         }
+
+        public override string ToString()
+        {
+            return IsFilled ? "Black" : "White";
+        }
     }
 }

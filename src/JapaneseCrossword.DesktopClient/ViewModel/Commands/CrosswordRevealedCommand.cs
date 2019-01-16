@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace JapaneseCrossword.DesktopClient.ViewModel
+namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
 {
     internal class CrosswordRevealedCommand:BaseCommand, ICommand
     {

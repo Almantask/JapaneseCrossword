@@ -1,26 +1,40 @@
 ﻿using System.IO;
+using JapaneseCrossword.Core.Rules;
 using Newtonsoft.Json;
 
 namespace JapaneseCrossword.Core.State
 {
     public class LocalStateLoader:IStateLoader
     {
+
+        private JsonSerializer CreateSerializer()
+        {
+            var serializer = new JsonSerializer
+            {
+                Formatting = Formatting.Indented
+            };
+
+            return serializer;
+        }
+
         public GameProgress Load(string path)
         {
             using (var r = new StreamReader(path))
             {
                 var data = r.ReadToEnd();
-                var progress = JsonConvert.DeserializeObject<GameProgress>(data);
+                var stateModel = JsonConvert.DeserializeObject<GameStateModel>(data);
+                var progress = new GameProgress(stateModel);
                 return progress;
             }
         }
 
         public void Save(GameProgress progress, string path)
         {
-            using (var file = File.CreateText(path))
+            using (var sw = new StreamWriter(path))
+            using (var writer = new JsonTextWriter(sw))
             {
-                var jsonSerialiser = new JsonSerializer();
-                jsonSerialiser.Serialize(file, progress);
+                var serializer = CreateSerializer();
+                serializer.Serialize(writer, progress);
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using JapaneseCrossword.Core;
 
-namespace JapaneseCrossword.DesktopClient.ViewModel
+namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
 {
     internal class BuildGameRandomCommand:BaseCommand, ICommand
     {

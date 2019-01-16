@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JapaneseCrossword.DesktopClient.ViewModel
+namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
 {
     internal class BaseCommand
     {

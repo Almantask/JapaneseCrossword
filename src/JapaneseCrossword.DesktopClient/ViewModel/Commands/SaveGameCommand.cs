@@ -1,13 +1,12 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using JapaneseCrossword.Core.State;
 using Microsoft.Win32;
 
-namespace JapaneseCrossword.DesktopClient.ViewModel
+namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
 {
-    internal class SaveScetchCommand:BaseCommand, ICommand
+    internal class SaveGameCommand:BaseCommand, ICommand
     {
-        public SaveScetchCommand(GameModel model) : base(model)
+        public SaveGameCommand(GameModel model) : base(model)
         {
         }
 
@@ -18,7 +17,6 @@ namespace JapaneseCrossword.DesktopClient.ViewModel
                 MessageBox.Show("No grid to be saved");
                 return;
             }
-            var loader = new LocalStateLoader();
             var openFileDialog = new SaveFileDialog
             {
                 Filter = "Game save file type | *.jcsj",
@@ -26,7 +24,7 @@ namespace JapaneseCrossword.DesktopClient.ViewModel
             };
             if (openFileDialog.ShowDialog() == true)
             {
-                model.Crossword.SaveCustom(openFileDialog.FileName);
+                model.Crossword.Save(openFileDialog.FileName);
             }
         }
     }

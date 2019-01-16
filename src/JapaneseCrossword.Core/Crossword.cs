@@ -29,7 +29,7 @@ namespace JapaneseCrossword.Core
             BuildGame(gridData);
         }
 
-        private void BuildGame(IMonochrome[,] gridData)
+        private void BuildGame(MonochromeCell[,] gridData)
         {
             _progress = new GameProgress(gridData);
             _mainGridBuilder.Build(gridData);

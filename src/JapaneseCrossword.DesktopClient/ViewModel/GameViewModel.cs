@@ -5,11 +5,20 @@ using JapaneseCrossword.DesktopClient.DisplayableGrid;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Input;
+using JapaneseCrossword.DesktopClient.ViewModel.Commands;
 
 namespace JapaneseCrossword.DesktopClient.ViewModel
 {
     internal class GameViewModel
     {
+        public ICommand BuildGameFromImageCommand { get; }
+        public ICommand BuildGameRandomCommand { get; }
+        public ICommand CrosswordRevealCommand { get; }
+        public ICommand InteractWithCellCommand { get; }
+        public ICommand LoadGameCommand { get; }
+        public ICommand SaveGameCommand { get; }
+        public ICommand SaveScetchCommand { get; }
+
         public GameModel GameModel { set; get; }
 
         private readonly MonochromeGridView _pixelGridView;
@@ -54,13 +63,5 @@ namespace JapaneseCrossword.DesktopClient.ViewModel
                 _pixelGridView, _numberGridBuilders);
             GameModel.Crossword.Initialise(gridData);
         }
-
-        public ICommand BuildGameFromImageCommand { get; }
-        public ICommand BuildGameRandomCommand { get; }
-        public ICommand CrosswordRevealCommand { get; }
-        public ICommand InteractWithCellCommand { get; }
-        public ICommand LoadGameCommand { get; }
-        public ICommand SaveGameCommand { get; }
-        public ICommand SaveScetchCommand { get; }
     }
 }
