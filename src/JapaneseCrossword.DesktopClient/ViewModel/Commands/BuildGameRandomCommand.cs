@@ -14,7 +14,8 @@ namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-
+            // TODO: figure out why is it not bound?
+            model.GridSize = parameter?.ToString();
             var gridSize = model.ParseGridSize();
             if (gridSize == null)
             {

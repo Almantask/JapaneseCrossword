@@ -49,8 +49,19 @@ namespace JapaneseCrossword.Core
 
         public void Load(string path)
         {
+            Clean();
+
             _progress = _stateLoader.Load(path);
             BuildGame(_progress.Current);
+        }
+
+        public void Clean()
+        {
+            _mainGridBuilder.Clean();
+            foreach (var hintBuilder in _hintsGridBuilders)
+            {
+                hintBuilder.Clean();
+            }
         }
 
         public void Save(string path)

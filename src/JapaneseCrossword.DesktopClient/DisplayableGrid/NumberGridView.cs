@@ -109,5 +109,10 @@ namespace JapaneseCrossword.DesktopClient.DisplayableGrid
                 }
             }
         }
+
+        public void Clean()
+        {
+            _gridSlot.Children.Clear();
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace JapaneseCrossword.DesktopClient.DisplayableGrid
             ColorWhite();
         }
 
+        public void Clean()
+        {
+            _gridSlot.Children.Clear();
+        }
+
         private void ColorWhite()
         {
             foreach (var child in _gridSlot.Children)

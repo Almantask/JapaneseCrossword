@@ -8,5 +8,6 @@ namespace JapaneseCrossword.Core
         void Build(int cols, int rows);
         void Reveal(IMonochrome[,] gridData);
         void Clear();
+        void Clean();
     }
 }
