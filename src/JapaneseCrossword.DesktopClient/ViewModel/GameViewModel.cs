@@ -59,9 +59,18 @@ namespace JapaneseCrossword.DesktopClient.ViewModel
 
         public void BuildGame(MonochromeCell[,] gridData)
         {
+            LoadCrossword(gridData);
+            GameModel.Crossword.Initialise(gridData);
+        }
+
+        public void LoadCrossword(MonochromeCell[,] gridData = null)
+        {
+            if (gridData == null)
+            {
+                gridData = new MonochromeCell[0,0];
+            }
             GameModel.Crossword = new Crossword(gridData, new StrictRules(), new LocalStateLoader(),
                 _pixelGridView, _numberGridBuilders);
-            GameModel.Crossword.Initialise(gridData);
         }
     }
 }
