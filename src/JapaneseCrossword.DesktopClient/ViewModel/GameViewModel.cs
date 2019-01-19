@@ -60,7 +60,7 @@ namespace JapaneseCrossword.DesktopClient.ViewModel
         public void BuildGame(MonochromeCell[,] gridData)
         {
             LoadCrossword(gridData);
-            GameModel.Crossword.Initialise(gridData);
+            GameModel.Crossword.Initialise();
         }
 
         public void LoadCrossword(MonochromeCell[,] gridData = null)
