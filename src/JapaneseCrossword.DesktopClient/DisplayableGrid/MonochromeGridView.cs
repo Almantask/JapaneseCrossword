@@ -21,6 +21,8 @@ namespace JapaneseCrossword.DesktopClient.DisplayableGrid
         public void Clean()
         {
             _gridSlot.Children.Clear();
+            _gridSlot.ColumnDefinitions.Clear();
+            _gridSlot.RowDefinitions.Clear();
         }
 
         private void ColorWhite()
@@ -83,7 +85,8 @@ namespace JapaneseCrossword.DesktopClient.DisplayableGrid
         public void Build(IMonochrome[,] GridData)
         {
             _gridSlot.Children.Clear();
-            Build(GridData.GetLength(1), GridData.GetLength(0));
+            base.Build(GridData.GetLength(1), GridData.GetLength(0));
+            //Build(GridData.GetLength(1), GridData.GetLength(0));
             for (var row = 0; row < GridData.GetLength(0); row++)
             {
                 for (var col = 0; col < GridData.GetLength(1); col++)

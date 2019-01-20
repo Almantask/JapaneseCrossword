@@ -36,7 +36,7 @@ namespace JapaneseCrossword.DesktopClient.ViewModel
             InteractWithCellCommand = new InteractWithCellCommand(GameModel, mainGrid);
             LoadGameCommand = new LoadGameCommand(GameModel);
             SaveGameCommand = new SaveGameCommand(GameModel);
-            SaveScetchCommand = new SaveGameCommand(GameModel);
+            SaveScetchCommand = new SaveScetchCommand(GameModel);
         }
 
         private void BuilHintGrids(Grid left, Grid right, Grid top, Grid bot)

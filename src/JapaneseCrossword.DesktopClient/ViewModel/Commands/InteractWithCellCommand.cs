@@ -18,7 +18,6 @@ namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            //((GameViewModel)DataContext).InteractWithCellCommand.Execute(null);
             if (model.Crossword == null)
             {
                 return;
@@ -93,11 +92,7 @@ namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
             foreach (var columnDefinition in _pixelGrid.ColumnDefinitions)
             {
                 accumulatedWidth += columnDefinition.ActualWidth;
-                if (accumulatedWidth >= mouseX)
-                {
-                    break;
-                }
-
+                if (accumulatedWidth >= mouseX) break;
                 col++;
             }
 

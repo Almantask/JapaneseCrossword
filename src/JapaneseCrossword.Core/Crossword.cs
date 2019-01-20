@@ -23,12 +23,12 @@ namespace JapaneseCrossword.Core
             _rules = rules;
             _stateLoader = loader;
             _mainGridBuilder = mainGridBuilder;
-            ResetHints(gridData);
+            ReloadHints(gridData);
             _hintsGridBuilders = hintsBuilders;
             BuildGame(gridData);
         }
 
-        public void ResetHints(MonochromeCell[,] gridData)
+        public void ReloadHints(MonochromeCell[,] gridData)
         {
             _verticalHintsCalculator = new VerticalHintsCalculator(gridData, new ConsequitiveElementsFinder());
             _horizontalHintsCalculator = new HorizontalHintsCalculator(gridData, new ConsequitiveElementsFinder());
@@ -47,8 +47,6 @@ namespace JapaneseCrossword.Core
             }
         }
 
-        
-
         public bool IsGameOver()
         {
             return _rules.IsComplate(_progress);
@@ -57,15 +55,16 @@ namespace JapaneseCrossword.Core
         public void Load(string path)
         {
             Clean();
-
-            _progress = _stateLoader.Load(path);
-            ResetHints(_progress.Goal);
-            BuildGame(_progress.Current);
+            var loadedProgress = _stateLoader.Load(path);
+            ReloadHints(loadedProgress.Goal);
+            BuildGame(loadedProgress);
         }
 
         private void BuildGame(GameProgress progress)
         {
             BuildGame(progress.Goal);
+            _mainGridBuilder.Reveal(progress.Current);
+            _progress = progress;
         }
 
         public void Clean()
@@ -118,12 +117,12 @@ namespace JapaneseCrossword.Core
 
         public void Reveal()
         {
-            _mainGridBuilder.Reveal(_progress.Goal);
+            _mainGridBuilder.Reveal((IMonochrome[,]) _progress.Goal);
         }
 
         public void BackToProgress()
         {
-            _mainGridBuilder.Reveal(_progress.Current);
+            _mainGridBuilder.Reveal((IMonochrome[,]) _progress.Current);
         }
     }
 }
