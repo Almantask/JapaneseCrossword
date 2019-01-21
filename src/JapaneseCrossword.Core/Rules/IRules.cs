@@ -4,6 +4,6 @@ namespace JapaneseCrossword.Core.Rules
 {
     public interface IRules
     {
-        bool IsComplate(GameProgress progress);
+        bool IsComplete(GameProgress progress);
     }
 }

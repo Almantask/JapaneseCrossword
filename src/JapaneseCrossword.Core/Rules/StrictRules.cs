@@ -5,7 +5,7 @@ namespace JapaneseCrossword.Core.Rules
 {
     public class StrictRules : IRules
     {
-        public bool IsComplate(GameProgress progress)
+        public bool IsComplete(GameProgress progress)
         {
             return progress.Current.Cast<MonochromeCell>().SequenceEqual(progress.Goal.Cast<MonochromeCell>());
         }

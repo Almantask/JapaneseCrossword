@@ -18,8 +18,7 @@ namespace JapaneseCrossword.Core.Hints
 
         public List<int>[] GetConsecuitiveVerticalElements()
         {
-            const int relatedDimension = 1;
-            var dimensionLength = CellData.GetLength(relatedDimension);
+            var dimensionLength = CellData.GetLength(1);
             var hintsPerCol = new List<int>[dimensionLength];
             for (var col = 0; col < dimensionLength; col++)
             {

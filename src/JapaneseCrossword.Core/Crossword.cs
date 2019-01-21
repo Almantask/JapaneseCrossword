@@ -49,7 +49,7 @@ namespace JapaneseCrossword.Core
 
         public bool IsGameOver()
         {
-            return _rules.IsComplate(_progress);
+            return _rules.IsComplete(_progress);
         }
 
         public void Load(string path)
@@ -117,12 +117,12 @@ namespace JapaneseCrossword.Core
 
         public void Reveal()
         {
-            _mainGridBuilder.Reveal((IMonochrome[,]) _progress.Goal);
+            _mainGridBuilder.Reveal(_progress.Goal);
         }
 
         public void BackToProgress()
         {
-            _mainGridBuilder.Reveal((IMonochrome[,]) _progress.Current);
+            _mainGridBuilder.Reveal(_progress.Current);
         }
     }
 }
