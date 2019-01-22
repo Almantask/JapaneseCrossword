@@ -19,12 +19,13 @@ namespace JapaneseCrossword.Core.Rules
 
         public bool IsComplete(GameProgress progress)
         {
-            
+            return IsHorizontalyCopmlete(progress) &&
+                   IsVerticallyComplete(progress);
         }
 
         private bool IsHorizontalyCopmlete(GameProgress progress)
         {
-
+            _consequitiveElementsFinder.Find(progress.Current[0])
         }
 
         private bool IsVerticallyComplete(GameProgress progress)
