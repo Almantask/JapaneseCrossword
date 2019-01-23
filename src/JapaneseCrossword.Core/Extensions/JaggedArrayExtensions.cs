@@ -15,7 +15,7 @@ namespace JapaneseCrossword.Core.Extensions
             {
                 rowElements[col] = array[row, col];
             }
-
+                
             return rowElements;
         }
 

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using JapaneseCrossword.Core.Extensions;
 using JapaneseCrossword.Core.Hints;
 using JapaneseCrossword.Core.State;
 
@@ -19,24 +22,38 @@ namespace JapaneseCrossword.Core.Rules
 
         public bool IsComplete(GameProgress progress)
         {
-            return IsHorizontalyCopmlete(progress) &&
+            return IsHorizontalyComplete(progress) &&
                    IsVerticallyComplete(progress);
         }
 
-        private bool IsHorizontalyCopmlete(GameProgress progress)
+        private bool IsHorizontalyComplete(GameProgress progress)
         {
-            _consequitiveElementsFinder.Find(progress.Current[0])
+            var rows = progress.Current.GetLength(1);
+            var horizontalyConsequitive = new List<int>[rows];
+
+            for (var row = 0; row < rows; row++)
+            {
+                var rowElements = progress.Current.GetRowElements(row);
+                var consequitiveElements = _consequitiveElementsFinder.Find(rowElements);
+                horizontalyConsequitive[row] = consequitiveElements;
+            }
+
+            return horizontalyConsequitive.Cast<int>().SequenceEqual(_horizontalHints.Cast<int>());
         }
 
         private bool IsVerticallyComplete(GameProgress progress)
         {
-            for (var col = 0; col < progress.Current.GetLength(0); col++)
-            {
-                for (var row = 0; row < progress.Current.GetLength(0); row++)
-                {
+            var cols = progress.Current.GetLength(0);
+            var horizontalyConsequitive = new List<int>[cols];
 
-                }
+            for (var col = 0; col < cols; col++)
+            {
+                var rowElements = progress.Current.GetRowElements(col);
+                var consequitiveElements = _consequitiveElementsFinder.Find(rowElements);
+                horizontalyConsequitive[col] = consequitiveElements;
             }
+
+            return horizontalyConsequitive.Cast<int>().SequenceEqual(_horizontalHints.Cast<int>());
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using General;
+using JapaneseCrossword.Core.Extensions;
 using JapaneseCrossword.Core.Rules;
 
 namespace JapaneseCrossword.Core.Hints
@@ -21,23 +22,12 @@ namespace JapaneseCrossword.Core.Hints
             var hintsPerRow = new List<int>[CellData.GetLength(0)];
             for (var row = 0; row < CellData.GetLength(0); row++)
             {
-                var rowElements = GetRowElements(row);
+                var rowElements = CellData.GetRowElements(row);
                 var counts = ConsequitiveElementsFinder.Find(rowElements);
                 hintsPerRow[row] = counts;
             }
 
             return hintsPerRow;
-        }
-
-        private MonochromeCell[] GetRowElements(int row)
-        {
-            var rowElements = new MonochromeCell[CellData.GetLength(1)];
-            for (var col = 0; col < CellData.GetLength(1); col++)
-            {
-                rowElements[col] = CellData[row, col];
-            }
-
-            return rowElements;
         }
     }
 }
