@@ -44,7 +44,7 @@ namespace JapaneseCrossword.DesktopClient.DisplayableGrid
             FillEmpty();
         }
 
-        public void Reveal(IMonochrome[,] gridData)
+        public void Reveal(IMonochrome<ColorChangedEventArgs>[,] gridData)
         {
             var index = 0;
             foreach (var cell in gridData)
@@ -82,11 +82,10 @@ namespace JapaneseCrossword.DesktopClient.DisplayableGrid
             }
         }
 
-        public void Build(IMonochrome[,] GridData)
+        public void Build(IMonochrome<ColorChangedEventArgs>[,] GridData)
         {
             _gridSlot.Children.Clear();
             base.Build(GridData.GetLength(1), GridData.GetLength(0));
-            //Build(GridData.GetLength(1), GridData.GetLength(0));
             for (var row = 0; row < GridData.GetLength(0); row++)
             {
                 for (var col = 0; col < GridData.GetLength(1); col++)

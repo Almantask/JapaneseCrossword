@@ -9,7 +9,7 @@ namespace JapaneseCrossword.Core
     public class Crossword
     {
         private GameProgress _progress;
-        public IMonochrome[,] Current => _progress.Current;
+        public IMonochrome<ColorChangedEventArgs>[,] Current => _progress.Current;
         private readonly IRules _rules;
         private readonly IStateLoader _stateLoader;
         private readonly IMainGridBuilder _mainGridBuilder;

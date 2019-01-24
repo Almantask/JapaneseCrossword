@@ -1,7 +1,11 @@
-﻿namespace JapaneseCrossword.Core.Rules
+﻿using System;
+
+namespace JapaneseCrossword.Core.Rules
 {
-    public class MonochromeCell : IMonochrome
+    public class MonochromeCell : IMonochrome<ColorChangedEventArgs>
     {
+        public EventHandler<ColorChangedEventArgs> ColorChanged { get; }
+
         public bool IsFilled { private set; get; }
 
         public MonochromeCell()

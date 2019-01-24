@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JapaneseCrossword.Core.State
+﻿namespace JapaneseCrossword.Core.State
 {
     /// <summary>
     /// TODO: refactor to bools.
