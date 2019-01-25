@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using General;
 using JapaneseCrossword.Core.Hints;
 using JapaneseCrossword.Core.Rules;
@@ -16,13 +17,15 @@ namespace JapaneseCrossword.Core
         private readonly List<IHintsGridBuider> _hintsGridBuilders;
         private IHintsCalculator _verticalHintsCalculator;
         private IHintsCalculator _horizontalHintsCalculator;
+        private IAnnouncer _announcer;
 
         public Crossword(MonochromeCell[,] gridData, IRules rules, IStateLoader loader,
-            IMainGridBuilder mainGridBuilder, List<IHintsGridBuider> hintsBuilders)
+            IMainGridBuilder mainGridBuilder, List<IHintsGridBuider> hintsBuilders, IAnnouncer announcer)
         {
             _rules = rules;
             _stateLoader = loader;
             _mainGridBuilder = mainGridBuilder;
+            _announcer = announcer;
             ReloadHints(gridData);
             _hintsGridBuilders = hintsBuilders;
             BuildGame(gridData);
@@ -45,9 +48,28 @@ namespace JapaneseCrossword.Core
                 var hintsData = hintsGridBuilder.IsVertical ? verticalHintsGridData : horizontalHintsGridData;
                 hintsGridBuilder.Build(hintsData);
             }
+
+            BindTiles();
         }
 
-        public bool IsGameOver()
+        private void BindTiles()
+        {
+            foreach (var tile in Current)
+            {
+                tile.ColorChanged += (sender, args) => OnCrosswordTileColorChange();
+            }
+        }
+
+        private void OnCrosswordTileColorChange()
+        {
+            var isDone = IsGameOver();
+            if (isDone)
+            {
+                _announcer.Show("Congratulations! You completed the crossword!");
+            }
+        }
+
+    public bool IsGameOver()
         {
             return _rules.IsComplete(_progress);
         }

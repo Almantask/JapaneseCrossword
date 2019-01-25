@@ -4,7 +4,7 @@ namespace JapaneseCrossword.Core.Rules
 {
     public class MonochromeCell : IMonochrome<ColorChangedEventArgs>
     {
-        public EventHandler<ColorChangedEventArgs> ColorChanged { get; }
+        public EventHandler<ColorChangedEventArgs> ColorChanged { set; get; }
 
         public bool IsFilled { private set; get; }
 
@@ -21,6 +21,7 @@ namespace JapaneseCrossword.Core.Rules
         public void InvertColor()
         {
             IsFilled = !IsFilled;
+            ColorChanged?.Invoke(this, new ColorChangedEventArgs(IsFilled));
         }
 
         public override bool Equals(object obj)

@@ -70,7 +70,7 @@ namespace JapaneseCrossword.DesktopClient.ViewModel
                 gridData = new MonochromeCell[0,0];
             }
             GameModel.Crossword = new Crossword(gridData, new StrictRules(), new LocalStateLoader(),
-                _pixelGridView, _numberGridBuilders);
+                _pixelGridView, _numberGridBuilders, new AnnouncerMessageBox());
         }
     }
 }

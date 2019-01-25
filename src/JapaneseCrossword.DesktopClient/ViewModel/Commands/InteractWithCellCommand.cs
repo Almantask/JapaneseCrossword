@@ -27,11 +27,6 @@ namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
             var cellView = GetCellViewAt(cell.Item1, cell.Item2);
             InvertColorOf(cellView);
             model.Crossword.InvertCell(cell.Item1, cell.Item2);
-            var isDone = model.Crossword.IsGameOver();
-            if (isDone)
-            {
-                MessageBox.Show("Congratulations! You completed the crossword!");
-            }
         }
 
         private Grid GetCellViewAt(int row, int col)
