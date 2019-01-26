@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.CoreGame
+namespace Assets.Scripts.CoreGame.Grid.Tile
 {
     public class Tile:MonoBehaviour
     {

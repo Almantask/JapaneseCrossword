@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Runtime.Remoting.Messaging;
+using Assets.Scripts.CoreGame.Grid.Tile;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Assets.Scripts.CoreGame
+namespace Assets.Scripts.CoreGame.Grid.Specs
 {
     [Serializable]
     public class GridSpecs<T> where T:MonoBehaviour, IInitialisable, IRenderable, IScalable

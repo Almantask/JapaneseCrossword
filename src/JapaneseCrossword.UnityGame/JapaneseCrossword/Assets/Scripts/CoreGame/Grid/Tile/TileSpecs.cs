@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.CoreGame.Grid.Specs;
+using UnityEngine;
 
-namespace Assets.Scripts.CoreGame
+namespace Assets.Scripts.CoreGame.Grid.Tile
 {
     public class TileSpecs<T> where T:MonoBehaviour, IRenderable, IInitialisable, IScalable
     {

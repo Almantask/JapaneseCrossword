@@ -1,8 +1,10 @@
-﻿using JapaneseCrossword.Core;
+﻿using Assets.Scripts.CoreGame.Grid.Specs;
+using Assets.Scripts.CoreGame.Grid.Tile;
+using JapaneseCrossword.Core;
 using JapaneseCrossword.Core.Rules;
 using UnityEngine;
 
-namespace Assets.Scripts.CoreGame
+namespace Assets.Scripts.CoreGame.Grid.Builder
 {
     public class MainGridBuilder:MonoBehaviour, IMainGridBuilder
     {
@@ -12,7 +14,7 @@ namespace Assets.Scripts.CoreGame
         public float Height => _gridSpecs.Height;
         public float Width => _gridSpecs.Width;
 
-        private readonly GridBuilder<GameTile, IMonochrome> _builder = new GridBuilder<GameTile, IMonochrome>();
+        private readonly GridBuilder<GameTile, IMonochrome<ColorChangedEventArgs>> _builder = new GridBuilder<GameTile, IMonochrome<ColorChangedEventArgs>>();
 
         public PivotPoints CreatePivotPoints(Vector2 size)
         {
@@ -27,22 +29,27 @@ namespace Assets.Scripts.CoreGame
             return new PivotPoints(top, left);
         }
 
-        public void Build(IMonochrome[,] gridData)
+        public void Build(IMonochrome<ColorChangedEventArgs>[,] gridData)
         {
             _builder.Build(gridData, _gridSpecs, transform);
         }
-        
+
         public void Build(int cols, int rows)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Reveal(IMonochrome[,] gridData)
+        public void Reveal(IMonochrome<ColorChangedEventArgs>[,] gridData)
         {
             throw new System.NotImplementedException();
         }
 
         public void Clear()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Clean()
         {
             throw new System.NotImplementedException();
         }

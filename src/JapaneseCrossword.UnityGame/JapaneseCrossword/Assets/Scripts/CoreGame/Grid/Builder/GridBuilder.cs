@@ -1,8 +1,8 @@
-﻿using JapaneseCrossword.Core.Rules;
+﻿using Assets.Scripts.CoreGame.Grid.Specs;
+using Assets.Scripts.CoreGame.Grid.Tile;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
 
-namespace Assets.Scripts.CoreGame
+namespace Assets.Scripts.CoreGame.Grid.Builder
 {
     internal class GridBuilder<T, G> where T: MonoBehaviour, IInitialisable, IRenderable, IScalable
     {
@@ -58,5 +58,6 @@ namespace Assets.Scripts.CoreGame
             var position = new Vector2(_gridSpecs.StartPositionX + offsetX, _gridSpecs.StartPositionY + offsetY);
             tile.position = position;
         }
+
     }
 }

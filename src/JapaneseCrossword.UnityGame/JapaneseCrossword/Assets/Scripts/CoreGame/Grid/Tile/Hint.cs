@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
-namespace Assets.Scripts.CoreGame
+namespace Assets.Scripts.CoreGame.Grid.Tile
 {
     [RequireComponent(typeof(TextMesh))]
     public class Hint : MonoBehaviour

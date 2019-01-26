@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.CoreGame.Grid.Builder;
 using Assets.Scripts.Utility;
 using JapaneseCrossword.Core;
 using JapaneseCrossword.Core.Rules;
@@ -46,7 +47,7 @@ namespace Assets.Scripts.CoreGame
             _hintsBuilderTop.Width = _mainGridBuilder.Width;
 
             _game = new Crossword(cells, new StrictRules(), new LocalStateLoader(),
-                _mainGridBuilder, hintsBuilders);
+                _mainGridBuilder, hintsBuilders, new UnityAnnnouncer());
         }
 
         /// <summary>

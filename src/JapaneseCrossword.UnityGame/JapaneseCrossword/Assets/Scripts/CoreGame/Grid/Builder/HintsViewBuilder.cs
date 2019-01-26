@@ -1,9 +1,9 @@
-﻿using General;
-using JapaneseCrossword.Core.Rules;
+﻿using Assets.Scripts.CoreGame.Grid.Specs;
+using Assets.Scripts.CoreGame.Grid.Tile;
 using UnityEngine;
 using IHintsGridBuider = JapaneseCrossword.Core.IHintsGridBuider;
 
-namespace Assets.Scripts.CoreGame
+namespace Assets.Scripts.CoreGame.Grid.Builder
 {
     public class HintsViewBuilder : MonoBehaviour, IHintsGridBuider
     {
@@ -28,6 +28,11 @@ namespace Assets.Scripts.CoreGame
         public void SetPivot(Vector2 pivot)
         {
             _gridSpecs.SetPivotPoint(pivot);
+        }
+
+        public void Clean()
+        {
+            throw new System.NotImplementedException();
         }
 
         public bool IsVertical => _isVertical;
