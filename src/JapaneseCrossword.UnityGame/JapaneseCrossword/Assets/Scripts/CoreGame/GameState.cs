@@ -48,6 +48,8 @@ namespace Assets.Scripts.CoreGame
 
             _game = new Crossword(cells, new StrictRules(), new LocalStateLoader(),
                 _mainGridBuilder, hintsBuilders, new UnityAnnnouncer());
+
+            _mainGridBuilder.BindToLogicalTiles(_game.Current);
         }
 
         /// <summary>

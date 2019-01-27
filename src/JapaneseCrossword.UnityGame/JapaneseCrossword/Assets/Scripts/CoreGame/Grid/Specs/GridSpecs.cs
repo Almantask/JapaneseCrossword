@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 namespace Assets.Scripts.CoreGame.Grid.Specs
 {
     [Serializable]
-    public class GridSpecs<T> where T:MonoBehaviour, IInitialisable, IRenderable, IScalable
+    public class GridSpecs<T> where T:MonoBehaviour, IPhysical, IRenderable, IScalable
     {
         public T TilePrefab;
         public T TileInstance { private set; get; }

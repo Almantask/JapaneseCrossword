@@ -398,8 +398,8 @@ MonoBehaviour:
   _gridSpecs:
     TilePrefab: {fileID: 114154289164631224, guid: 6810e2f75024add42875ae71276aa32e,
       type: 2}
-    Width: 7
-    Height: 7
+    Width: 5
+    Height: 5
     StartPositionX: -3.4
     StartPositionY: -3.4
 --- !u!1 &556403383

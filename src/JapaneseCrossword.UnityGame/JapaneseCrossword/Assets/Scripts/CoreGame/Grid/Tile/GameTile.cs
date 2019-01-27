@@ -10,7 +10,7 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
     /// </summary>
     [RequireComponent(typeof(BoxCollider2D))]
     [Serializable]
-    public class GameTile : MonoBehaviour, IMonochrome<ColorChangedEventArgs>, IInitialisable, IRenderable, IScalable
+    public class GameTile : MonoBehaviour, IMonochrome<ColorChangedEventArgs>, IPhysical, IRenderable, IScalable
     {
         [SerializeField]
         private Tile _tilePhysical;
@@ -22,18 +22,16 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
         public bool IsFilled { get; private set; }
         public EventHandler<ColorChangedEventArgs> ColorChanged { get; set; }
 
+        void OnMouseDown()
+        {
+            InvertColor();
+        }
+
         public void InvertColor()
         {
             IsFilled = !IsFilled;
             _tilePhysical.Color = IsFilled ? Color.black : Color.white;
             _tileLogical?.ColorChanged?.Invoke(_tileLogical, new ColorChangedEventArgs(IsFilled));
-        }
-
-        
-
-        void OnMouseDown()
-        {
-            InvertColor();
         }
 
         public object Initialise()
@@ -42,12 +40,12 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
             return _tilePhysical;
         }
 
-        public void SetProperties(object param, bool isLoad = false)
+        public void BindToLogical(object param, bool isLoad = false)
         {
-            var monochrome = (IMonochrome<ColorChangedEventArgs>)param;
-            _tileLogical = monochrome;
+            var monochrome = (IMonochrome<ColorChangedEventArgs>[])param;
+            _tileLogical = monochrome[0];
             if (!isLoad) return;
-            _tilePhysical.Color = monochrome.IsFilled ? Color.black : Color.white;
+            _tilePhysical.Color = monochrome[1].IsFilled ? Color.black : Color.white;
             IsFilled = false;
         }
 

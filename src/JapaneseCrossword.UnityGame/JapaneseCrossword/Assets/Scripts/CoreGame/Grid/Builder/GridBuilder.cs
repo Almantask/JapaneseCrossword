@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.CoreGame.Grid.Builder
 {
-    internal class GridBuilder<T, G> where T: MonoBehaviour, IInitialisable, IRenderable, IScalable
+    internal class GridBuilder<T, G> where T: MonoBehaviour, IPhysical, IRenderable, IScalable
     {
         private GridSpecs<T> _gridSpecs;
         protected TileSpecs<T> TileSpecs;
@@ -27,8 +27,8 @@ namespace Assets.Scripts.CoreGame.Grid.Builder
                     tileObj.name = $"TileObj [{col},{row}]";
                     RepositionTile(col, row, tileObj.transform);
 
-                    var tile = tileObj.GetComponent<IInitialisable>();
-                    tile.SetProperties(gridData[col, row]);
+                    var tile = tileObj.GetComponent<IPhysical>();
+                    tile.BindToLogical(gridData[col, row]);
                 }
             }
 

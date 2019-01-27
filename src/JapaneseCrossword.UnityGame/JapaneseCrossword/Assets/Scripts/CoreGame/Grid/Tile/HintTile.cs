@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.CoreGame.Grid.Tile
 {
-    public class HintTile : MonoBehaviour, IInitialisable, IRenderable, IScalable
+    public class HintTile : MonoBehaviour, IPhysical, IRenderable, IScalable
     {
         private bool _initialised;
 
@@ -23,7 +23,7 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
         [SerializeField]
         private Hint _hint;
 
-        public void SetProperties(object param, bool isLoad = false)
+        public void BindToLogical(object param, bool isLoad = false)
         {
             int number = (int) param;
             ConsequitiveColors = number;
