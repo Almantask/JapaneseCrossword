@@ -12,10 +12,13 @@ namespace Assets.Scripts.CoreGame.Grid.Builder
         public float TileWidth => TileSpecs.Width;
         public float TileHeight => TileSpecs.Height;
 
+        public T[,] Tiles { get; private set; }
+
         public void Build(G[,] gridData, GridSpecs<T> gridSpecs, Transform parent)
         {
             var cols = gridData.GetLength(0);
             var rows = gridData.GetLength(1);
+            Tiles = new T[cols, rows];
 
             LoadSpecs(gridSpecs, cols, rows);
 
@@ -24,6 +27,7 @@ namespace Assets.Scripts.CoreGame.Grid.Builder
                 for (var row = 0; row < rows; row++)
                 {
                     var tileObj = Object.Instantiate(gridSpecs.TileInstance, parent).gameObject;
+                    Tiles[col, row] = tileObj.GetComponent<T>();
                     tileObj.name = $"TileObj [{col},{row}]";
                     RepositionTile(col, row, tileObj.transform);
 

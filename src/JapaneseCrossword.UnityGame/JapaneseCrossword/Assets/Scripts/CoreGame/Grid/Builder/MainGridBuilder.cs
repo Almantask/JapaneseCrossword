@@ -54,10 +54,17 @@ namespace Assets.Scripts.CoreGame.Grid.Builder
             throw new System.NotImplementedException();
         }
 
-        // TODO: implement logical event binding and remove dirty object casting 
         public void BindToLogicalTiles(IMonochrome<ColorChangedEventArgs>[,] gameCurrent)
         {
-            throw new System.NotImplementedException();
+            var cols = gameCurrent.GetLength(0);
+            var rows = gameCurrent.GetLength(1);
+            for (var col = 0; col < cols; col++)
+            {
+                for (var row = 0; row < rows; row++)
+                {
+                    _builder.Tiles[col, row].TileLogical = gameCurrent[col, row];
+                }
+            }
         }
     }
 }

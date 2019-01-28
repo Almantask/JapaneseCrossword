@@ -15,7 +15,7 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
         [SerializeField]
         private Tile _tilePhysical;
 
-        private IMonochrome<ColorChangedEventArgs> _tileLogical;
+        public IMonochrome<ColorChangedEventArgs> TileLogical { set; get; }
 
         public float VisualHeight => _tilePhysical.VisualHeight;
         public float VisualWidth => _tilePhysical.VisualWidth;
@@ -31,7 +31,7 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
         {
             IsFilled = !IsFilled;
             _tilePhysical.Color = IsFilled ? Color.black : Color.white;
-            _tileLogical?.ColorChanged?.Invoke(_tileLogical, new ColorChangedEventArgs(IsFilled));
+            TileLogical?.ColorChanged?.Invoke(TileLogical, new ColorChangedEventArgs(IsFilled));
         }
 
         public object Initialise()
@@ -42,10 +42,9 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
 
         public void BindToLogical(object param, bool isLoad = false)
         {
-            var monochrome = (IMonochrome<ColorChangedEventArgs>[])param;
-            _tileLogical = monochrome[0];
             if (!isLoad) return;
-            _tilePhysical.Color = monochrome[1].IsFilled ? Color.black : Color.white;
+            var monochrome = (IMonochrome<ColorChangedEventArgs>)param;
+            _tilePhysical.Color = monochrome.IsFilled ? Color.black : Color.white;
             IsFilled = false;
         }
 
