@@ -58,8 +58,9 @@ namespace Assets.Scripts.CoreGame.Grid.Builder
         {
             var offsetX = col * TileSpecs.Width;
             var offsetY = row * TileSpecs.Height;
+            const float tileOffsetZ = 1;
 
-            var position = new Vector2(_gridSpecs.StartPositionX + offsetX, _gridSpecs.StartPositionY + offsetY);
+            var position = new Vector3(_gridSpecs.StartPositionX + offsetX, _gridSpecs.StartPositionY + offsetY, tileOffsetZ);
             tile.position = position;
         }
 

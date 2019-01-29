@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using JapaneseCrossword.Core.Rules;
 
 namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
 {
@@ -26,6 +27,7 @@ namespace JapaneseCrossword.DesktopClient.ViewModel.Commands
             var cell = GetCellAtGrid();
             var cellView = GetCellViewAt(cell.Item1, cell.Item2);
             InvertColorOf(cellView);
+            var cellLogic = model.Crossword.Current[cell.Item1, cell.Item2];
             model.Crossword.InvertCell(cell.Item1, cell.Item2);
         }
 

@@ -31,7 +31,7 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
         {
             IsFilled = !IsFilled;
             _tilePhysical.Color = IsFilled ? Color.black : Color.white;
-            TileLogical?.ColorChanged?.Invoke(TileLogical, new ColorChangedEventArgs(IsFilled));
+            TileLogical.InvertColor();
         }
 
         public object Initialise()

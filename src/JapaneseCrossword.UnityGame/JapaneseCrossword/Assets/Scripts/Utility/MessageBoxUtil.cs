@@ -17,7 +17,6 @@ namespace Assets.Scripts.Utility
         void Awake()
         {
             mainPrefab = Resources.Load<GameObject>("MessageBox").GetComponent<MessageBox>();
-            mainPrefab.BindComponents();
 
             _titles = new Dictionary<MessageType, string>()
             {
@@ -35,6 +34,12 @@ namespace Assets.Scripts.Utility
         private static IEnumerator ShowE(string message, MessageType messageType)
         {
             var messageBox = Instantiate(Instance.mainPrefab.transform.gameObject);
+
+            if (messageType == MessageType.Info)
+            {
+                messageBox.GetComponent<MessageBox>().ConvertToOk();
+            }
+
             var messageLogic = messageBox.GetComponent<MessageBox>();
 
             messageLogic.Content = message;

@@ -27,10 +27,14 @@ namespace Assets.Scripts.Utility
             set { Core.Image.sprite = value; }
         }
 
-        public void BindComponents()
+        public void Close()
         {
-            Core.BindComponents();
+            Destroy(gameObject);
         }
 
+        public void ConvertToOk()
+        {
+            Core.ConvertToOkMessage();
+        }
     }
 }

@@ -5,33 +5,20 @@ namespace Assets.Scripts.Utility
 {
     public class CoreMessageBox : MonoBehaviour
     {
-
         public Text MessageText;
         public Text TitleText;
         public Image Image;
+        public Button ButtonConfirm;
+        public Button ButtonCancel;
 
-        void Start ()
+        public void ConvertToOkMessage()
         {
-            BindComponents();
+            Destroy(ButtonCancel.gameObject);
+
+            const float middle = 95;
+            var rectTransform = ButtonConfirm.GetComponent<RectTransform>();
+            var oldAnchorY = rectTransform.anchoredPosition.y;
+            rectTransform.anchoredPosition = new Vector3(middle, oldAnchorY);
         }
-
-        public void BindComponents()
-        {
-            var popup = transform.GetChild(0);
-            var popupWindow = popup.GetChild(0);
-            
-            const string imageHolderName = "MessageTypeImage";
-            Image = popupWindow.Find(imageHolderName).GetComponent<Image>();
-
-            const string titleHolderName = "Text_WindowTitle";
-            TitleText = popupWindow.Find(titleHolderName).GetComponent<Text>();
-
-            const string textContainerHolderName = "Panel_Content";
-            var textContainerHodler = popupWindow.Find(textContainerHolderName);
-            const string textDescriptionHolderName = "Text_Description";
-            MessageText = textContainerHodler.Find(textDescriptionHolderName).GetComponent<Text>();
-
-        }
-
     }
 }
