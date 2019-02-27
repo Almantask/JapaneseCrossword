@@ -14,10 +14,27 @@ namespace Assets.Scripts.CoreGame.Grid.Builder
 
         public T[,] Tiles { get; private set; }
 
+        private GameObject[] _physicalTiles;
+
+        public void CleanUp()
+        {
+            if (_physicalTiles == null) return;
+
+            foreach (var physicalTile in _physicalTiles)
+            {
+                Object.Destroy(physicalTile);
+            }
+
+            _physicalTiles = null;
+        }
+
         public void Build(G[,] gridData, GridSpecs<T> gridSpecs, Transform parent)
         {
+            CleanUp();
             var cols = gridData.GetLength(0);
             var rows = gridData.GetLength(1);
+
+            _physicalTiles = new GameObject[cols*rows];
             Tiles = new T[cols, rows];
 
             LoadSpecs(gridSpecs, cols, rows);
@@ -27,6 +44,10 @@ namespace Assets.Scripts.CoreGame.Grid.Builder
                 for (var row = 0; row < rows; row++)
                 {
                     var tileObj = Object.Instantiate(gridSpecs.TileInstance, parent).gameObject;
+
+                    var tileIndex = col * rows + row;
+                    _physicalTiles[tileIndex] = tileObj;
+
                     Tiles[col, row] = tileObj.GetComponent<T>();
                     tileObj.name = $"TileObj [{col},{row}]";
                     RepositionTile(col, row, tileObj.transform);

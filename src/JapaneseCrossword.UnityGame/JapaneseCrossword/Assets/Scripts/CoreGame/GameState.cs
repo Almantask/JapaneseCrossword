@@ -90,5 +90,13 @@ namespace Assets.Scripts.CoreGame
 
             return gridSize;
         }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                InitialiseCrossword();
+            }
+        }
     }
 }

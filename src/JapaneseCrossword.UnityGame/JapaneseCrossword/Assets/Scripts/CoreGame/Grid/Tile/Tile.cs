@@ -28,8 +28,6 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
             if (_isInitialised) return;
             SetRenderer();
             _bounds = _rendererFrame.bounds;
-            //VisualWidth = bounds.size.x;
-            //VisualHeight = bounds.size.y;
             _isInitialised = true;
         }
 

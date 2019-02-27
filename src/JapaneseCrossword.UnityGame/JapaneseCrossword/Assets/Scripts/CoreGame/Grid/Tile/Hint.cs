@@ -11,7 +11,7 @@ namespace Assets.Scripts.CoreGame.Grid.Tile
         {
             set
             {
-                _text.text = value.ToString();
+                _text.text = value == 0 ? "" : value.ToString();
                 _consequitiveColors = value;
             }
             get { return _consequitiveColors; }
